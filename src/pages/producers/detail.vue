@@ -82,7 +82,7 @@ export default defineComponent({
         LTileLayer,
     },
     setup() {
-        const account = ref('eosio');
+        const account = ref('amax');
         const route = useRoute();
         const option = ref({
             layers: [tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 18, attribution: 'Armonia multi-chain platform' })],

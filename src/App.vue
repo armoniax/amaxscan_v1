@@ -30,7 +30,7 @@ export default defineComponent({
             getMainFrontConfig();
             // TODO 如果登陆。获取用户信息
             EOS.rpc.get_info().then(res => {
-                console.log(res);
+                // console.log(res);
                 // getAccount();
             });
         };

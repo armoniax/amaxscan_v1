@@ -129,7 +129,7 @@ export default defineComponent({
         };
 
         const getRam = () => {
-            GET_TABLE_ROWS('eosio', 'rammarket', 10).then((res: any) => {
+            GET_TABLE_ROWS('amax', 'rammarket', 10).then((res: any) => {
                 countRamPrice(res);
             });
         };

@@ -33,7 +33,7 @@ export class ScatterService {
     constructor() {}
 
     getRam() {
-        Ax.get(`/api/v1/get_table_rows/eosio/eosio/rammarket/10`)
+        Ax.get(`/api/v1/get_table_rows/amax/amax/rammarket/10`)
             .then((res: any) => {
                 console.log(123, res);
                 this.countRamPrice(res);

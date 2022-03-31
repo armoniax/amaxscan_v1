@@ -19,7 +19,7 @@
                 span {{ (state.globalStat?.max_ram_size / 1024 / 1024 / 1024).toLocaleString() }} GB
             .w-full.bg-green.bg-opacity-20.h-3.rounded-full.relative.overflow-hidden.mb-6
                 .absolute.top-0.left-0.h-full.bg-green.rounded-full.transition-all.duration-200(:style='{ width: (state.globalStat?.total_ram_bytes_reserved / state.globalStat?.max_ram_size) * 100 + "%" }')
-            .h-12.w-full.text-white.text-lg.flex.justify-center.items-center.rounded.cursor-pointer(style='background: linear-gradient(139deg, #2ff443 0%, #32d5d8 100%)') Connect Wallet
+            //- .h-12.w-full.text-white.text-lg.flex.justify-center.items-center.rounded.cursor-pointer(style='background: linear-gradient(139deg, #2ff443 0%, #32d5d8 100%)') Connect Wallet
             //- .h-12.w-full.text-white.text-lg.flex.justify-center.items-center.rounded.cursor-pointer(v-if='!loginEOSService?.accountName', style='background: linear-gradient(139deg, #2ff443 0%, #32d5d8 100%)', @click='loginEOSService.initScatter') Connect Wallet
             //- .h-12.w-full.text-white.text-lg.flex.justify-center.items-center.rounded.cursor-pointer(v-else, style='background: linear-gradient(139deg, #2ff443 0%, #32d5d8 100%)', @click='loginEOSService.logout') Logout
 </template>
@@ -42,7 +42,7 @@ const frontConfig = environment.frontConfig;
 export default defineComponent({
     components: { VChart },
     setup() {
-        const account = ref('eosio');
+        const account = ref('amax');
 
         const socket = inject('socket') as any;
         const frontConfig = ref(environment.frontConfig);
@@ -157,7 +157,7 @@ export default defineComponent({
         };
 
         const getRam = () => {
-            Ax.get(`/api/v1/get_table_rows/eosio/eosio/rammarket/10`)
+            Ax.get(`/api/v1/get_table_rows/amax/amax/rammarket/10`)
                 .then((res: any) => {
                     countRamPrice(res);
                 })

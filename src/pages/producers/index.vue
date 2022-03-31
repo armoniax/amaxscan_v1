@@ -56,7 +56,7 @@ import { useStore } from 'vuex';
 export default defineComponent({
     setup() {
         const socket = inject('socket') as any;
-        const account = ref('eosio');
+        const account = ref('amax');
         const filterVal = ref('');
         const frontConfig = ref(environment.frontConfig);
         const store = useStore();

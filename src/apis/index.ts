@@ -31,7 +31,7 @@ export const GET_CURRENCY_BALANCE = (parmas: GetCurrencyBalanceParams) => Ax.get
 
 export const GET_ACCOUNT_TOKENS = (account: string) => Ax.post(`/api/v1/get_account_tokens`, { account });
 
-export const GET_TABLE_ROWS = (accountName: string, name: string, count = 20) => Ax.get(`/api/v1/get_table_rows/${accountName}/${accountName}/${name}/${count},`);
+export const GET_TABLE_ROWS = (accountName: string, name: string, count = 20) => Ax.get(`/api/v1/get_table_rows/${accountName}/${accountName}/${name}/${count}`);
 
 export const GET_EOSIO_GLOBAL_10 = () => Ax.get(`/api/v1/get_table_rows/eosio/eosio/global/10`);
 
