@@ -12,7 +12,8 @@ COPY . /opt/amaxweb
 #RUN npm update
 RUN npm install -g pm2@2.10.4
 RUN npm install -g @angular/cli@7.1.4
-RUN cd /opt/amaxweb && npm install
+RUN npm install
+RUN npm run build
 RUN cd /opt/amaxweb && node patch
 RUN cd /opt/amaxweb/server && npm install
 RUN cd /opt/amaxweb && ng build --configuration=${CONFIG_NET}
