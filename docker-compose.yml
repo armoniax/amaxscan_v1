@@ -4,6 +4,7 @@ services:
   
   mongodb:
     image: mongo:4.0
+    container_name: amax.exp.mongo
     restart: always
     volumes:
       - ./mongo:/data/db
@@ -14,9 +15,17 @@ services:
         #- MONGO_INITDB_ROOT_PASSWORD=test123
 
   amaxweb:
-    build: .
+    build:
+      dockerfile: Dockerfile.web
+    container_name: amax.exp.web
     ports: 
       - 3039:3039
-      - 9615:9615
     restart: always
 
+  amaxsrv:
+    build:
+      dockerfile: Dockerfile.srv
+    container_name: amax.exp.srv
+    ports: 
+      - 9615:9615
+    restart: always
