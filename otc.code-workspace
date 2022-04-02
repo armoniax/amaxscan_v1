@@ -1,0 +1,64 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      // "allanoricil.nuxt-vscode-extension",
+      "esbenp.prettier-vscode",
+      "eamodio.gitlens",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss"
+    ]
+  },
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "editor.detectIndentation": false,
+    "editor.formatOnPaste": true,
+    "editor.tabSize": 2,
+
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "tailwindCSS.emmetCompletions": true,
+
+    // 代码美化 & 规范
+    // "prettier.enable": true,
+    // "eslint.format.enable": true,
+    // "eslint.alwaysShowStatus": true,
+    // "editor.quickSuggestions": {
+    //   "strings": true
+    // },
+    // "eslint.workingDirectories": [
+    //   {
+    //     "mode": "location"
+    //   }
+    // ],
+
+    "scss.lint.unknownAtRules": "ignore",
+    "files.autoSave": "off",
+    "files.eol": "\n",
+    "files.exclude": {
+      "**/.output": true,
+      "**/.nuxt": true,
+      "**/.DS_Store": true,
+      "**/.git": true,
+      "**/.hg": true,
+      "**/.svn": true,
+      "**/CVS": true,
+      "**/dist": true,
+      "**/test": true,
+      "**/node_modules": true,
+      "**/doc": true,
+      "**/logs": true,
+      "**/run": true
+    },
+    "nuxt.isNuxtApp": false
+  }
+}
