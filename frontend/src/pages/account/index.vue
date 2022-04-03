@@ -141,7 +141,6 @@ export default defineComponent({
     components: { PageAccountBase, RawDataBase, JsonViewer },
     setup() {
         // const type = ref(1)
-        // 测试账号： dragonmaster    mgpbpooooo31    explorer1111
 
         const state = reactive<Record<string, any>>({
             typeActionList: [
