@@ -4,6 +4,10 @@
     PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance', :creator='state.creator')
     RawDataBase(title='Contract Raw Data:', :json='state.code')
     RawDataBase(title='Blockchain Raw Data:', :json='state.mainData')
+    RawDataBase(v-for="(elem, ind) in state.tables", :index="ind", v-if="state.tables.length > 0", :title='"Table - " + elem.name', :json='elem.data')
+    //- div(v-for="(elem, ind) in state.tables", :index="ind", v-if="state.tables.length > 0")
+    //-     RawDataBase(:title='"Table - " + elem.name', :json='elem.data')
+    //- RawDataBase(v-for="(elem, ind) in [1,2,3,4,5,6]", :key="ind" :title='"Table - " + ind', :json='state.mainData')
 
     .tabs
         a.tab.tab-bordered(v-for='item in state.typeActionList', :key='item.key', :class='{ "tab-active": state.typeActionActive === item.key }', @click='state.typeActionActive = item.key') {{ item.name }}
@@ -161,6 +165,7 @@ export default defineComponent({
             actions: [],
             dataSource: [],
             showDataSource: [],
+            tables: [],
             actionsTotal: 0,
             currentPage: 1,
         });
@@ -189,7 +194,6 @@ export default defineComponent({
             return result;
         };
 
-        // 接口不通了
         const getBlockData = (account: string) => {
             GET_ACCOUNT(account).then((res: any) => {
                 state.mainData = res;
