@@ -40,7 +40,7 @@ const mongoMain = mongoose.createConnection(config.MONGO_URI, config.MONGO_OPTIO
       log.error(err);
       process.exit(1);
     }
-    log.info('[Connected to Mongo EOS] : 27017');
+    log.info('[Connected to Mongo AMAX] : 27017');
 });
 mongoose.set('useCreateIndex', true);
 
