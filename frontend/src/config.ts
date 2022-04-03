@@ -8,8 +8,8 @@ let config = {};
 // production mod
 config.PROD = false;
 
-config.toInt = 10000;
-config.coin = 'MGP';
+config.toInt = 100000000;
+config.coin = 'AMAX';
 
 // mongo uri and options
 // config.MONGO_URI = process.env.MONGO_URI || 'mongodb://mongodb:27017/EOSweb';
