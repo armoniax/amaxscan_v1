@@ -24,8 +24,8 @@ export const environment = {
     frontConfig: {
        coin: 'EOS',
        bp: 'bp.json',
-       tokenContract: 'eosio.token',
-       totalBalance: 'EOS',
+       tokenContract: 'amax.token',
+       totalBalance: 'AMAX',
        convertToUSD: true,
        customBalance: false,
        logo: '/assets/images/mgpweb.png',

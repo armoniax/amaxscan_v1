@@ -20,7 +20,7 @@ export const environment = {
   frontConfig: {
     coin: "AMAX",
     bp: "bp.json",
-    tokenContract: "eosio.token",
+    tokenContract: "amax.token",
     totalBalance: "AMAX",
     convertToUSD: false,
     customBalance: false,

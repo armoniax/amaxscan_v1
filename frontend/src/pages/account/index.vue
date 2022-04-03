@@ -233,7 +233,7 @@ export default defineComponent({
 
         // Token transfer      Actions (Raw Data)        Actions info
         const getActions = (account: string, pos: number) => {
-            account = 'eosio.token';
+            account = 'amax.token';
             pos = pos === 1 ? -1 : pos;
             GET_ACTIONS(account, pos, 100).then((res: any) => {
                 console.log('getActions-----', res);
