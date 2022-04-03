@@ -21,7 +21,7 @@ mongoose.set('useCreateIndex', true);
 const EOS           = require('eosjs');
 global.eos          = EOS(config.eosConfig);
 
-const { logWrapper } = require('./src/utils/main.utils');
+const { logWrapper } = require('./utils/main.utils');
 const log            = new logWrapper('server');
 
 const customSlack   = require('./modules/slack.module');
