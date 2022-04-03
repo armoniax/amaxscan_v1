@@ -292,7 +292,7 @@ export default defineComponent({
         };
 
         const getAccountCreator = (account: string) => {
-            GET_ACTIONS_NAME(account).then((res: any) => {
+            GET_ACTIONS_NAME(account, 'newaccount').then((res: any) => {
                 state.creator = res.actions[0];
                 console.log('getAccountCreator-----', res);
             });
