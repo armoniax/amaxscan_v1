@@ -29,7 +29,7 @@ export const environment = {
       big: "",
       small: "",
     },
-    nets: [{ name: "MGP", url: "127.0.0.1:3039", active: true }],
+    nets: [{ name: "AMAX", url: "https://www.amaxscan.io", active: true }],
     disableNets: true,
     voteDonationAcc: "eoswebnetbp1",
     disableVoteDonation: true,

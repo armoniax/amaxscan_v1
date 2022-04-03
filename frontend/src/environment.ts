@@ -84,7 +84,7 @@ export const environment = {
           big: '',
           small: ''
        },
-       nets: [{ name: 'AMAX', url: 'www.amaxscan.io:3039', active: true }],
+       nets: [{ name: 'AMAX', url: 'www.amaxscan.io', active: true }],
        disableNets: true,
        voteDonationAcc: 'cryptolions1',
        disableVoteDonation: true,

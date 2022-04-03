@@ -7,11 +7,11 @@ export default defineConfig({
     plugins: [vue()],
     server: {
         proxy: {
-            // '/api': 'http://120.77.26.105:3039', //"http://testnet.amaxscan.io",
-            // "/api": "https://exp.mgpchain.io", //"http://testnet.amaxscan.io",
-            "/api": "https://testnet.amaxscan.io", //"http://testnet.amaxscan.io",
+            // '/api': 'http://120.77.26.105', //"http://www.amaxscan.io",
+            // "/api": "https://exp.mgpchain.io", //"http://www.amaxscan.io",
+            "/api": "https://www.amaxscan.io", //"http://www.amaxscan.io",
             '/socket.io': {
-                target: 'https://testnet.amaxscan.io',
+                target: 'https://www.amaxscan.io',
                 // secure: true,
                 changeOrigin: true,
                 // secure: false,
