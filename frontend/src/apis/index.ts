@@ -3,7 +3,7 @@ import { GetCurrencyBalanceParams } from './types';
 console.log('NODE_ENV: ---->>>>>>>', process.env.NODE_ENV)
 export const Ax = axios.create({
     // baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://sh-misc.vm.amax.dev:38888',
-    baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://101.132.169.141:38888',
+    baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/node-api',
 });
 
 Ax.interceptors.response.use(response => {
