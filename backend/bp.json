@@ -1,0 +1,44 @@
+{
+	"producer_account_name": "coolproducer",
+	"producer_public_key": "EOS6ek7UoQGd8AZhRymF7PJNHNzRHriN6hav169dBaBSibfiowdQ9",
+	"org": {
+	"candidate_name": "coolproducer",
+	"website": "https://eosweb.net/",
+	"code_of_conduct": "",
+	"email": "",
+	"branding": {
+	"logo_256": "https://secure.gravatar.com/avatar/b7e0f18f9621ed4f2d54be1bb89de0d8.jpg?s=80&r=g&d=mm",
+	"logo_1024": "https://secure.gravatar.com/avatar/b7e0f18f9621ed4f2d54be1bb89de0d8.jpg?s=80&r=g&d=mm",
+	"logo_svg": ""
+},
+	"location": {
+	"name": "Kiev",
+	"country": "UA",
+	"latitude": 50.431782,
+	"longitude": 30.516382
+},
+	"social": {
+		"steemit": "@eosweb.net",
+		"twitter": "EoswebN",
+		"youtube": "",
+		"facebook": "EOSwebnet-199076424068961",
+		"github": "orange1337",
+		"reddit": "eosweb",
+		"keybase": "",
+		"telegram": "eosweb",
+		"wechat": ""
+	}
+},
+"nodes": [{
+		"location": {
+			"name": "coolproducer",
+			"country": "Finland",
+			"latitude": 60.1708,
+			"longitude": 24.9375
+		},
+		"is_producer": true,
+		"p2p_endpoint": "node.eosweb.net",
+		"api_endpoint": "http://apinode.eosweb.net",
+		"ssl_endpoint": "https://apinode.eosweb.net"
+	}]
+}
