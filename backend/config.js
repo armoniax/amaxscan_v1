@@ -10,8 +10,9 @@ config.PROD = false;
 config.toInt = 10000;
 config.coin = 'AMAX';
 
-// mongo uri and options
-config.MONGO_URI = process.env.MONGO_URI || 'mongodb://10.88.0.1:27018/EOSweb';
+// mongo uri and options  root mini1234
+// config.MONGO_URI = process.env.MONGO_URI || 'mongodb://10.88.0.1:27018/EOSweb';
+config.MONGO_URI = process.env.MONGO_URI || 'mongodb://deex:deex123456@139.224.250.244:27017/EOSweb';
 config.MONGO_OPTIONS = {
     socketTimeoutMS: 30000,
     keepAlive: true,
