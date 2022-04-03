@@ -8,7 +8,6 @@ export default defineConfig({
     server: {
         proxy: {
             // '/api': 'http://120.77.26.105', //"http://www.amaxscan.io",
-            // "/api": "https://exp.mgpchain.io", //"http://www.amaxscan.io",
             "/api": "https://www.amaxscan.io", //"http://www.amaxscan.io",
             '/socket.io': {
                 target: 'https://www.amaxscan.io',
