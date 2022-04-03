@@ -33,7 +33,7 @@ export class ScatterService {
     constructor() {}
 
     getRam() {
-        Ax.get(`/api/v1/get_table_rows/amax/amax/rammarket/10`)
+        Ax.get(`/v1/get_table_rows/amax/amax/rammarket/10`)
             .then((res: any) => {
                 console.log(123, res);
                 this.countRamPrice(res);
@@ -55,7 +55,7 @@ export class ScatterService {
 
     getAccount() {
         this.spinnerRAM = true;
-        Ax.get(`/api/v1/get_account/${this.loginEOSService.accountName}`).then(
+        Ax.get(`/v1/get_account/${this.loginEOSService.accountName}`).then(
             (res: any) => {
                 this.mainDataRAM = res;
                 this.getBalance();
@@ -69,7 +69,7 @@ export class ScatterService {
     }
 
     getBalance() {
-        Ax.get(`/api/v1/get_currency_balance/amax.token/${this.loginEOSService.accountName}/EOS`)
+        Ax.get(`/v1/get_currency_balance/amax.token/${this.loginEOSService.accountName}/EOS`)
             .then((res: any) => {
                 this.unstaked = !res[0] ? 0 : Number(res[0].split(' ')[0]);
                 if (this.mainDataRAM.voter_info && this.mainDataRAM.voter_info.staked) {
@@ -83,7 +83,7 @@ export class ScatterService {
     }
     getContract(name: string) {
         this.spinnerRAM = true;
-        Ax.get(`/api/v1/get_code/${name}`)
+        Ax.get(`/v1/get_code/${name}`)
             .then((res: any) => {
                 //console.log(this.b64DecodeUnicode(res.abi));
                 if (res && res.abi && res.abi.structs) {
@@ -213,7 +213,7 @@ export class ScatterService {
     }
 
     saveOrder(data: any) {
-        Ax.post('/api/v1/ram_order', data).then(
+        Ax.post('/v1/ram_order', data).then(
             (res: any) => {
                 this.getAccount();
                 this.getOrderHistory();
@@ -225,7 +225,7 @@ export class ScatterService {
     }
 
     getOrderHistory() {
-        Ax.get(`/api/v1/ram_orders/${this.loginEOSService.accountName}`).then(
+        Ax.get(`/v1/ram_orders/${this.loginEOSService.accountName}`).then(
             (res: any) => {
                 this.orderHistoryRAM = res;
                 let ELEMENT_DATA: Element[] = res;

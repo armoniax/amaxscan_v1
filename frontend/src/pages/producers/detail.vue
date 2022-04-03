@@ -163,7 +163,7 @@ export default defineComponent({
         };
 
         const getLastVotes = (accountName: string) => {
-            Ax.get(`/api/v1/get_voters/${accountName}?limit=20`)
+            Ax.get(`/v1/get_voters/${accountName}?limit=20`)
                 .then((res: any) => {
                     state.voters = res;
                     if (!res.voters) {
@@ -178,7 +178,7 @@ export default defineComponent({
 
         const getStakeBalances = (elem: any) => {
             if (elem.act && elem.act.data && elem.act.data.voter) {
-                Ax.get(`/api/v1/get_account/${elem.act.data.voter}`).then(
+                Ax.get(`/v1/get_account/${elem.act.data.voter}`).then(
                     (res: any) => {
                         if (res && res.voter_info && res.voter_info.staked) {
                             elem.stake = res.voter_info.staked / 10000;
@@ -195,7 +195,7 @@ export default defineComponent({
             if (!elem || !elem.url) {
                 return console.log(elem);
             }
-            Ax.post(`/api/producer`, { url: `${elem.url}/${frontConfig.value.bp}` }).then((res: any) => {
+            Ax.post(`/producer`, { url: `${elem.url}/${frontConfig.value.bp}` }).then((res: any) => {
                 state.bpData = res;
                 if (res.nodes && res.nodes.length) {
                     res.nodes.forEach((elem: any) => {

@@ -158,7 +158,7 @@ export default defineComponent({
         };
 
         const getSupplyEOS = (globalTable: any) => {
-            Ax.get(`/api/custom/get_table_rows/${frontConfig.value.tokenContract}/${frontConfig.value.coin}/stat/1`).then(
+            Ax.get(`/custom/get_table_rows/${frontConfig.value.tokenContract}/${frontConfig.value.coin}/stat/1`).then(
                 (res: any) => {
                     if (!res || !res.rows || !res.rows[0] || !res.rows[0].supply) {
                         return;

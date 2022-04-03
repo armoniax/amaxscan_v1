@@ -104,7 +104,7 @@ export default defineComponent({
         });
 
         const getGlobal = () => {
-            Ax.get(`/api/v1/get_table_rows/${account.value}/${account.value}/global/10`)
+            Ax.get(`/v1/get_table_rows/${account.value}/${account.value}/global/10`)
                 .then((res: any) => {
                     if (!res || !res.rows) {
                         return console.error('data error', res);
@@ -134,7 +134,7 @@ export default defineComponent({
 
         const getChart = (from: any) => {
             state.spinnerRAM = true;
-            Ax.post(`/api/v1/get_chart_ram`, { from })
+            Ax.post(`/v1/get_chart_ram`, { from })
                 .then((res: any) => {
                     // console.log(createChartArr(res));
                     option.value.series[0].data = createChartArr(res).map(item => item.value) as any;
@@ -157,7 +157,7 @@ export default defineComponent({
         };
 
         const getRam = () => {
-            Ax.get(`/api/v1/get_table_rows/amax/amax/rammarket/10`)
+            Ax.get(`/v1/get_table_rows/amax/amax/rammarket/10`)
                 .then((res: any) => {
                     countRamPrice(res);
                 })

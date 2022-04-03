@@ -97,7 +97,7 @@ export default defineComponent({
 
         const getAccounts = () => {
             state.spinner = true;
-            Ax.get(`/api/v1/get_accounts_analytics/50`)
+            Ax.get(`/v1/get_accounts_analytics/50`)
                 .then((res: any) => {
                     // mainData.value = res;
 
@@ -126,7 +126,7 @@ export default defineComponent({
         };
 
         const getChart = () => {
-            Ax.post(`/api/v1/get_trx_actions`, { date: +new Date() - 7 * 24 * 60 * 60 * 1000 })
+            Ax.post(`/v1/get_trx_actions`, { date: +new Date() - 7 * 24 * 60 * 60 * 1000 })
                 .then((res: any) => {
                     createChart(res);
                 })
@@ -149,7 +149,7 @@ export default defineComponent({
         };
 
         const getGlobal = () => {
-            Ax.get(`/api/v1/get_table_rows/amax/amax/global/10`)
+            Ax.get(`/v1/get_table_rows/amax/amax/global/10`)
                 .then((res: any) => {
                     if (!res || !res.rows) {
                         return console.error('data error', res);
