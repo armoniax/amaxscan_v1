@@ -24,7 +24,7 @@ export const environment = {
     totalBalance: "AMAX",
     convertToUSD: false,
     customBalance: false,
-    logo: "/assets/images/mgpweb.png",
+    logo: "/assets/images/amax.png",
     name: {
       big: "",
       small: "",
