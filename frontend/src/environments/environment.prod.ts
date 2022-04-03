@@ -1,5 +1,5 @@
-const chain =
-  "208dacab3cd2e181c86841613cf05d9c60786c677e4ce86b266d0a58884968f7";
+const chain = "208dacab3cd2e181c86841613cf05d9c60786c677e4ce86b266d0a58884968f7";
+
 export const environment = {
   production: true,
   appName: "Armonia Multichain Blockchain Platform",

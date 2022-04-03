@@ -67,8 +67,8 @@ config.eosConfig = {
 // api url for producers list
 config.customChain = 'http://172.17.0.1:8888';
 
-// api url for history
-config.historyChain = 'http://172.17.0.1:8888';
+// api url for history API
+config.historyChain = 'https://www.amaxscan.io';
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
