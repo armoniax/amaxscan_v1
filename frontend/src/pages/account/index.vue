@@ -112,7 +112,7 @@
                         th Name
                         th Action data
                 tbody
-                    tr(v-for='i in 10', :key='i')
+                    tr(v-for='i in 10', :key='i' v-if="false")
                         th {{ i }}
                         th pojekngj
                         th 2022-06-24

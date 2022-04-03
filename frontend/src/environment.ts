@@ -28,7 +28,7 @@ export const environment = {
        totalBalance: 'AMAX',
        convertToUSD: true,
        customBalance: false,
-       logo: '/assets/images/mgpweb.png',
+       logo: '/assets/images/amax.png',
        name: {
           big: 'eos',
           small: 'web'
@@ -79,7 +79,7 @@ export const environment = {
        totalBalance: 'AMAX',
        convertToUSD: false,
        customBalance: false,
-       logo: '/assets/images/mgpio.png',
+       logo: '/assets/images/amax.png',
        name: {
           big: '',
           small: ''

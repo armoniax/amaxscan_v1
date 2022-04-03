@@ -29,10 +29,10 @@ export default defineComponent({
         const onInit = async () => {
             getMainFrontConfig();
             // TODO 如果登陆。获取用户信息
-            EOS.rpc.get_info().then(res => {
-                // console.log(res);
-                // getAccount();
-            });
+            // EOS.rpc.get_info().then(res => {
+            //     // console.log(res);
+            //     // getAccount();
+            // });
         };
 
         onInit();
