@@ -1,7 +1,7 @@
 <template lang="pug">
 footer.bg-gray.py-4
   Wrapper.text-center
-    p.text-xs.text-gray-999.font-normal Copyright © 2019 Mango global payment system
+    p.text-xs.text-gray-999.font-normal Copyright © 2022 Armonia Multi-chain Platform
 </template>
 
 <script lang="ts">
