@@ -3,7 +3,7 @@ import { GetCurrencyBalanceParams } from './types';
 console.log('NODE_ENV: ---->>>>>>>', process.env.NODE_ENV)
 export const Ax = axios.create({
     // baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://sh-misc.vm.amax.dev:38888',
-    baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/node-api',
+    baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/api',
 });
 
 Ax.interceptors.response.use(response => {
@@ -14,7 +14,7 @@ export const GET_TABLE_ROWS__RAMMARKET_10 = () => Ax.get('/v1/get_table_rows/ama
 
 export const GET_AGGREGATION_STAT = () => Ax.get('/v1/get_aggregation_stat');
 
-export const GET_INFO = () => Ax.get('/v1/chain/get_info');
+export const GET_INFO = () => Ax.get('/v1/get_info');
 
 export const GET_CONTROLLED_BY_ACCOUNT = (account: string) => Ax.get(`/v1/get_controlled_accounts/${account}`);
 
