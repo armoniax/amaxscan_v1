@@ -112,7 +112,7 @@
                         th Name
                         th Action data
                 tbody
-                    tr(v-for='i in 10', :key='i')
+                    tr(v-for='i in 10', :key='i' v-if="false")
                         th {{ i }}
                         th pojekngj
                         th 2022-06-24
@@ -233,7 +233,7 @@ export default defineComponent({
 
         // Token transfer      Actions (Raw Data)        Actions info
         const getActions = (account: string, pos: number) => {
-            account = 'amax';
+            console.log('getActions for account: ', account);
             pos = pos === 1 ? -1 : pos;
             GET_ACTIONS(account, pos, 100).then((res: any) => {
                 console.log('getActions-----', res);
