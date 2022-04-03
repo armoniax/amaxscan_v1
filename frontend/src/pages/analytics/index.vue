@@ -51,12 +51,15 @@ import { PieChart } from 'echarts/charts';
 import { GridComponent } from 'echarts/components';
 import VChart from 'vue-echarts';
 import { Ax } from '@/apis';
+import { environment } from '@/environments/environment';
+
 use([CanvasRenderer, PieChart, GridComponent]);
 
 export default defineComponent({
     components: { VChart },
     setup() {
         const chart = ref();
+        const frontConfig = environment.frontConfig;
         // const Legends = ref([
         //     { value: 40, name: 'rose 1' },
         //     { value: 38, name: 'rose 2' },
@@ -173,6 +176,7 @@ export default defineComponent({
             // Legends,
             dataSource,
             state,
+            frontConfig
         };
     },
 });
