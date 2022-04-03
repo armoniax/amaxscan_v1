@@ -2,10 +2,10 @@ const chain =
   "cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f";
 export const environment = {
   production: true,
-  appName: "Armonia Multichain Blockchain Platform",
+  appName: "Armonia Multichain platform",
   network: {
     blockchain: "AMAX",
-    host: "testnet.amaxscan.io",
+    host: "101.132.169.141",
     port: 8888,
     protocol: "http",
     expireInSeconds: 120,
@@ -13,14 +13,14 @@ export const environment = {
   },
   chain: chain,
   Eos: {
-    httpEndpoint: "http://172.17.0.1:8888",
+    httpEndpoint: "https://101.132.169.141:38888",
     chainId: chain,
     verbose: false,
   },
   frontConfig: {
     coin: "AMAX",
     bp: "bp.json",
-    tokenContract: "amax.token",
+    tokenContract: "eosio.token",
     totalBalance: "AMAX",
     convertToUSD: false,
     customBalance: false,
@@ -29,7 +29,7 @@ export const environment = {
       big: "",
       small: "",
     },
-    nets: [{ name: "AMAX", url: "127.0.0.1:3039", active: true }],
+    nets: [{ name: "MGP", url: "127.0.0.1:3039", active: true }],
     disableNets: true,
     voteDonationAcc: "eoswebnetbp1",
     disableVoteDonation: true,

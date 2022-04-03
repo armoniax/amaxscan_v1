@@ -1,27 +1,27 @@
 const chain =
-  "cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f";
+  "208dacab3cd2e181c86841613cf05d9c60786c677e4ce86b266d0a58884968f7";
 export const environment = {
   production: true,
-  appName: "Mango Global Payment Blockchain System",
+  appName: "Armonia Multichain Blockchain Platform",
   network: {
-    blockchain: "eos",
-    host: "sh-expnode.vm.mgps.me",
-    port: 8888,
+    blockchain: "AMAX",
+    host: "101.132.169.141",
+    port: 38888,
     protocol: "http",
     expireInSeconds: 120,
     chainId: chain,
   },
   chain: chain,
   Eos: {
-    httpEndpoint: "https://sh-expnode.vm.mgps.me:8888",
+    httpEndpoint: "http://101.132.169.141:38888",
     chainId: chain,
     verbose: false,
   },
   frontConfig: {
-    coin: "MGP",
+    coin: "AMAX",
     bp: "bp.json",
-    tokenContract: "eosio.token",
-    totalBalance: "MGP",
+    tokenContract: "amax.token",
+    totalBalance: "AMAX",
     convertToUSD: false,
     customBalance: false,
     logo: "/assets/images/mgpweb.png",
@@ -29,7 +29,7 @@ export const environment = {
       big: "",
       small: "",
     },
-    nets: [{ name: "MGP", url: "127.0.0.1:3039", active: true }],
+    nets: [{ name: "AMAX", url: "10.88.0.1:3039", active: true }],
     disableNets: true,
     voteDonationAcc: "eoswebnetbp1",
     disableVoteDonation: true,
