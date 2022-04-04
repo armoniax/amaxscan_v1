@@ -2,14 +2,14 @@
 .text-sm
   .flex.items-center.h-8
     .w-44 Total Balance:
-    .flex-1 {{balance}} {{state.frontConfig?.totalBalance}}
+    .flex-1 {{balance}} {{state.frontConfig?.coin}}
       //- span(v-if="state.frontConfig?.convertToUSD") / {{ (balance * eosRate?.RAW[frontConfig.coin]?.USD?.PRICE).toLocaleString() }} USD
   .flex.items-center.h-8
     .w-44 Unstaked
-    .flex-1.text-gray-999 {{unstaked}} {{state.frontConfig?.totalBalance}}
+    .flex-1.text-gray-999 {{unstaked}} {{state.frontConfig?.coin}}
   .flex.items-center.h-8
     .w-44 Staked
-    .flex-1.text-gray-999 {{ mainData?.voter_info?.staked ? (state.frontConfig?.coin !== 'WAX') ? mainData?.voter_info?.staked / 10000 : mainData?.voter_info?.staked / 100000000 : 0}} {{state.frontConfig?.coin}}
+    .flex-1.text-gray-999 {{ mainData?.voter_info?.staked ? mainData?.voter_info?.staked / 100000000 : 0}} {{state.frontConfig?.coin}}
   .flex.items-center.h-8
     .w-44 CPU
     .flex-1.flex.items-center

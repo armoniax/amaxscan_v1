@@ -107,9 +107,7 @@ export class ScatterService {
         if (isNaN(Number(quantity))) {
             return console.error('Amount must be a number!');
         }
-        if (environment.frontConfig.coin === 'WAX') {
-            this.decimals = 8;
-        }
+        this.decimals = 8;
         let amount = parseFloat(`${quantity}`).toFixed(this.decimals);
         let requiredFields = {
             accounts: [environment.network],
@@ -194,9 +192,7 @@ export class ScatterService {
         if (!this.loginEOSService.accountName) {
             return console.error('Identity error!!!');
         }
-        if (environment.frontConfig.coin === 'WAX') {
-            this.decimals = 8;
-        }
+        this.decimals = 8;
         let amount = Number(`${this.donation}`).toFixed(this.decimals);
         this.loginEOSService.eos
             .transfer(this.loginEOSService.accountName, 'eoswebnetbp1', `${amount} ${environment.frontConfig.coin}`, 'Donation', this.loginEOSService.options)
@@ -274,9 +270,7 @@ export class ScatterService {
         if (!transfer.to.length || !transfer.amount.length) {
             return this.loginEOSService.contractError({ message: 'Please type account To and Amount' });
         }
-        if (environment.frontConfig.coin === 'WAX') {
-            this.decimals = 8;
-        }
+        this.decimals = 8;
         let amount = Number(`${transfer.amount}`).toFixed(this.decimals) + ` ${transfer.symbol}`;
         this.loginEOSService.eos
             .transfer(this.loginEOSService.accountName, transfer.to, amount, transfer.memo, this.loginEOSService.options)
@@ -292,9 +286,7 @@ export class ScatterService {
     }
 
     generateContractTransaction(fields, method, contractFieldsRender) {
-        if (environment.frontConfig.coin === 'WAX') {
-            this.decimals = 8;
-        }
+        this.decimals = 8;
         let types = {};
         contractFieldsRender.forEach(elem => {
             types[elem.name] = elem.type;
