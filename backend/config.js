@@ -10,7 +10,7 @@ config.PROD = true;
 config.toInt = 100000000; //precison: 8
 config.coin = 'AMAX';
 
-config.MONGO_URI = process.env.MONGO_URI || 'mongodb://amax:amax123456@10.88.0.1:27018/AMAXExp';
+config.MONGO_URI = process.env.MONGO_URI || 'mongodb://amax:amax123456@10.88.0.1:27017/AMAXExp';
 // config.MONGO_URI = process.env.MONGO_URI || 'mongodb://deex:deex123456@139.224.250.244:27017/AMAXExp';
 config.MONGO_OPTIONS = {
     socketTimeoutMS: 30000,
