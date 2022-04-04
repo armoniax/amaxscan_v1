@@ -176,7 +176,7 @@ export default defineComponent({
             if (!global || !global.rows || !global.rows[0] || !global.rows[0].total_activated_stake) {
                 return;
             }
-            state.chainPercentage = ((global.rows[0].total_activated_stake / 10000 / supply) * 100).toFixed(2);
+            state.chainPercentage = ((global.rows[0].total_activated_stake / 100000000 / supply) * 100).toFixed(2);
             state.chainNumber = (global.rows[0].total_activated_stake / supply) * 100000;
         };
 

@@ -133,7 +133,7 @@ import moment from 'moment';
 import { useRoute } from 'vue-router';
 import PageAccountBase from '@/components/Page/Account/Base.vue';
 import RawDataBase from '@/components/RawData/Base.vue';
-import { environment } from '@/environment';
+import { environment } from '@/environments/environment';
 import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10 } from '@/apis';
 
 const frontConfig = environment.frontConfig;
