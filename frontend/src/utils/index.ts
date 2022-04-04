@@ -23,12 +23,12 @@ export const sortArray = (data: any[], ungerKey = 'EOS11111111111111111111111111
 };
 
 export const calculateAmaxFromVotes = (votes: number) => {
-    let date = +new Date() / 1000 - 946684800; // 946... start timestamp
-    if (frontConfig.coin === 'AMAX') {
-        let weight = parseInt(`${date / (86400 * 7)}`, 10) / 13;
-        return votes / 2 ** weight / 100000000;
-    }
-    
+    let date = +new Date() / 1000 - 1649083919; // 946... start timestamp
+    // if (frontConfig.coin === 'AMAX') {
+    //     let weight = parseInt(`${date / (86400 * 7)}`, 10) / 13;
+    //     return votes / 2 ** weight / 100000000;
+    // }
+
     let weight = parseInt(`${date / (86400 * 7)}`, 10) / 52; // 86400 = seconds per day 24*3600
-    return votes / 2 ** weight / 10000;
+    return votes / 2 ** weight / 100000000;
 };
