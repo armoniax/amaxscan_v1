@@ -9,10 +9,12 @@ export default defineConfig({
         proxy: {
             // '/api': 'http://120.77.26.105', //"http://www.amaxscan.io",
             // "/api": "https://www.amaxscan.io", //"http://www.amaxscan.io",
-            "/api": "https://expnode.amaxscan.io", //"http://www.amaxscan.io",
+            // "/api": "https://expnode.amaxscan.io", //"http://www.amaxscan.io",
+            "/api": "http://prod-exp-proxy.ambt.art", //"http://www.amaxscan.io",
             '/socket.io': {
                 // target: 'https://www.amaxscan.io',
-                target: 'https://expnode.amaxscan.io',
+                // target: 'https://expnode.amaxscan.io',
+                target: 'http://prod-exp-proxy.ambt.art',
                 // secure: true,
                 changeOrigin: true,
                 // secure: false,

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { GetCurrencyBalanceParams } from './types';
-console.log('NODE_ENV: ---->>>>>>>', process.env.NODE_ENV)
+console.log('NODE_ENV: ---->>>>>>> v0.0.1', process.env.NODE_ENV)
 export const Ax = axios.create({
     // baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://sh-misc.vm.amax.dev:38888',
     baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/api',

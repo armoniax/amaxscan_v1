@@ -3,7 +3,7 @@
   .collapse.collapse-arrow(tabindex="0")
     .collapse-title.text-sm.h-8 {{ title }}
     .collapse-content
-      JsonViewer(:value="json", copyable, sort)
+      JsonViewer(:value="json", copyable, sort, :expand-depth=5)
 </template>
 
 <script lang="ts">
