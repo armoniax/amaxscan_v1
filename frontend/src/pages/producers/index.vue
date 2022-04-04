@@ -177,10 +177,7 @@ export default defineComponent({
                 return;
             
             state.chainPercentage = ((global.rows[0].total_activated_stake / 100000000 / supply) * 100).toFixed(2);
-            state.chainNumber = (global.rows[0].total_activated_stake / supply) * 100000;
-            console.log(global);
-            console.log(supply);
-            console.log(state);
+            state.chainNumber = (global.rows[0].total_activated_stake / supply) * 10;
         };
 
         const joinOtherProducerInfo = (sortedArr: any[], joinArr: any[]) => {
