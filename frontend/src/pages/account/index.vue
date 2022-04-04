@@ -209,7 +209,7 @@ export default defineComponent({
             });
         };
 
-        // pendding状态
+        // pending状态
         const getAllTokens = (account: string) => {
             GET_ACCOUNT_TOKENS(account).then((res: any) => {
                 console.log('GET_ACCOUNT_TOKENS-----', res);
@@ -217,7 +217,7 @@ export default defineComponent({
         };
 
         const getBalance = (account: string) => {
-            GET_CURRENCY_BALANCE({ tokenContract: frontConfig.tokenContract, account, totalBalance: frontConfig.totalBalance }).then((res: any) => {
+            GET_CURRENCY_BALANCE({ tokenContract: frontConfig.tokenContract, account, tokenSymbol: frontConfig.coin }).then((res: any) => {
                 console.log('getBalance-----', res);
 
                 state.unstaked = !res[0] ? 0 : Number(res[0].split(' ')[0]);

@@ -69,7 +69,7 @@ export class ScatterService {
     }
 
     getBalance() {
-        Ax.get(`/v1/get_currency_balance/amax.token/${this.loginEOSService.accountName}/EOS`)
+        Ax.get(`/v1/get_currency_balance/amax.token/${this.loginEOSService.accountName}/AMAX`)
             .then((res: any) => {
                 this.unstaked = !res[0] ? 0 : Number(res[0].split(' ')[0]);
                 if (this.mainDataRAM.voter_info && this.mainDataRAM.voter_info.staked) {

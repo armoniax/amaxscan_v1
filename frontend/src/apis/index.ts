@@ -28,7 +28,7 @@ export const GET_ACTIONS_NAME = (accountName: string, actionName: string) => Ax.
 
 export const GET_ACTIONS = (accountName: string, pos: number, elementsLimit: number) => Ax.get(`/v1/get_actions/${accountName}/${pos}/-${elementsLimit}`);
 
-export const GET_CURRENCY_BALANCE = (parmas: GetCurrencyBalanceParams) => Ax.get(`/v1/get_currency_balance/${parmas.tokenContract}/${parmas.account}/${parmas.totalBalance}`);
+export const GET_CURRENCY_BALANCE = (parmas: GetCurrencyBalanceParams) => Ax.get(`/v1/get_currency_balance/${parmas.tokenContract}/${parmas.account}/${parmas.tokenSymbol}`);
 
 export const GET_ACCOUNT_TOKENS = (account: string) => Ax.post(`/v1/get_account_tokens`, { account });
 
