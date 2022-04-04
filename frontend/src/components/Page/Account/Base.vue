@@ -72,7 +72,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive } from 'vue';
-import { environment } from '@/environment';
+import { environment } from '@/environments/environment';
 const frontConfig = environment.frontConfig;
 export default defineComponent({
     props: {
