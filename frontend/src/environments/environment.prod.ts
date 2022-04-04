@@ -11,17 +11,16 @@ export const environment = {
     expireInSeconds: 120,
     chainId: chain,
   },
-  chain: chain,
-  Eos: {
-    httpEndpoint: "http://101.132.169.141:38888",
-    chainId: chain,
-    verbose: false,
-  },
+  // chain: chain,
+  // Eos: {
+  //   httpEndpoint: "http://101.132.169.141:38888",
+  //   chainId: chain,
+  //   verbose: false,
+  // },
   frontConfig: {
     coin: "AMAX",
     bp: "bp.json",
     tokenContract: "amax.token",
-    totalBalance: "AMAX",
     convertToUSD: false,
     customBalance: false,
     logo: "/assets/images/amax.png",

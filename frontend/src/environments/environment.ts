@@ -2,7 +2,7 @@ const chain = "208dacab3cd2e181c86841613cf05d9c60786c677e4ce86b266d0a58884968f7"
 
 export const environment = {
   production: true,
-  appName: "Armonia Multichain Platform",
+  // appName: "Armonia Multichain Platform",
   network: {
     blockchain: "AMAX",
     host: "expnode.amaxscan.io",
@@ -11,19 +11,18 @@ export const environment = {
     expireInSeconds: 120,
     chainId: chain,
   },
-  chain: chain,
-  Eos: {
-    httpEndpoint: "https://expnode.amaxscan.io",
-    chainId: chain,
-    verbose: false,
-  },
+  // chain: chain,
+  // Eos: {
+  //   httpEndpoint: "https://expnode.amaxscan.io",
+  //   chainId: chain,
+  //   verbose: false,
+  // },
   frontConfig: {
     coin: "AMAX",
     bp: "bp.json",
     tokenContract: "amax.token",
-    totalBalance: "AMAX",
     convertToUSD: false,
-    customBalance: false,
+    customBalance: false, //when true: must show precision
     logo: "/assets/images/amax.png",
     name: {
       big: "",

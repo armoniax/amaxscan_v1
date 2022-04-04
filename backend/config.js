@@ -40,8 +40,9 @@ config.telegram = {
   TIME_UPDATE: 5000
 };
 
-// reserve nodes
+// reserved nodes
 config.endpoints = [
+  'http://10.88.0.1:8888',  //localhost access
 	'https://expnode.amaxscan.io'
      //'http://bp.cryptolions.io',
      //'https://eos.greymass.com',

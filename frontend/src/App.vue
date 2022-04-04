@@ -10,7 +10,7 @@ import { Api } from 'eosjs';
 
 export default defineComponent({
     setup() {
-        const EOS = inject('EOS') as Api;
+        // const EOS = inject('AMAX') as Api;
         const state = reactive<any>({
             netName: '',
             networks: [],

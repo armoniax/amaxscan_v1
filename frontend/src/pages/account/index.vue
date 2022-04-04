@@ -225,10 +225,10 @@ export default defineComponent({
                 if (state.mainData.voter_info && state.mainData.voter_info.staked) {
                     staked = state.mainData.voter_info.staked;
                 }
-                if (frontConfig.customBalance) {
+                if (frontConfig.customBalance) {//include precision
                     state.balance = state.unstaked;
                 } else {
-                    state.balance = frontConfig.coin !== 'WAX' ? state.unstaked + staked / 10000 : state.unstaked + staked / 100000000;
+                    state.balance = state.unstaked + staked / 100000000;
                 }
                 // state.eosRate = this.MainService.getEosPrice();
             });
