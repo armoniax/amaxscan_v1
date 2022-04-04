@@ -5,14 +5,13 @@ const path = require('path');
 let config = {};
 
 // production mod
-config.PROD = false;
+config.PROD = true;
 
-config.toInt = 10000;
+config.toInt = 100000000; //precison: 8
 config.coin = 'AMAX';
 
-// mongo uri and options  root mini1234
-// config.MONGO_URI = process.env.MONGO_URI || 'mongodb://10.88.0.1:27018/EOSweb';
-config.MONGO_URI = process.env.MONGO_URI || 'mongodb://deex:deex123456@139.224.250.244:27017/EOSweb';
+config.MONGO_URI = process.env.MONGO_URI || 'mongodb://root:Amax123@10.88.0.1:27018/EOSweb';
+// config.MONGO_URI = process.env.MONGO_URI || 'mongodb://deex:deex123456@139.224.250.244:27017/EOSweb';
 config.MONGO_OPTIONS = {
     socketTimeoutMS: 30000,
     keepAlive: true,
@@ -43,7 +42,7 @@ config.telegram = {
 
 // reserve nodes
 config.endpoints = [
-	'http://101.132.169.141:38888'
+	'https://expnode.amaxscan.io'
      //'http://bp.cryptolions.io',
      //'https://eos.greymass.com',
      //'https://public.eosinfra.io', 
@@ -65,7 +64,7 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = 'http://101.132.169.141:38888';
+config.customChain = 'https://expnode.amaxscan.io';
 
 // api url for history
 config.historyChain = 'http://10.88.0.1:3039';

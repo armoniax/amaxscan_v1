@@ -1,4 +1,4 @@
-const chain = "cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f";
+const chain = "208dacab3cd2e181c86841613cf05d9c60786c677e4ce86b266d0a58884968f7";
 
 export const environment = {
   production: true,
@@ -13,7 +13,7 @@ export const environment = {
   },
   chain: chain,
   Eos: {
-    httpEndpoint: "https://101.132.169.141:38888",
+    httpEndpoint: "https://expnode.amaxscan.io",
     chainId: chain,
     verbose: false,
   },
