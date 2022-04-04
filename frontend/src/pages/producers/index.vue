@@ -12,7 +12,7 @@
                 th #
                 th Name
                 th Status
-                th Url
+                //- th Url
                 th Location
                 th Total Votes ({{ frontConfig?.coin }})
                 th Rate
@@ -20,15 +20,15 @@
         tbody
             tr.h-16.border-b.border-b-gray-f4(v-for='item in DataList', :key='item.index')
                 td {{ item.index }}
-                td.flex.items-center.justify-center.h-16.cursor-pointer(@click='$router.push(`/producers/${item.owner}`)')
+                td.flex.items-center.justify-center.h-16.cursor-pointer(@click.stop='$router.push(`/producers/${item.owner}`)')
                     //- img.w-10.mr-2(:src='item?.image || "../../assets/images/amax.png"')
-                    img.w-10.mr-2(:src='item?.image || "/amax.png"')
+                    img.w-10.mr-2(:src='item?.image || "/amax.png"' @click="item?.url && window.open(item?.url)")
                     span.font-medium {{ item.owner }}
                 td
                     span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(139deg, #2ff443 0%, #32d5d8 100%)', v-if='item?.index <= 21 && producer !== item.owner') TOP21
                     span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(to right, #ff9389, #ff8ea4); background: -webkit-gradient(linear, left top, right top, from(#ff9389), to(#ff8ea4))', v-if='producer === item.owner') Producing
                     span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(to right, #ff9048, #f44336); background: -webkit-gradient(linear, left top, right top, from(#ff9048), to(#f44336))', v-if='item?.index > 21 && producer !== item.owner') Standby
-                td {{ item?.url || "-" }}
+                //- td {{ item?.url || "-" }}
                 td
                     img.w-8.m-auto(v-if="item?.location")(:src='`/flags/${item?.location}.svg`')
 
