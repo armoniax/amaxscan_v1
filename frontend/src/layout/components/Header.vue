@@ -9,6 +9,7 @@
         input.bg-transparent.w-full.h-full.outline-none.text-xs(
           placeholder="Search by block,tx,account,address",
           v-model="keyword"
+          @keyup="changeInput"
         )
       router-link(to="/analytics") ANALYTICS
       router-link(to="/ram") RAM
@@ -41,9 +42,16 @@ export default defineComponent({
             });
         };
 
+        const changeInput = event => {
+            if (event.keyCode == 13) {
+                search();
+            }
+        };
+
         return {
             keyword,
             search,
+            changeInput,
         };
     },
 });
