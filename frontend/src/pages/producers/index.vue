@@ -96,7 +96,7 @@ export default defineComponent({
                     const totalProducerVoteWeight = Number(results[1].rows[0].total_producer_vote_weight);
                     const bpJson = results[2];
                     const globalTable = results[1];
-                    getSupplyEOS(globalTable);
+                    getSupplyAMAX(globalTable);
                     createTable(results[0], totalProducerVoteWeight, bpJson);
 
                     socket.on('producers', (data: any) => {
@@ -158,7 +158,7 @@ export default defineComponent({
             return Math.floor(reward).toLocaleString();
         };
 
-        const getSupplyEOS = (globalTable: any) => {
+        const getSupplyAMAX = (globalTable: any) => {
             Ax.get(`/custom/get_table_rows/${frontConfig.value.tokenContract}/${frontConfig.value.coin}/stat/1`).then(
                 (res: any) => {
                     if (!res || !res.rows || !res.rows[0] || !res.rows[0].supply) {
@@ -173,11 +173,14 @@ export default defineComponent({
         };
 
         const calculateTotalVotes = (global: any, supply: any) => {
-            if (!global || !global.rows || !global.rows[0] || !global.rows[0].total_activated_stake) {
+            if (!global || !global.rows || !global.rows[0] || !global.rows[0].total_activated_stake)
                 return;
-            }
+            
             state.chainPercentage = ((global.rows[0].total_activated_stake / 100000000 / supply) * 100).toFixed(2);
             state.chainNumber = (global.rows[0].total_activated_stake / supply) * 100000;
+            console.log(global);
+            console.log(supply);
+            console.log(state);
         };
 
         const joinOtherProducerInfo = (sortedArr: any[], joinArr: any[]) => {
