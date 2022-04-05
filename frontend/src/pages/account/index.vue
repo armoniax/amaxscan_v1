@@ -202,7 +202,7 @@ export default defineComponent({
 
                 getBalance(account);
                 getActions(state.mainData.account_name, state.position); // Table Actions info
-                getAccountAction(state.mainData.account_name, state.mainData.action_name); //FIXME:: actionName not passed in
+                getAccountAction(state.mainData.account_name, state.mainData.action_name); //TODO: is action_name definition correct?
                 getCode(state.mainData.account_name);
 
                 console.log('getAccount-----', res);
