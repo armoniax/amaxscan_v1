@@ -65,10 +65,10 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = 'https://expnode.amaxscan.io';
+config.customChain = 'http://10.88.0.1:18888';
 
 // api url for history
-config.historyChain = 'http://10.88.0.1:19555';
+config.historyChain = 'http://10.88.0.1:18888'; //still the RPC chain
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
