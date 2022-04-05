@@ -128,7 +128,7 @@
 // @ts-ignore
 import JsonViewer from 'vue-json-viewer';
 
-import { computed, defineComponent, InputHTMLAttributes, reactive, ref } from 'vue';
+import { computed, defineComponent, InputHTMLAttributes, reactive, ref, watch } from 'vue';
 import moment from 'moment';
 import { useRoute } from 'vue-router';
 import PageAccountBase from '@/components/Page/Account/Base.vue';
@@ -173,6 +173,10 @@ export default defineComponent({
 
         const account = computed(() => route.params.account as string);
         const momentFarmat = moment;
+
+        watch(route, (newVlaue, oldValue) => {
+            onInit();
+        })
 
         // pass  接口通了  没数据
         const getControlledAccounts = (account: string) => {
@@ -337,12 +341,21 @@ export default defineComponent({
             // state.showDataSource
         };
 
-        ((): void => {
+        const onInit = () => {
             state.actionsArray = [];
             getBlockData(account.value);
             getControlledAccounts(account.value);
             getAllTokens(account.value);
-        })();
+        }
+
+        onInit()
+
+        // ((): void => {
+        //     state.actionsArray = [];
+        //     getBlockData(account.value);
+        //     getControlledAccounts(account.value);
+        //     getAllTokens(account.value);
+        // })();
 
         return {
             state,
