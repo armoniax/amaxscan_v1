@@ -10,7 +10,7 @@ request.get(`${config.historyChain}/v1/history/get_actions_transactions`, (err, 
 	}
 	let data;
 	try{
-		log.info("get_actions_transactions: " + body);
+		log.info(`${config.historyChain}/v1/history/get_actions_transactions: ` + body);
 		data = JSON.parse(body);
 	} catch(err){
 		log.error(err);
