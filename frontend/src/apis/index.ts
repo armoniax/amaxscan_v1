@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { GetCurrencyBalanceParams } from './types';
-console.log('NODE_ENV: ---->>>>>>> v0.0.1', process.env.NODE_ENV)
+
 export const Ax = axios.create({
     // baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://sh-misc.vm.amax.dev:38888',
     baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/api',
 });
+
+console.log('AmaxExpSrv_Ver: ---->>>>>>> v0.5.31', process.env.NODE_ENV)
 
 Ax.interceptors.response.use(response => {
     return response.data;
