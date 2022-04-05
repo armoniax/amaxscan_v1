@@ -34,6 +34,7 @@ async function getAccounts(settings){
 	}
 	let accounts;
 	try {
+		log.info(`${config.historyChain}/v1/history/get_accounts?counter=on&skip=${skip}&limit=${limit}: ` + body);
 		accounts = JSON.parse(data);
 	} catch(e){
 		console.error(e);
