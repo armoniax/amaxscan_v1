@@ -380,17 +380,31 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	});
 
 	/*
-	* router - get_actions
+	* router - get_actions by account name
 	* params - account_name, position, offset
 	*/
-	router.get('/api/v1/get_actions/:account_name/:position/:offset', (req, res) => {
-	   	let formData = { json: true,
-			    account_name: req.params.account_name,
-	   	 		pos: req.params.position,
-	   	 		offset: (config.historyNewAPI) ? Math.abs(req.params.offset) : req.params.offset,
-	   	 		counter: 1
+	// router.get('/api/v1/get_actions/:account_name/:position/:offset', (req, res) => {
+	//    	let formData = { 
+	// 			json: true,
+	// 		    account_name: req.params.account_name,
+	//    	 		pos: req.params.position,
+	//    	 		offset: (config.historyNewAPI) ? Math.abs(req.params.offset) : req.params.offset,
+	//    	 		counter: 1
+	// 	};
+	//    	request.post({url:`${config.historyChain}/v1/history/get_actions`, json: formData}).pipe(res);
+	// });
+
+	/*
+	* router - get_actions by account name
+	* params - account_name, position, offset
+	*/
+	router.get('/api/v1/get_actions/:account/:pos/:offset', (req, res) => {
+		let data = { 
+			account_name: req.params.account, 
+			pos: req.params.pos,
+			offset: req.params.offset,
 		};
-	   	request.post({url:`${config.historyChain}/v1/history/get_actions`, json: formData}).pipe(res);
+	   	request.post({url:`${config.historyChain}/v1/history/get_actions`, json: data }).pipe(res);
 	});
 
 	/*
@@ -421,6 +435,20 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	});
 
 	/*
+	* router - get_transactions
+	* params - null
+	*/
+	router.get('/api/v1/get_transactions', (req, res) => {
+		global.eos.getTransactions({})
+			.then(result => {
+				res.json(result);
+			})
+			.catch(err => {
+				log.error(err);
+				res.status(501).end();
+			});
+	});
+	/*
 	* router - get_transaction
 	* params - transaction_id_type
 	*/
@@ -447,47 +475,20 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	   	request.post({url:`${config.historyChain}/v1/history/get_controlled_accounts`, json: data }).pipe(res);
 	});
 
-	/*
-	* router - get_actions by account name
-	* params - account_name, position, offset
-	*/
-	router.get('/api/v1/get_actions/:account/:pos/:offset', (req, res) => {
-		let data = { 
-			account_name: req.params.account, 
-			pos: req.params.pos,
-			offset: req.params.offset,
-		};
-	   	request.post({url:`${config.historyChain}/v1/history/get_actions`, json: data }).pipe(res);
-	});
-
-	/*
-	* router - get_transactions
-	* params - transaction_id_type
-	*/
-	router.get('/api/v1/get_transactions', (req, res) => {
-	   	 global.eos.getTransactions({})
-	   	 	.then(result => {
-	   	 		res.json(result);
-	   	 	})
-	   	 	.catch(err => {
-	   	 		log.error(err);
-	   	 		res.status(501).end();
-	   	 	});
-	});
 
 	/*
 	* router - get_info
 	*/
 	router.get('/api/v1/get_info', (req, res) => {
-      console.log(req);
-	   	 global.eos.getInfo({})
-	   	 	.then(result => {
-	   	 		res.json(result);
-	   	 	})
-	   	 	.catch(err => {
-	   	 		log.error(err);
-	   	 		res.status(501).end();
-	   	 	});
+      	console.log(req);
+		global.eos.getInfo({})
+		.then(result => {
+			res.json(result);
+		})
+		.catch(err => {
+			log.error(err);
+			res.status(501).end();
+		});
 	});
 	//============ END of HISTORY API
 
@@ -498,17 +499,17 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	* params - code: 'name', symbol: 'string'
 	*/
 	router.get('/api/v1/get_currency_stats/:code/:symbol', (req, res) => {
-	   	 global.eos.getCurrencyStats({
-	   	 		code: req.params.code,
-	   	 		symbol: req.params.symbol
-	   	 	})
-	   	 	.then(result => {
-	   	 		res.json(result);
-	   	 	})
-	   	 	.catch(err => {
-	   	 		log.error(err);
-	   	 		res.status(501).end();
-	   	 	});
+	   	global.eos.getCurrencyStats({
+			code: req.params.code,
+			symbol: req.params.symbol
+		})
+		.then(result => {
+			res.json(result);
+		})
+		.catch(err => {
+			log.error(err);
+			res.status(501).end();
+		});
 	});
 	//============ END of CHAIN API
 
