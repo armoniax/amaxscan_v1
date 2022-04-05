@@ -174,9 +174,9 @@ export default defineComponent({
         const account = computed(() => route.params.account as string);
         const momentFarmat = moment;
 
-        watch(route, (newVlaue, oldValue) => {
-            onInit();
-        })
+        // watch(route, (newVlaue, oldValue) => {
+        //     onInit();
+        // })
 
         // pass  接口通了  没数据
         const getControlledAccounts = (account: string) => {
@@ -341,21 +341,22 @@ export default defineComponent({
             // state.showDataSource
         };
 
-        const onInit = () => {
-            state.actionsArray = [];
-            getBlockData(account.value);
-            getControlledAccounts(account.value);
-            getAllTokens(account.value);
-        }
-
-        onInit()
-
-        // ((): void => {
+        // const onInit = () => {
+        //     console.log('commin')
         //     state.actionsArray = [];
         //     getBlockData(account.value);
         //     getControlledAccounts(account.value);
         //     getAllTokens(account.value);
-        // })();
+        // }
+
+        // onInit()
+
+        ((): void => {
+            state.actionsArray = [];
+            getBlockData(account.value);
+            getControlledAccounts(account.value);
+            getAllTokens(account.value);
+        })();
 
         return {
             state,
