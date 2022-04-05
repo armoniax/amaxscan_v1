@@ -68,7 +68,7 @@ config.eosConfig = {
 config.customChain = 'https://expnode.amaxscan.io';
 
 // api url for history
-config.historyChain = 'http://10.88.0.1:18888';
+config.historyChain = 'http://10.88.0.1:19555';
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
