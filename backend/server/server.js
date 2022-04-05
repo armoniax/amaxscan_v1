@@ -40,7 +40,7 @@ const mongoMain = mongoose.createConnection(config.MONGO_URI, config.MONGO_OPTIO
       log.error(err);
       process.exit(1);
     }
-    log.info('[Connected to Mongo-DB: AMAX] : 27017');
+    log.info('[Connected to Mongo <AMAXExp>] at port 27017');
 });
 mongoose.set('useCreateIndex', true);
 

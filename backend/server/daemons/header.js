@@ -36,7 +36,7 @@ module.exports = (loggerFileName) => {
 	      log.error(err);
 	      process.exit(1);
 	    }
-	    log.info(`[Connected to Mongo EOS in (${loggerFileName}) Daemon]`);
+	    log.info(`[Connected to Mongo <AMAXExp> in (${loggerFileName}) Daemon]`);
 	});
 	
 	const SETTINGS_DB 		= require('../models/api.stats.model')(mongoMain);
