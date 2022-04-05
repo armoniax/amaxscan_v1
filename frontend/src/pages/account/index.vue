@@ -202,7 +202,7 @@ export default defineComponent({
 
                 getBalance(account);
                 getActions(state.mainData.account_name, state.position); // Table Actions info
-                getAccountCreator(state.mainData.account_name); // 报错 暂不处理  testnet.amaxscan.io也一样
+                getAccountAction(state.mainData.account_name, state.mainData.action_name); //FIXME:: actionName not passed in
                 getCode(state.mainData.account_name);
 
                 console.log('getAccount-----', res);
@@ -290,10 +290,10 @@ export default defineComponent({
             return result;
         };
 
-        const getAccountCreator = (account: string) => {
-            GET_ACTIONS_NAME(account, 'newaccount').then((res: any) => {
+        const getAccountAction = (account: string, actionName: string) => {
+            GET_ACTIONS_NAME(account, actionName).then((res: any) => {
                 state.creator = res.actions[0];
-                console.log('getAccountCreator-----', res);
+                console.log('getAccountAction-----', res);
             });
         };
 
