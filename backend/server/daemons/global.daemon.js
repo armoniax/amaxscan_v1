@@ -3,14 +3,14 @@
 */
 const { SETTINGS_DB, log, config, request } = require('./header')('global_stat');
 
-request.get(`${config.historyChain}/v1/history/get_actions_transactions`, (err, response, body) => {
+request.get(`${config.historyChain}/v1/history/get_actions`, (err, response, body) => {
 	if (err){
 		log.error(err);
 		process.exit(1);
 	}
 	let data;
 	try{
-		log.info(`${config.historyChain}/v1/history/get_actions_transactions: ` + body);
+		log.info(`${config.historyChain}/v1/history/get_actions: ` + body);
 		data = JSON.parse(body);
 	} catch(err){
 		log.error(err);
