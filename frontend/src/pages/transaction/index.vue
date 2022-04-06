@@ -102,7 +102,7 @@ export default defineComponent({
         const momentFarmat = moment;
 
         const getBlockData = (transactionId: string) => {
-            const res123 = {
+            const res = {
                 id: '5fcd26c9fe739ced1543f892a4036879a48479d52e5c826b4749bc82b0e3ed28',
                 trx: {
                     receipt: { status: 'executed', cpu_usage_us: 1699, net_usage_words: 49, trx: [1, { signatures: ['SIG_K1_K368KUKpHswAp52DHoD2nmL2XA1tGAGSKGS2wCZ7zmMnYKp3j97cT4rAmzGsv4W1963T6F3wNT4eWqDfcKqq1ykyGx5x3t'], compression: 'none', packed_context_free_data: '', packed_trx: 'a3394262800bd1d9c8a100000000040000000000ea305500409e9a2264b89a010000984e2603326e00000000a8ed3232660000984e2603326e50d95a8a9344336e0100000001000299669ab9aeb6ce77e8da5d971f7217af8fffd680dddc30a8fb6b643ca49f090c010000000100000001000299669ab9aeb6ce77e8da5d971f7217af8fffd680dddc30a8fb6b643ca49f090c010000000000000000ea305500b0cafe4873bd3e010000984e2603326e00000000a8ed3232140000984e2603326e50d95a8a9344336ecc1000000000000000ea305500003f2a1ba6a24a010000984e2603326e00000000a8ed3232310000984e2603326e50d95a8a9344336e6400000000000000044d4750000000006400000000000000044d47500000000001000000311a09326e7015d65765ec98ba010000984e2603326e00000000a8ed3232180000984e2603326e50d95a8a9344336e100aec71e47e326e00' }] },
@@ -255,7 +255,7 @@ export default defineComponent({
                     { action_ordinal: 4, creator_action_ordinal: 0, closest_unnotified_ancestor_action_ordinal: 0, receipt: { receiver: 'hst.mall', act_digest: '5c1bab5c19b9e3ed6c53d879027d8b2742da0125304685e0f124cb00df29186f', global_sequence: 108541131, recv_sequence: 134500, auth_sequence: [['hst.admin', 32655]], code_sequence: 165, abi_sequence: 14 }, receiver: 'hst.mall', act: { account: 'hst.mall', name: 'registeruser', authorization: [{ actor: 'hst.admin', permission: 'active' }], data: { issuer: 'hst.admin', user: 'hstod4weffgp', referrer: 'hstbxt3lxk51' }, hex_data: '0000984e2603326e50d95a8a9344336e100aec71e47e326e' }, context_free: false, elapsed: 133, console: '', trx_id: '5fcd26c9fe739ced1543f892a4036879a48479d52e5c826b4749bc82b0e3ed28', block_num: 106892493, block_time: '2022-03-28T22:40:40.000', producer_block_id: '065f0ccdb6d2aed70d62a86a662c8f0826c0b1877dd12715f8eb92f0df191022', account_ram_deltas: [{ account: 'hst.mall', delta: 522 }], except: null, error_code: null },
                 ],
             };
-            GET_TRANSACTION(transactionId).then((res: any) => {
+            //- GET_TRANSACTION(transactionId).then((res: any) => {
                 state.mainData = res;
                 if (state.mainData && !state.mainData.trx && state.mainData.action_traces) {
                     state.mainData.trx = {};
@@ -264,7 +264,7 @@ export default defineComponent({
                 }
                 state.time = momentFarmat(state.mainData.block_time).format('MMMM Do YYYY, h:mm:ss a');
                 state.dataSource = state.mainData.trx;
-            });
+            //- });
         };
 
         const createActionsArr = actions => {

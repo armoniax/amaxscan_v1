@@ -133,7 +133,8 @@ div
         .dialog-zhan(@click="dialogVisible = false")
         .dialog-content
             h1 Data 
-                i.el-icon-close.text-gray-ca.mr-1.cursor-pointer(@click="dialogVisible = false")
+                //- i.el-icon-close.text-gray-ca.mr-1.cursor-pointer(@click="dialogVisible = false")
+                i.iconfont.text-gray-999.mr-1.cursor-pointer(@click="dialogVisible = false") &#xe64f;
             JsonViewer(:value='dialogResult', sort, :expand-depth=5)
 
 </template>
@@ -143,7 +144,6 @@ div
 import JsonViewer from 'vue-json-viewer';
 
 import { defineComponent, computed, toRefs, reactive } from 'vue';
-// import { Dialog } from 'element-ui';
 export default defineComponent({
     components: { JsonViewer },
     props: {
@@ -272,7 +272,7 @@ export default defineComponent({
             font-weight: 600;
             i {
                 float: right;
-                font-size: 26px;
+                font-size: 18px;
                 position: relative;
                 top: -5px;
             }
