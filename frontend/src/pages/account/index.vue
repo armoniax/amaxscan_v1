@@ -28,7 +28,7 @@
                         th Action data
                 tbody
                     tr(v-for='(element, index) in state.showDataSource', :key='index')
-                        th {{ index }}-{{ searVal }}
+                        th {{ index }}
                         th 
                             a(:href='"/transaction/" + element?.action_trace?.trx_id') {{ hash(element?.action_trace?.trx_id) }}
                         th {{ momentFarmat(element?.block_time).format("lll") }}
