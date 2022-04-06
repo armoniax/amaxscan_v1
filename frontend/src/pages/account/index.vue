@@ -137,12 +137,13 @@ import { environment } from '@/environments/environment';
 import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10 } from '@/apis';
 
 const frontConfig = environment.frontConfig;
+
 export default defineComponent({
     components: { PageAccountBase, RawDataBase, JsonViewer },
     setup() {
         // const type = ref(1)
 
-        const state = reactive<Record<string, any>>({
+        let state = reactive<Record<string, any>>({
             typeActionList: [
                 { name: 'Actions info', key: 'ActionsInfo' },
                 { name: 'Token transfer', key: 'TokenTransfer' },
@@ -170,13 +171,20 @@ export default defineComponent({
         });
         const route = useRoute();
         const searVal = ref('');
+        let resetData:Record<string, any> = {};
 
         const account = computed(() => route.params.account as string);
         const momentFarmat = moment;
 
-        // watch(route, (newVlaue, oldValue) => {
-        //     onInit();
-        // })
+        watch(route, (newVlaue, oldValue) => {
+            onInit();
+            // console.log('----', newVlaue.fullPath, state)
+            // console.log('----', newVlaue)
+            // Object.assign(this.$data, this.$options.data());
+            // if(newVlaue.path)
+            // window.location.hash = newVlaue.fullPath+'?' +new Date().getTime();
+            // window.location.hash = this.list[i]
+        })
 
         // pass  接口通了  没数据
         const getControlledAccounts = (account: string) => {
@@ -341,22 +349,28 @@ export default defineComponent({
             // state.showDataSource
         };
 
-        // const onInit = () => {
-        //     console.log('commin')
+        const onInit = () => {
+            console.log('commin befor', resetData, state)
+            // state.actionsArray = [];
+            if(resetData.hasOwnProperty('mainData')){
+                state = {...resetData}
+            }
+            console.log('commin after', resetData, state)
+            getBlockData(account.value);
+            getControlledAccounts(account.value);
+            getAllTokens(account.value);
+        }
+
+        onInit()
+
+        resetData = JSON.parse(JSON.stringify(state));
+        // ((): void => {
+        //     console.error('------')
         //     state.actionsArray = [];
         //     getBlockData(account.value);
         //     getControlledAccounts(account.value);
         //     getAllTokens(account.value);
-        // }
-
-        // onInit()
-
-        ((): void => {
-            state.actionsArray = [];
-            getBlockData(account.value);
-            getControlledAccounts(account.value);
-            getAllTokens(account.value);
-        })();
+        // })();
 
         return {
             state,

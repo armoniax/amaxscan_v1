@@ -27,6 +27,8 @@ const log            = new logWrapper('server');
 const customSlack   = require('./modules/slack.module');
 const logSlack      = customSlack.configure(config.loggerSlack.alerts);
 
+require('dotenv').config({ path: '.env' })
+
 process.on('uncaughtException', (err) => {
     logSlack(`======= UncaughtException Main Server :  ${err}`);
 });

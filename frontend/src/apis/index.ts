@@ -3,7 +3,7 @@ import { GetCurrencyBalanceParams } from './types';
 
 export const Ax = axios.create({
     // baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://sh-misc.vm.amax.dev:38888',
-    baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/api',
+    baseURL: process.env.NODE_ENV === 'development' ? 'https://expnode.amaxscan.io/api' : '/api',
 });
 
 console.log('AmaxExpSrv_Ver: ---->>>>>>> v0.5.31', process.env.NODE_ENV)
@@ -42,3 +42,5 @@ export const GET_CHART_RAM = (date: Date) => Ax.post(`/v1/get_chart_ram`, { from
 
 export const GET_PRODUCERS_BP_JSON = () => Ax.get('/v1/get_producers_bp_json');
 // export const GET_TABLE_ROWS__GLOBAL = () => Ax.get('/v1/get_table_rows/amax/amax/global/1');
+
+export const GET_TRANSACTION = (transactionId: string) => Ax.post(`/api/v1/get_transaction/${transactionId}`);
