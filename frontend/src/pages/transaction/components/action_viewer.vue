@@ -130,7 +130,7 @@ div
                 a.text-green.producer-link(v-for="(prod, index) in dataObj?.producers" :key="index" :href='"/account/" + prod') {{ prod }}
 
     .dialog(v-if="dialogVisible")
-        .dialog-zhan
+        .dialog-zhan(@click="dialogVisible = false")
         .dialog-content
             h1 Data 
                 i.el-icon-close.text-gray-ca.mr-1.cursor-pointer(@click="dialogVisible = false")
@@ -263,6 +263,8 @@ export default defineComponent({
         background: #fff;
         border-radius: 10px;
         padding: 10px;
+        max-height: 75vh;
+        overflow-y: auto;
         h1 {
             text-indent: 10px;
             margin-top: 10px;
