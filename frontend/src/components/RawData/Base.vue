@@ -1,6 +1,7 @@
 <template lang="pug">
 .border.text-sm.border-opacity-10.border-black.rounded.shadow
   .collapse.collapse-arrow(tabindex="0")
+    input(type="checkbox")
     .collapse-title.text-sm.h-8 {{ title }}
     .collapse-content
       JsonViewer(:value="json", copyable, sort, :expand-depth=5)
