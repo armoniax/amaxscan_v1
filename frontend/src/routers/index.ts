@@ -2,7 +2,7 @@ import Layout from '@/layout/index.vue';
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     
     scrollBehavior(to, from, savedPosition) {
         return { top: 0 };
