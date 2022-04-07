@@ -64,26 +64,27 @@
                         th Quantity
                         th Tx id
                 tbody
-                    tr(v-for='(action, ind) in state.actions', :key='ind')
-                        th 
-                            strong {{ momentFarmat(action?.block_time).format("lll") }}
-                        th 
-                            strong.text-green(v-if='action?.action_trace?.act?.data?.to === state.mainData?.account_name') In
-                            strong.text-red(v-if='action?.action_trace?.act?.data?.to !== state.mainData?.account_name') Out
-                        th 
-                            a(:href='"/account/" + action?.action_trace?.act?.data?.from') 
-                                strong {{ action?.action_trace?.act?.data?.from }}
-                        th 
-                            a(:href='"/account/" + action?.action_trace?.act?.data?.to') 
-                                strong {{ action?.action_trace?.act?.data?.to }}
-                        th {{ action?.action_trace?.act?.data?.memo }}
-                        th 
-                            strong {{ action?.action_trace?.act?.data?.quantity }}
-                        th 
-                            a.text-green(:href='"/transaction/" + action?.action_trace?.trx_id') {{ hash(action?.action_trace?.trx_id) }}
+                    template(v-for='(action, ind) in state.actions' )
+                        tr(v-if="action?.action_trace?.act?.name === 'transfer'", :key='ind')
+                            th 
+                                strong {{ momentFarmat(action?.block_time).format("lll") }}
+                            th 
+                                strong.text-green(v-if='action?.action_trace?.act?.data?.to === state.mainData?.account_name') In
+                                strong.text-red(v-if='action?.action_trace?.act?.data?.to !== state.mainData?.account_name') Out
+                            th 
+                                a(:href='"/account/" + action?.action_trace?.act?.data?.from') 
+                                    strong {{ action?.action_trace?.act?.data?.from }}
+                            th 
+                                a(:href='"/account/" + action?.action_trace?.act?.data?.to') 
+                                    strong {{ action?.action_trace?.act?.data?.to }}
+                            th {{ action?.action_trace?.act?.data?.memo }}
+                            th 
+                                strong {{ action?.action_trace?.act?.data?.quantity }}
+                            th 
+                                a.text-green(:href='"/transaction/" + action?.action_trace?.trx_id') {{ hash(action?.action_trace?.trx_id) }}
 
     .actions(v-if='state.typeActionActive === "Actions"')
-        JsonViewer(:value='state.actions', copyable, sort, :expand-depth=1)
+        JsonViewer(:value='state.actions', copyable, sort, :expand-depth=2)
 
     .permissions(v-if='state.typeActionActive === "Permissions"')
         .overflow-x-auto
