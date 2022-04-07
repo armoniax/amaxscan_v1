@@ -11,6 +11,12 @@
             router-link(to='/analytics') ANALYTICS
             router-link(to='/ram') RAM
             router-link(to='/producers') PRODUCERS
+
+    //- .alert.alert-error.shadow-l
+    //-     div
+    //-         svg.stroke-current.flex-shrink-0.h-6.w-6(xmlns='http://www.w3.org/2000/svg', fill='none', viewBox='0 0 24 24')
+    //-             path(stroke-linecap='round', stroke-linejoin='round', stroke-width='2', d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z') 
+    //-         span Error! Task failed successfully.
 </template>
 
 <script lang="ts">
@@ -34,7 +40,7 @@ export default defineComponent({
                 } else if (res.key) {
                     router.push({ path: '/address', query: { address: keyword.value } });
                 } else {
-                    // router.push({ path: '/notfound' });
+                    router.push({ path: '/notfound' });
                 }
                 keyword.value = '';
             });
