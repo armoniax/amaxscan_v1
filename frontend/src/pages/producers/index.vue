@@ -5,7 +5,7 @@
         .flex.border-b.w-72.text-gray-ccc.border-b-gray-ccc.text-gray-ca.h-7.items-center
             i.fal.fa-search.text-gray-ca.mr-2
             input.outline-none.flex-1.h-full(placeholder='Search by producer name', v-model='filterVal')
-            
+
     table.w-full.text-center.text-gray-666
         thead.bg-gray.h-10
             tr
@@ -22,7 +22,7 @@
                 td {{ item.index }}
                 td.flex.items-center.justify-center.h-16.cursor-pointer(@click='$router.push(`/producers/${item.owner}`)')
                     //- img.w-10.mr-2(:src='item?.image || "../../assets/images/amax.png"')
-                    img.w-10.mr-2(:src='item?.image || "/amax.png"' @click.stop="item?.url && openUrl(item?.url)")
+                    img.w-10.mr-2(:src='item?.image || "/amax.png"', @click.stop='item?.url && openUrl(item?.url)')
                     span.font-medium {{ item.owner }}
                 td
                     span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(139deg, #2ff443 0%, #32d5d8 100%)', v-if='item?.index <= 21 && producer !== item.owner') TOP21
@@ -30,7 +30,7 @@
                     span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(to right, #ff9048, #f44336); background: -webkit-gradient(linear, left top, right top, from(#ff9048), to(#f44336))', v-if='item?.index > 21 && producer !== item.owner') Standby
                 //- td {{ item?.url || "-" }}
                 td
-                    img.w-8.m-auto(v-if="item?.location")(:src='`/flags/${item?.location}.svg`')
+                    img.w-8.m-auto(v-if='item?.location', :src='`/flags/${item?.location}.svg`')
 
                 td {{ item?.total_votes }}
                 td {{ item?.rate }} %
@@ -83,9 +83,9 @@ export default defineComponent({
             return state.dataList.filter((item: any) => item.owner.includes(filterVal.value.trim().toLowerCase()));
         });
 
-        const openUrl = (url:string): void => {
+        const openUrl = (url: string): void => {
             window.open(url);
-        }
+        };
 
         //        const  applyFilter(filterValue: string) {
         //   this.filterVal = filterValue;
@@ -177,9 +177,8 @@ export default defineComponent({
         };
 
         const calculateTotalVotes = (global: any, supply: any) => {
-            if (!global || !global.rows || !global.rows[0] || !global.rows[0].total_activated_stake)
-                return;
-            
+            if (!global || !global.rows || !global.rows[0] || !global.rows[0].total_activated_stake) return;
+
             state.chainPercentage = ((global.rows[0].total_activated_stake / 100000000 / supply) * 100).toFixed(2);
             state.chainNumber = (global.rows[0].total_activated_stake / supply) * 10;
         };

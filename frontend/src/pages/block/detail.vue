@@ -13,31 +13,31 @@
         span.font-medium.text-7xl.text-gray-999 Loading...
 
     template(v-else) 
-        .flex.items-center.h-8
+        .flex.items-center.h-8(v-if='state.mainData?.producer')
             .w-44 Producer:
             .flex-1.text-green
                 span.cursor-pointer(@click='$router.push(`/account/${state.mainData?.producer}`)') {{ state.mainData?.producer }}
-        .flex.items-center.h-8
+        .flex.items-center.h-8(v-if='state.mainData?.id')
             .w-44 Id:
             .flex-1
                 span.text-gray-999 {{ state.mainData?.id }}
-        .flex.items-center.h-8
+        .flex.items-center.h-8(v-if='state.mainData?.previous')
             .w-44 Previous:
             .flex-1
                 span.text-green.cursor-pointer(@click='$router.push(`/block/${state.mainData?.previous}`)') {{ state.mainData?.previous }}
-        .flex.items-center.h-8
+        .flex.items-center.h-8(v-if='state.mainData?.confirmed')
             .w-44 Confirmations:
             .flex-1.text-gray-999 {{ state.mainData?.confirmed }}
-        .flex.items-center.h-8
+        .flex.items-center.h-8(v-if='state.mainData?.action_mroot')
             .w-44 Action Mroot:
             .flex-1 {{ state.mainData?.action_mroot }}
-        .flex.items-center.h-8
+        .flex.items-center.h-8(v-if='state.mainData?.transaction_mroot')
             .w-44 Transaction Mroot:
             .flex-1 {{ state.mainData?.transaction_mroot }}
-        .flex.items-center.h-8
+        .flex.items-center.h-8(v-if='state.time')
             .w-44 Time:
             .flex-1.text-gray-999 {{ state.time }}
-        .flex.items-center.h-8
+        .flex.items-center.h-8(v-if='state.mainData?.transactions')
             .w-44 Transactions:
             .flex-1.text-gray-999 {{ state.mainData?.transactions?.length }}
 
@@ -91,7 +91,7 @@ export default defineComponent({
         const state = reactive({
             trxArr: [],
             spinner: false,
-            mainData: {},
+            mainData: null,
             time: '',
             listQuery: {
                 page: 1,
