@@ -4,7 +4,7 @@
     PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance', :creator='state.creator')
     RawDataBase(title='Contract Raw Data:', :json='state.code')
     RawDataBase(title='Blockchain Raw Data:', :json='state.mainData')
-    RawDataBase(v-for="(elem, ind) in state.tables", :index="ind", v-if="state.tables.length > 0", :title='"Table - " + elem.name', :json='elem.data')
+    RawDataBase(v-for="(elem, ind) in state.tables", :index="ind", v-if="state.tables.length > 0", :title='"Table - " + elem.name + ":"', :json='elem.data')
     //- div(v-for="(elem, ind) in state.tables", :index="ind", v-if="state.tables.length > 0")
     //-     RawDataBase(:title='"Table - " + elem.name', :json='elem.data')
     //- RawDataBase(v-for="(elem, ind) in [1,2,3,4,5,6]", :key="ind" :title='"Table - " + ind', :json='state.mainData')

@@ -41,7 +41,7 @@
             .w-44 Transactions:
             .flex-1.text-gray-999 {{ state.mainData?.transactions?.length }}
 
-        RawDataBase(title='Blockchain Raw Data:', :isopen="true" :json='state.mainData', v-if='state.mainData?.transactions?.length < 1000')
+        RawDataBase(title='Blockchain Raw Data:', :isopen="true" expand-path="2" :json='state.mainData', v-if='state.mainData?.transactions?.length < 1000')
 
         template(v-if='state.trxArr.length')
             .overflow-scroll

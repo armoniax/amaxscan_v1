@@ -4,7 +4,7 @@
     input(type="checkbox")
     .collapse-title.text-sm.h-8 {{ title }}
     .collapse-content
-      JsonViewer(:value="json", copyable, sort, :expand-depth=5)
+      JsonViewer(:value="json", copyable, sort, :expand-depth=expandPath)
 </template>
 
 <script lang="ts">
@@ -86,6 +86,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    expandPath: {
+      type: String,
+      default: "0",
+    }
   },
   setup() {},
 });
