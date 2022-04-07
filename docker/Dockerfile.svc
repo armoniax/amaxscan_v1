@@ -1,4 +1,4 @@
-FROM node:10.15.3
+FROM node:14.15.0
 
 ARG PORT=3039
 ENV PORT=${PORT}
@@ -7,7 +7,12 @@ COPY ./backend /opt/expsvr/
 WORKDIR /opt/expsvr/server
 
 
-RUN npm update -g && npm install -g pm2@3.5.1 && npm install -g express && npm install -g install
+RUN npm update -g && npm install -g pm2@3.5.1
+RUN npm install -g express
+RUN npm install -g
+RUN npm install -g express --save
+RUN npm install -g express-generator
+RUN npm install -g dotenv -S
 
 CMD ["pm2-runtime", "./ecosystem.config.js", "--web"]
 
