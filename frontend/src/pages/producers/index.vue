@@ -36,14 +36,14 @@
                 td {{ item?.rate }} %
                 td {{ item?.rewards }} {{ frontConfig?.coin }}
 
-    .flex.justify-end.items-center.text-gray-666.py-3
-        span Items per page:
-        select.outline-none.h-6.w-20.border.rounded.mx-2.border-gray-f4.cursor-pointer(v-model='state.listQuery.size')
-            option(value='80') 80
-            option(value='500') 500
-        span {{ state.listQuery.page }} - {{ DataList.length }} of {{ DataList.length }}
-        span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center &lt;
-        span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center >
+    //- .flex.justify-end.items-center.text-gray-666.py-3
+    //-     span Items per page:
+    //-     select.outline-none.h-6.w-20.border.rounded.mx-2.border-gray-f4.cursor-pointer(v-model='state.listQuery.size')
+    //-         option(value='80') 80
+    //-         option(value='500') 500
+    //-     span {{ state.listQuery.page }} - {{ DataList.length }} of {{ DataList.length }}
+    //-     span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center &lt;
+    //-     span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center >
 </template>
 
 <script lang="ts">
