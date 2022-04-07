@@ -16,6 +16,7 @@
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "csv-parser": "^2.3.0",
+    "dotenv": "^16.0.0",
     "eosjs": "^16.0.9",
     "express": "^4.17.1",
     "helmet": "^3.18.0",
