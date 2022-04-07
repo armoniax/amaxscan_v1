@@ -60,9 +60,9 @@
             .w-44 Nodes:
             .flex-1.text-gray-666 {{ bpData?.nodes?.length }}
 
-    .w-full.h-96.rounded-lg.bg-gray-fb
-        LMap(:zoom='option.zoom', :center='option.center')
-            LTileLayer(url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png', attribution='Armonia multi-chain platform')
+    //- .w-full.h-96.rounded-lg.bg-gray-fb
+    //-     LMap(:zoom='option.zoom', :center='option.center')
+    //-         LTileLayer(url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png', attribution='Armonia multi-chain platform')
 </template>
 
 <script lang="ts">
