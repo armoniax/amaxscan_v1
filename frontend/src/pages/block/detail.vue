@@ -1,11 +1,11 @@
 <template lang="pug">
 .py-4.space-y-4.mb-8
     .flex.items-center.justify-start.space-x-4
-        h2.text-2xl Block NO. {{ blockId }}
-        span.text-green.cursor-pointer(@click='$router.push(`/block/${Number(blockId) - 1}`)')
+        h2.text-2xl Block NO. {{ state.mainData.blockId }}
+        span.text-green.cursor-pointer(@click='$router.push(`/block/${Number(state.mainData.blockId) - 1}`)')
             i.far.fa-long-arrow-left.mr-1
             | Prev
-        span.text-green.cursor-pointer(@click='$router.push(`/block/${Number(blockId) + 1}`)')
+        span.text-green.cursor-pointer(@click='$router.push(`/block/${Number(state.mainData.blockId) + 1}`)')
             | Next
             i.far.fa-long-arrow-right.ml-1
 
