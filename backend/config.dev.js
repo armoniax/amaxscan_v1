@@ -43,7 +43,7 @@ config.telegram = {
 
 // reserved nodes
 config.endpoints = [
-  'http://10.88.0.1:18888',  //localhost access
+  'http://it.amax.dev:38888',  //localhost access
 	'https://expnode.amaxscan.io'
      //'http://bp.cryptolions.io',
      //'https://eos.greymass.com',
@@ -66,10 +66,10 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = process.env.CUSTOMCHAIN || 'http://10.88.0.1:18888';
+config.customChain = process.env.CUSTOMCHAIN || 'http://it.amax.dev:38888';
 
 // api url for history
-config.historyChain = process.env.HISTORYCHAIN || 'http://10.88.0.1:18888'; //still the RPC chain
+config.historyChain = process.env.HISTORYCHAIN || 'http://it.amax.dev:38888'; //still the RPC chain
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
