@@ -1,19 +1,16 @@
 <template lang="pug">
 .p-4
-  Wrapper.flex.items-center
-    router-link(to="/")
-      img.object-contain(src="@/assets/images/logo.png", style="width: 95px")
-    .flex-1.flex.space-x-8.items-center.justify-end.text-sm.font-semibold
-      .flex.w-64.h-8.bg-gray-eee.rounded-full.px-2.items-center
-        i.fal.fa-search.text-gray-ca.mr-1.cursor-pointer(@click="search()")
-        input.bg-transparent.w-full.h-full.outline-none.text-xs(
-          placeholder="Search by block,tx,account,address",
-          v-model="keyword"
-          @keyup="changeInput"
-        )
-      router-link(to="/analytics") ANALYTICS
-      router-link(to="/ram") RAM
-      router-link(to="/producers") PRODUCERS
+    Wrapper.flex.items-center
+        router-link(to='/')
+            img.object-contain(src='@/assets/images/logo.png', style='width: 95px')
+        .flex-1.flex.space-x-8.items-center.justify-end.text-sm.font-semibold
+            .flex.w-80.h-8.bg-gray-eee.rounded-full.px-2.items-center
+                i.fal.fa-search.text-gray-ca.mr-1.cursor-pointer(@click='search()')
+                input.bg-transparent.w-full.h-full.outline-none.text-xs(placeholder='Search by block,tx,account,address', v-model='keyword', @keyup='changeInput')
+                span.btn.btn-xs.rounded-full(:class='keyword ? "cursor-pointer" : "opacity-50 cursor-not-allowed"', @click='search') 搜索
+            router-link(to='/analytics') ANALYTICS
+            router-link(to='/ram') RAM
+            router-link(to='/producers') PRODUCERS
 </template>
 
 <script lang="ts">
@@ -27,6 +24,7 @@ export default defineComponent({
         let keyword = ref('');
         const search = () => {
             SEARCCH(keyword.value).then((res: any) => {
+                console.log(res);
                 if (res.block && !isNaN(+keyword.value)) {
                     router.push({ path: '/block', query: { block: res.block.block_num } });
                 } else if (res.transaction) {
