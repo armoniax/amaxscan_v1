@@ -9,7 +9,7 @@ config.PROD = true;
 
 config.toInt = 100000000; //precison: 8
 config.coin = 'AMAX';
-console.log("process.env.MONGO_URI: ===========>>>>>>>>>>", process.env.MONGO_URI)
+console.log("process.env.MONGO_URI: ===========>>>>>>>>>>", process.env)
 
 config.MONGO_URI = process.env.MONGO_URI || 'mongodb://amax:amax123456@10.88.0.1:27017/AMAXExp';
 // config.MONGO_URI = process.env.MONGO_URI || 'mongodb://deex:deex123456@139.224.250.244:27017/AMAXExp';
@@ -22,7 +22,7 @@ config.MONGO_OPTIONS = {
 
 // cron processes (aggregation of main stat - actions, transactions, accounts, analytics)
 config.CRON = true;
-config.CRON_API = 'https://public.eosinfra.io';
+config.CRON_API = process.env.CRON_API || 'https://public.eosinfra.io';
 
 // anable TPS APS daemon aggregation
 config.TPS_ENABLE = true;
@@ -66,10 +66,10 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = 'http://10.88.0.1:18888';
+config.customChain = process.env.CUSTOMCHAIN || 'http://10.88.0.1:18888';
 
 // api url for history
-config.historyChain = 'http://10.88.0.1:18888'; //still the RPC chain
+config.historyChain = process.env.HISTORYCHAIN || 'http://10.88.0.1:18888'; //still the RPC chain
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
