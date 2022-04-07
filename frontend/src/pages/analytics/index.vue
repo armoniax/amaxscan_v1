@@ -14,7 +14,7 @@
                         span.ml-2 {{ item.name }}
                     span {{ item.value }}
             .divide-y.divide-gray-f4(v-else)
-                .py-4.text-gray-999 暂无数据
+                .py-4.text-gray-999 Data not available
 
     .overflow-x-auto
         table.table.w-full
@@ -176,7 +176,7 @@ export default defineComponent({
             // Legends,
             dataSource,
             state,
-            frontConfig
+            frontConfig,
         };
     },
 });

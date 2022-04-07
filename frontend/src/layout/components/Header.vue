@@ -7,7 +7,7 @@
             .flex.w-80.h-8.bg-gray-eee.rounded-full.px-2.items-center
                 i.fal.fa-search.text-gray-ca.mr-1.cursor-pointer(@click='search()')
                 input.bg-transparent.w-full.h-full.outline-none.text-xs(placeholder='Search by block,tx,account,address', v-model='keyword', @keyup='changeInput')
-                span.btn.btn-xs.rounded-full(:class='keyword ? "cursor-pointer" : "opacity-50 cursor-not-allowed"', @click='search') 搜索
+                span.btn.btn-xs.rounded-full(:class='keyword ? "cursor-pointer" : "opacity-50 cursor-not-allowed"', @click='search') Search
             router-link(to='/analytics') ANALYTICS
             router-link(to='/ram') RAM
             router-link(to='/producers') PRODUCERS
