@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 
 const router = createRouter({
     history: createWebHistory(),
-
+    
     scrollBehavior(to, from, savedPosition) {
         return { top: 0 };
     },
@@ -59,6 +59,16 @@ const router = createRouter({
                 {
                     path: '',
                     component: () => import('@/pages/account/index.vue'),
+                },
+            ],
+        },
+        {
+            path: '/transaction/:tx',
+            component: Layout,
+            children: [
+                {
+                    path: '',
+                    component: () => import('@/pages/transaction/index.vue'),
                 },
             ],
         },
