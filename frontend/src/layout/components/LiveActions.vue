@@ -29,9 +29,9 @@
                 | max
                 | users online:
                 span.text-lg.mx-1 {{ state.usersOnline }}
-            span.flex.items-center.cursor-pointer
+            span.flex.items-center.cursor-pointer(@click="toggleShow")
                 | Live Actions
-                i.fas.fa-chevron-down.ml-2
+                i.fas.fa-chevron-down.ml-2(:class="modelValue ? 'rotate-180' : ''")
 </template>
 
 <script lang="ts">
@@ -45,7 +45,11 @@ import { inject } from 'vue';
 
 export default defineComponent({
     components: { Wrapper },
-    setup() {
+    props: {
+        modelValue:{type: Boolean,default: false}
+    },
+    emits: ['update:modelValue'],
+    setup(props, { emit }) {
         const socket = inject('socket') as any;
         const frontConfig = ref(environment.frontConfig);
         const timeForUpdate = ref(5000);
@@ -145,6 +149,11 @@ export default defineComponent({
             // IO.connect();
         });
 
+        const toggleShow = () => {
+            // console.log(123)
+            emit('update:modelValue', !props.modelValue)
+        }
+
         const onInit = () => {
             getData();
             getChart();
@@ -196,6 +205,7 @@ export default defineComponent({
         return {
             frontConfig,
             state,
+            toggleShow
         };
     },
 });
