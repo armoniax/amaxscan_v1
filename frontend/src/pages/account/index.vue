@@ -28,7 +28,7 @@
                         th Action data
                 tbody
                     tr(v-for='(element, index) in state.showDataSource', :key='index')
-                        th {{ index }}
+                        th {{ searVal ? (state.currentPage - 1) * state.pageSize + index + 1 : index + 1 }}
                         th 
                             a(:href='"/transaction/" + element?.action_trace?.trx_id') {{ hash(element?.action_trace?.trx_id) }}
                         th {{ momentFarmat(element?.block_time).format("lll") }}
@@ -39,15 +39,15 @@
                         th 
                             strong
                                 span.text-green {{ element?.action_trace?.act?.data?.from }}
-                                span.ml-2.mr-2 →
+                                span.ml-2.mr-2(v-if="element?.action_trace?.act?.data?.to") →
                                 span.text-green {{ element?.action_trace?.act?.data?.to }}
                                 span.ml-2 {{ element?.action_trace?.act?.data?.quantity }}
 
-        .flex.justify-end.items-center.text-gray-666.py-3.text-sm.font-normal
+        .flex.justify-end.items-center.text-gray-666.py-3.text-sm.font-normal(v-if="searVal.length === 0")
             //- span Items per pag:
             //- select.outline-none.h-6.w-10.border.rounded.mx-2.border-gray-f4.cursor-pointer
             //-     option(v-for="i in 10", :key="i") {{ i }}
-            span 1 - 40 of 44
+            span 1 - {{state.totalPage}} of {{state.currentPage}}
             span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='changePage("up")') &lt;
             span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='changePage("down")') &gt;
 
@@ -83,7 +83,7 @@
                             a.text-green(:href='"/transaction/" + action?.action_trace?.trx_id') {{ hash(action?.action_trace?.trx_id) }}
 
     .actions(v-if='state.typeActionActive === "Actions"')
-        JsonViewer(:value='state.actions', copyable, sort)
+        JsonViewer(:value='state.actions', copyable, sort, :expand-depth=1)
 
     .permissions(v-if='state.typeActionActive === "Permissions"')
         .overflow-x-auto
@@ -167,7 +167,9 @@ export default defineComponent({
             showDataSource: [],
             tables: [],
             actionsTotal: 0,
-            currentPage: 1,
+            totalPage: 1,
+            pageSize: 15,
+            currentPage: 0,
         });
         const route = useRoute();
         const searVal = ref('');
@@ -264,9 +266,9 @@ export default defineComponent({
 
                 state.actions = state.actionsArray;
                 state.dataSource = state.actionsArray;
-                state.showDataSource = [...state.actionsArray];
-                console.log('state.dataSource---1', JSON.parse(JSON.stringify(state.dataSource)));
-
+                // state.showDataSource = [...state.actionsArray];
+                state.totalPage = Math.ceil(state.dataSource.length / state.pageSize);
+                changePage('down');
                 // state.dataSource.filterPredicate = function (data:any, filter: string): boolean {
                 //     return data.action_trace.act.name.toLowerCase().includes(filter) || data.action_trace.act.account.toLowerCase().includes(filter);
                 // };
@@ -342,11 +344,24 @@ export default defineComponent({
         };
 
         const searchActions = () => {
-            state.showDataSource = state.dataSource.filter((ele: any) => ele?.action_trace?.act?.account.indexOf(searVal.value) != -1);
+            if(searVal.value.length > 0){
+                state.showDataSource = state.dataSource.filter((ele: any) => ele?.action_trace?.act?.account.indexOf(searVal.value) != -1);
+            }else{
+                state.currentPage = 0;
+                changePage('down')
+            }
         };
 
-        const changePage = (page: number | string = 1) => {
-            // state.showDataSource
+        const changePage = (type: string) => {
+            let start = 0, end = 0, nextPage = state.currentPage;
+            if(type === "up") nextPage = Math.max(state.currentPage - 1, 1);
+            else nextPage = Math.min(state.currentPage + 1, state.totalPage);
+            if(nextPage === state.currentPage) return;
+
+            state.currentPage = nextPage;
+            start = (state.currentPage - 1) * state.pageSize;
+            end = state.currentPage * state.pageSize;
+            state.showDataSource = state.dataSource.slice(start,  end)
         };
 
         const onInit = () => {
