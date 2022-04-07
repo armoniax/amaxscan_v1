@@ -32,7 +32,7 @@ export default defineComponent({
             SEARCCH(keyword.value).then((res: any) => {
                 console.log(res);
                 if (res.block && !isNaN(+keyword.value)) {
-                    router.push({ path: '/block', query: { block: res.block.block_num } });
+                    router.push({ path: `/block/${res.block.block_num}` });
                 } else if (res.transaction) {
                     router.push({ path: '/transaction', query: { tx: res.transaction.id } });
                 } else if (res.account) {
