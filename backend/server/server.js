@@ -2,6 +2,7 @@
   Created by eoswebnetbp1 
 */
 //require('appmetrics-dash').monitor();
+require('dotenv').config({ path: '.env' });
 const express       = require('express');
 const path          = require('path');
 const cookieParser  = require('cookie-parser');
@@ -12,6 +13,7 @@ const compression   = require('compression');
 const request       = require('request');
 const async			    = require('async');
 
+console.log('---------->>>>', process.env)
 const configName    = (process.env.CONFIG) ? process.env.CONFIG : 'config';
 const config        = require(`../${configName}`);
 
@@ -27,7 +29,7 @@ const log            = new logWrapper('server');
 const customSlack   = require('./modules/slack.module');
 const logSlack      = customSlack.configure(config.loggerSlack.alerts);
 
-require('dotenv').config({ path: '.env' })
+
 
 process.on('uncaughtException', (err) => {
     logSlack(`======= UncaughtException Main Server :  ${err}`);

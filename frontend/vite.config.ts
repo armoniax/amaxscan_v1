@@ -10,7 +10,8 @@ export default defineConfig({
             // exp.mgpchain.io
             // '/api': 'http://120.77.26.105:3039', 
             // '/api': 'https://testnet.amaxscan.io', 
-            "/api": "https://www.amaxscan.io", 
+            // "/api": "https://www.amaxscan.io", 
+            "/api": "https://dev-exp.ambt.art", 
             // "/api": "https://expnode.amaxscan.io", 
             // "/api": "http://prod-exp-proxy.ambt.art", 
             // "/api": "http://expnode.mgps.me", 

@@ -3,7 +3,7 @@ import { GetCurrencyBalanceParams } from './types';
 
 export const Ax = axios.create({
     // baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://sh-misc.vm.amax.dev:38888',
-    baseURL: process.env.NODE_ENV === 'development' ? 'https://expnode.amaxscan.io/api' : '/api',
+    baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/api',
 });
 
 console.log('AmaxExpSrv_Ver: ---->>>>>>> v0.5.31', process.env.NODE_ENV)
