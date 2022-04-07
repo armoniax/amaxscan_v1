@@ -1,8 +1,8 @@
 <template lang="pug">
 Wrapper.pt-4
     .flex.space-x-8
-        Block(class='w-2/5', title='Blocks')
-            .px-4.py-2.font-normal(v-if='!state.blocks.length') 暂无数据
+        Block.flex-1(title='Blocks')
+            .px-4.font-normal.h-12.items-center.flex(v-if='!state.blocks.length') 暂无数据
             table.table.w-full(v-else)
                 thead
                     tr
@@ -13,26 +13,26 @@ Wrapper.pt-4
                 tbody
                     tr(v-for='(item, index) in state.blocks', :key='index')
                         th
-                            span.text-green(@click='$router.push(`/block/${item?.block_num}`)') {{ item?.block_num.toLocaleString() }}
+                            span.text-green.cursor-pointer(@click='$router.push(`/block/${item?.block_num}`)') {{ item?.block_num.toLocaleString() }}
                         th {{ item?.transactions.length }}
                         th
-                            span.text-green(@click='$router.push(`/producer/${item?.producer}`)') {{ item?.producer }}
+                            span.text-green.cursor-pointer(@click='$router.push(`/producers/${item?.producer}`)') {{ item?.producer }}
                         th.text-center {{ handleTime(item?.timestamp) }}
 
-        Block(class='w-3/5', title='Latest Actions')
-            .px-4.py-2.font-normal(v-if='!state.hashs.length') 暂无数据
+        Block.flex-1(title='Latest Actions')
+            .px-4.font-normal.h-12.items-center.flex(v-if='!state.hashs.length') 暂无数据
             table.table.w-full(v-else)
                 thead
                     tr
                         th Tx Hash
                         th Action Name
-                        th Data
+                        //- th Data
                 tbody
                     tr(v-for='(item, index) in state.hashs', :key='index')
                         th 
                             span.text-green(@click='$router.push(`/transaction/${item?.block_num}`)') {{ item?.block_num.toLocaleString() }}
                         th.font-medium {{ item?.name }}
-                        th 
+                        //- th -
 </template>
 
 <script lang="ts">
@@ -133,7 +133,7 @@ export default defineComponent({
 
         const getData = () => {
             state.spinner = true;
-            Ax.get('/api/v1/get_last_blocks/6')
+            Ax.get('/v1/get_last_blocks/6')
                 .then((res: any) => {
                     state.blocks = sortArray(res);
                     state.hashs = createTransactionsArray(res);
@@ -148,10 +148,10 @@ export default defineComponent({
         const onInit = () => {
             getData();
 
-            socket.on('get_last_blocks', (res: any) => {
-                state.blocks = sortArray(res);
-                state.hashs = createTransactionsArray(res);
-            });
+            // socket.on('get_last_blocks', (res: any) => {
+            //     state.blocks = sortArray(res);
+            //     state.hashs = createTransactionsArray(res);
+            // });
         };
 
         onInit();

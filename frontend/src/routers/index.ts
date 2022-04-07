@@ -47,6 +47,16 @@ const router = createRouter({
             ],
         },
         {
+            path: '/block',
+            component: Layout,
+            children: [
+                {
+                    path: ':block',
+                    component: () => import('@/pages/block/detail.vue'),
+                },
+            ],
+        },
+        {
             path: '/analytics',
             component: Layout,
             children: [

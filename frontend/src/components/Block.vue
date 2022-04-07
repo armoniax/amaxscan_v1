@@ -1,7 +1,7 @@
 <template lang="pug">
 div
     h3.text-3xl.mb-2 {{ title }}
-    .bg-gray.text-gray-666
+    .bg-gray.text-gray-666.overflow-scroll
         slot
 </template>
 
