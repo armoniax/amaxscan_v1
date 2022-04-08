@@ -1,11 +1,11 @@
 <template lang="pug">
 .py-4.space-y-4.mb-8
     .flex.items-center.justify-start.space-x-4
-        h2.text-2xl Block NO. {{ blockId }}
-        span.text-green.cursor-pointer(@click='$router.push(`/block/${Number(blockId) - 1}`)')
+        h2.text-2xl Block No. {{ state.mainData?.block_num }}
+        span.text-green.cursor-pointer(v-if="state.mainData?.block_num" @click='$router.push(`/block/${Number(state.mainData?.block_num) - 1}`)')
             i.far.fa-long-arrow-left.mr-1
             | Prev
-        span.text-green.cursor-pointer(@click='$router.push(`/block/${Number(blockId) + 1}`)')
+        span.text-green.cursor-pointer(v-if="state.mainData?.block_num" @click='$router.push(`/block/${Number(state.mainData?.block_num) + 1}`)')
             | Next
             i.far.fa-long-arrow-right.ml-1
 
@@ -41,7 +41,7 @@
             .w-44 Transactions:
             .flex-1.text-gray-999 {{ state.mainData?.transactions?.length }}
 
-        RawDataBase(title='Blockchain Raw Data:', :json='state.mainData', v-if='state.mainData?.transactions?.length < 1000')
+        RawDataBase(title='Blockchain Raw Data:', :isopen="true" expand-path="2" :json='state.mainData', v-if='state.mainData?.transactions?.length < 1000')
 
         template(v-if='state.trxArr.length')
             .overflow-scroll

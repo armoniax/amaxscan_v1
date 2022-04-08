@@ -2,7 +2,7 @@
 Wrapper.pt-4
     .flex.space-x-8
         Block.flex-1(title='Blocks')
-            .px-4.font-normal.h-12.items-center.flex(v-if='!state.blocks.length') Data not available
+            .px-4.font-normal.h-12.items-center.flex(v-if='!state.blocks.length') None yet
             table.table.w-full(v-else)
                 thead
                     tr
@@ -20,7 +20,7 @@ Wrapper.pt-4
                         th.text-center {{ handleTime(item?.timestamp) }}
 
         Block.flex-1(title='Latest Actions')
-            .px-4.font-normal.h-12.items-center.flex(v-if='!state.hashs.length') Data not available
+            .px-4.font-normal.h-12.items-center.flex(v-if='!state.hashs.length') None yet
             table.table.w-full(v-else)
                 thead
                     tr

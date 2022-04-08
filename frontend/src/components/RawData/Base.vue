@@ -1,10 +1,10 @@
 <template lang="pug">
 .border.text-sm.border-opacity-10.border-black.rounded.shadow
-  .collapse.collapse-arrow(tabindex="0")
+  .collapse.collapse-arrow(tabindex="0" :class='{ "collapse-open": isopen }')
     input(type="checkbox")
     .collapse-title.text-sm.h-8 {{ title }}
     .collapse-content
-      JsonViewer(:value="json", copyable, sort, :expand-depth=5)
+      JsonViewer(:value="json", copyable, sort, :expand-depth=expandPath)
 </template>
 
 <script lang="ts">
@@ -76,12 +76,20 @@ export default defineComponent({
   props: {
     json: {
       type: [Object, String],
-      default: () => demo,
+      default: () => ({}),
     },
     title: {
       type: String,
       default: "",
     },
+    isopen: {
+      type: Boolean,
+      default: false,
+    },
+    expandPath: {
+      type: String,
+      default: "0",
+    }
   },
   setup() {},
 });

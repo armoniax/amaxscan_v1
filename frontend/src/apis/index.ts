@@ -43,4 +43,4 @@ export const GET_CHART_RAM = (date: Date) => Ax.post(`/v1/get_chart_ram`, { from
 export const GET_PRODUCERS_BP_JSON = () => Ax.get('/v1/get_producers_bp_json');
 // export const GET_TABLE_ROWS__GLOBAL = () => Ax.get('/v1/get_table_rows/amax/amax/global/1');
 
-export const GET_TRANSACTION = (transactionId: string) => Ax.post(`/v1/get_transaction/${transactionId}`);
+export const GET_TRANSACTION = (transactionId: string) => Ax.get(`/v1/get_transaction/${transactionId}`);
