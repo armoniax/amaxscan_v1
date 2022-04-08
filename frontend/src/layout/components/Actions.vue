@@ -148,10 +148,10 @@ export default defineComponent({
         const onInit = () => {
             getData();
 
-            // socket.on('get_last_blocks', (res: any) => {
-            //     state.blocks = sortArray(res);
-            //     state.hashs = createTransactionsArray(res);
-            // });
+            socket.on('get_last_blocks', (res: any) => {
+                state.blocks = sortArray(res);
+                state.hashs = createTransactionsArray(res);
+            });
         };
 
         onInit();
