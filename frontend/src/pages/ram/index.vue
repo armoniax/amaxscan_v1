@@ -59,7 +59,7 @@ export default defineComponent({
             color: '#0E9CFF',
             grid: {
                 top: 48,
-                left: 48,
+                // left: 48,
                 right: 48,
                 bottom: 48,
             },
