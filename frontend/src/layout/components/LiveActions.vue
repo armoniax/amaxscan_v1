@@ -3,7 +3,7 @@
     Wrapper.py-6.pb-4
         .grid.grid-cols-5.gap-2.mb-3
             .bg-white.p-4
-                span RAM PRICE
+                span RAM Price
                 p.mt-2.text-green
                     | {{ state.ramPrice }}
                     span.ml-1.text-xs.font-normal {{ frontConfig?.coin }}/KB

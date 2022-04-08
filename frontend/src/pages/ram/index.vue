@@ -3,7 +3,7 @@
     .flex-1
         .flex.justify-between.items-center
             p.font-medium.text-2xl
-                | {{ frontConfig?.coin }} RAM PRICE
+                | {{ frontConfig?.coin }} RAM Price
                 span.text-sm.ml-2.text-gray-666 {{ frontConfig?.coin }}/kb RAM
             ul.flex.text-sm.space-x-4.font-normal
                 li.bg-gray.rounded.w-8.h-6.flex.items-center.justify-center.cursor-pointer(:class='state.defaultTimeName === t ? "is-active" : ""', v-for='t in state.timeArray', @click='toggleTime(t)') {{ t }}
