@@ -43,7 +43,7 @@ config.telegram = {
 
 // reserved nodes
 config.endpoints = [
-  'http://10.88.0.1:18888',  //localhost access
+  'http://10.88.0.1:8888',  //localhost access
 	'https://expnode.amaxscan.io'
      //'http://bp.cryptolions.io',
      //'https://eos.greymass.com',
