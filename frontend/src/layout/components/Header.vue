@@ -5,7 +5,7 @@
             img.object-contain(src='@/assets/images/logo.png', style='width: 95px')
         .flex-1.flex.space-x-8.items-center.justify-end.text-sm.font-semibold
             .flex.w-80.h-8.bg-gray-eee.rounded-full.px-2.items-center
-                input.pl-4.bg-transparent.w-full.h-full.outline-none.text-xs(placeholder='Search by block、tx、account、address', v-model='keyword', @keyup='changeInput')
+                input.pl-4.bg-transparent.w-full.h-full.outline-none.text-xs(placeholder='Search by block/tx/account/address', v-model='keyword', @keyup='changeInput')
                 i.text-xl.fal.fa-search.text-gray-ca.mr-1.cursor-pointer(@click='search()')
                 //- span.btn.btn-xs.rounded-full(:class='keyword ? "cursor-pointer" : "opacity-50 cursor-not-allowed"', @click='search') Search
             router-link(to='/analytics') ANALYTICS

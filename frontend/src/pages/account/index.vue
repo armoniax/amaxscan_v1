@@ -138,7 +138,6 @@ import { environment } from '@/environments/environment';
 import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10 } from '@/apis';
 
 const frontConfig = environment.frontConfig;
-
 export default defineComponent({
     components: { PageAccountBase, RawDataBase, JsonViewer },
     setup() {
@@ -174,7 +173,6 @@ export default defineComponent({
         });
         const route = useRoute();
         const searVal = ref('');
-        let resetData:Record<string, any> = {};
 
         const account = computed(() => route.params.account as string);
         const momentFarmat = moment;
@@ -187,7 +185,7 @@ export default defineComponent({
             // if(newVlaue.path)
             // window.location.hash = newVlaue.fullPath+'?' +new Date().getTime();
             // window.location.hash = this.list[i]
-        })
+        });
 
         // pass  接口通了  没数据
         const getControlledAccounts = (account: string) => {
@@ -240,7 +238,8 @@ export default defineComponent({
                 if (state.mainData.voter_info && state.mainData.voter_info.staked) {
                     staked = state.mainData.voter_info.staked;
                 }
-                if (frontConfig.customBalance) {//include precision
+                if (frontConfig.customBalance) {
+                    //include precision
                     state.balance = state.unstaked;
                 } else {
                     state.balance = state.unstaked + staked / 100000000;
@@ -326,7 +325,7 @@ export default defineComponent({
             }
             data.abi.tables.forEach((elem: any) => {
                 GET_TABLE_ROWS(account, elem.name).then((res: any) => {
-                    console.log('GET_TABLE_ROWS-----', res);
+                    //- console.log('GET_TABLE_ROWS-----', res);
                     state.tables.push({ name: elem.name, data: res });
                 });
             });
@@ -345,48 +344,61 @@ export default defineComponent({
         };
 
         const searchActions = () => {
-            if(searVal.value.length > 0){
+            if (searVal.value.length > 0) {
                 state.showDataSource = state.dataSource.filter((ele: any) => ele?.action_trace?.act?.account.indexOf(searVal.value) != -1);
-            }else{
+            } else {
                 state.currentPage = 0;
-                changePage('down')
+                changePage('down');
             }
         };
 
         const changePage = (type: string) => {
-            let start = 0, end = 0, nextPage = state.currentPage;
-            if(type === "up") nextPage = Math.max(state.currentPage - 1, 1);
+            let start = 0,
+                end = 0,
+                nextPage = state.currentPage;
+            if (type === 'up') nextPage = Math.max(state.currentPage - 1, 1);
             else nextPage = Math.min(state.currentPage + 1, state.totalPage);
-            if(nextPage === state.currentPage) return;
+            if (nextPage === state.currentPage) return;
 
             state.currentPage = nextPage;
             start = (state.currentPage - 1) * state.pageSize;
             end = state.currentPage * state.pageSize;
-            state.showDataSource = state.dataSource.slice(start,  end)
+            state.showDataSource = state.dataSource.slice(start, end);
+
+            console.log('state.dataSource：-----', state.dataSource);
+            console.log('state.showDataSource：-----', state.showDataSource);
         };
 
+        const resetData = () => {
+            state.typeActionActive= 'ActionsInfo';
+            state.controlledAccount= {};
+            state.mainData= {};
+            state.creator= {};
+            state.unstaked= '0';
+            state.balance= '0';
+            state.time= '';
+            state.position= 1;
+            state.dataSourcePermission= [];
+            state.actionsNotSorted= [];
+            state.actionsArray= [];
+            state.actions= [];
+            state.dataSource= [];
+            state.showDataSource= [];
+            state.tables= [];
+            state.actionsTotal= 0;
+            state.totalPage= 1;
+            state.pageSize= 15;
+            state.currentPage= 0;
+        }
+
         const onInit = () => {
-            console.log('commin befor', resetData, state)
-            // state.actionsArray = [];
-            if(resetData.hasOwnProperty('mainData')){
-                state = {...resetData}
-            }
-            console.log('commin after', resetData, state)
+            resetData();
             getBlockData(account.value);
             getControlledAccounts(account.value);
             getAllTokens(account.value);
-        }
+        };
 
-        onInit()
-
-        resetData = JSON.parse(JSON.stringify(state));
-        // ((): void => {
-        //     console.error('------')
-        //     state.actionsArray = [];
-        //     getBlockData(account.value);
-        //     getControlledAccounts(account.value);
-        //     getAllTokens(account.value);
-        // })();
+        onInit();
 
         return {
             state,
