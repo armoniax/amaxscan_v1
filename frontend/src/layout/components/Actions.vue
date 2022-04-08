@@ -48,7 +48,7 @@ export default defineComponent({
         const offsetPageElems = ref(6);
         const frontConfig = ref(environment.frontConfig);
         const socket = inject('socket') as any;
-        const ungerKey = ref('EOS1111111111111111111111111111111114T1Anm');
+        const ungerKey = ref('AMAX1111111111111111111111111111111114T1Anm');
         const state = reactive({
             trxObj: {},
             spinner: false,
