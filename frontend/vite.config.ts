@@ -7,7 +7,6 @@ export default defineConfig({
     plugins: [vue()],
     server: {
         proxy: {
-            // exp.mgpchain.io
             // '/api': 'http://120.77.26.105:3039', 
             // '/api': 'https://testnet.amaxscan.io', 
             // "/api": "https://www.amaxscan.io", 
@@ -15,13 +14,11 @@ export default defineConfig({
             // "/api": "https://expnode.amaxscan.io", 
             // "/api": "http://prod-exp-proxy.ambt.art", 
             // "/api": "http://expnode.mgps.me", 
-            // "/api": "https://exp.mgpchain.io", 
             '/socket.io': {
                 // target: 'https://www.amaxscan.io',
                 // target: 'https://expnode.amaxscan.io',
                 // target: 'http://prod-exp-proxy.ambt.art',
                 // target: 'http://expnode.mgps.me',
-                // target: 'https://exp.mgpchain.io',
                 target: 'https://dev-exp.ambt.art',
                 // secure: true,
                 changeOrigin: true,
