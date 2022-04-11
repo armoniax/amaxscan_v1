@@ -11,7 +11,7 @@
     .w-80.ml-5
         p.text-lg Legend
         .flex.flex-col.items-end.font-normal.text-sm
-            p.text-gray-999.mb-2 {{ frontConfig?.coin }} RAM price:
+            p.text-gray-999.mb-2 {{ frontConfig?.coin }} RAM Price:
             p.font-medium.text-lg.mb-6 {{ state.ramPrice }} {{ frontConfig?.coin }}/kb
             p.text-gray-999.mb-2 Overall RAM:
             .flex.items-center.justify-between.w-full.font-medium.mb-2

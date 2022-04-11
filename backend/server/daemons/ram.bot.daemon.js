@@ -29,7 +29,7 @@ module.exports = function(mongoMain){
 					- /low 0.26 
 					- /stop_loss 0.3 
 					- /info  (Get info about your bot parameters)
-					- /price (Get gurrent RAM price) 
+					- /price (Get gurrent RAM Price) 
 					- /high 0 (disable high) 
 					- /low 0, 
 					- /stop_loss 0
