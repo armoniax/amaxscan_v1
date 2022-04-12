@@ -1,40 +1,40 @@
 <template lang="pug">
 .text-sm.font-normal
-    .flex.justify-between.items-center.py-7
-        .text-green.py-1.px-2.bg-green.bg-opacity-20.rounded-lg Votes: {{ state.chainNumber?.toLocaleString() }} ({{ state.chainPercentage }}%)
+    .flex.justify-between.lg_items-center.lg_py-7.flex-col.lg_flex-row.items-start.px-2.lg_px-0.py-4
+        .text-green.py-1.px-2.bg-green.bg-opacity-20.rounded.lg_rounded-lg.mb-2.lg_mb-0 Votes: {{ state.chainNumber?.toLocaleString() }} ({{ state.chainPercentage }}%)
         .flex.border-b.w-72.text-gray-ccc.border-b-gray-ccc.text-gray-ca.h-7.items-center
             i.fal.fa-search.text-gray-ca.mr-2
             input.outline-none.flex-1.h-full(placeholder='Search by producer name', v-model='filterVal')
+    .overflow-scroll
+        table.w-full.text-center.text-gray-666.table-compact
+            thead.bg-gray.h-10
+                tr
+                    th #
+                    th Name
+                    th Status
+                    //- th Url
+                    th Location
+                    th.whitespace-nowrap Total Votes ({{ frontConfig?.coin }})
+                    th Rate
+                    th.whitespace-nowrap Rewards Per Day
+            tbody
+                tr.h-16.border-b.border-b-gray-f4(v-for='item in DataList', :key='item.index')
+                    td {{ item.index }}
+                    td.flex.flex-col.lg_flex-row.items-center.justify-center.h-16.cursor-pointer(@click='$router.push(`/producers/${item.owner}`)')
+                        //- img.w-10.mr-2(:src='item?.image || "../../assets/images/amax.png"')
+                        img.w-10.lg_mr-2(:src='item?.image || "/amax.png"', @click.stop='item?.url && openUrl(item?.url)')
+                        span.font-medium {{ item.owner }}
+                    td
+                        span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(139deg, #2ff443 0%, #32d5d8 100%)', v-if='item?.index <= 21 && producer !== item.owner') TOP21
+                        span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(to right, #ff9389, #ff8ea4); background: -webkit-gradient(linear, left top, right top, from(#ff9389), to(#ff8ea4))', v-if='producer === item.owner') Producing
+                        span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(to right, #ff9048, #f44336); background: -webkit-gradient(linear, left top, right top, from(#ff9048), to(#f44336))', v-if='item?.index > 21 && producer !== item.owner') Standby
+                    //- td {{ item?.url || "-" }}
+                    td
+                        img.w-8.m-auto(v-if='item?.location', :src='`/flags/${item?.location}.svg`')
 
-    table.w-full.text-center.text-gray-666
-        thead.bg-gray.h-10
-            tr
-                th #
-                th Name
-                th Status
-                //- th Url
-                th Location
-                th Total Votes ({{ frontConfig?.coin }})
-                th Rate
-                th Rewards Per Day
-        tbody
-            tr.h-16.border-b.border-b-gray-f4(v-for='item in DataList', :key='item.index')
-                td {{ item.index }}
-                td.flex.items-center.justify-center.h-16.cursor-pointer(@click='$router.push(`/producers/${item.owner}`)')
-                    //- img.w-10.mr-2(:src='item?.image || "../../assets/images/amax.png"')
-                    img.w-10.mr-2(:src='item?.image || "/amax.png"', @click.stop='item?.url && openUrl(item?.url)')
-                    span.font-medium {{ item.owner }}
-                td
-                    span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(139deg, #2ff443 0%, #32d5d8 100%)', v-if='item?.index <= 21 && producer !== item.owner') TOP21
-                    span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(to right, #ff9389, #ff8ea4); background: -webkit-gradient(linear, left top, right top, from(#ff9389), to(#ff8ea4))', v-if='producer === item.owner') Producing
-                    span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(to right, #ff9048, #f44336); background: -webkit-gradient(linear, left top, right top, from(#ff9048), to(#f44336))', v-if='item?.index > 21 && producer !== item.owner') Standby
-                //- td {{ item?.url || "-" }}
-                td
-                    img.w-8.m-auto(v-if='item?.location', :src='`/flags/${item?.location}.svg`')
-
-                td {{ item?.total_votes }}
-                td {{ item?.rate }} %
-                td {{ item?.rewards }} {{ frontConfig?.coin }}
+                    td {{ item?.total_votes }}
+                    td.whitespace-nowrap {{ item?.rate }} %
+                    td.whitespace-nowrap {{ item?.rewards }} {{ frontConfig?.coin }}
 
     //- .flex.justify-end.items-center.text-gray-666.py-3
     //-     span Items per page:

@@ -1,47 +1,47 @@
 <template lang="pug">
-.py-4.space-y-4.mb-8
+.py-4.space-y-4.mb-8.px-2.lg_px-0
     .flex.items-center.justify-start.space-x-4
-        h2.text-2xl Block No. {{ state.mainData?.block_num }}
-        span.text-green.cursor-pointer(v-if="state.mainData?.block_num" @click='$router.push(`/block/${Number(state.mainData?.block_num) - 1}`)')
+        h2.lg_text-2xl.text-xl Block No. {{ state.mainData?.block_num }}
+        span.text-green.cursor-pointer(v-if='state.mainData?.block_num', @click='$router.push(`/block/${Number(state.mainData?.block_num) - 1}`)')
             i.far.fa-long-arrow-left.mr-1
             | Prev
-        span.text-green.cursor-pointer(v-if="state.mainData?.block_num" @click='$router.push(`/block/${Number(state.mainData?.block_num) + 1}`)')
+        span.text-green.cursor-pointer(v-if='state.mainData?.block_num', @click='$router.push(`/block/${Number(state.mainData?.block_num) + 1}`)')
             | Next
             i.far.fa-long-arrow-right.ml-1
 
     .flex.justify-center.items-center(v-if='state.spinner', style='height: 100%')
-        span.font-medium.text-7xl.text-gray-999 Loading...
+        span.font-medium.lg_text-7xl.text-gray-999.text-xl Loading...
 
     template(v-else) 
-        .flex.items-center.h-8(v-if='state.mainData?.producer')
-            .w-44 Producer:
+        .flex.items-center(v-if='state.mainData?.producer')
+            .w-24.lg_w-44 Producer:
             .flex-1.text-green
-                span.cursor-pointer(@click='$router.push(`/account/${state.mainData?.producer}`)') {{ state.mainData?.producer }}
-        .flex.items-center.h-8(v-if='state.mainData?.id')
-            .w-44 Id:
+                span.cursor-pointer.break-all(@click='$router.push(`/account/${state.mainData?.producer}`)') {{ state.mainData?.producer }}
+        .flex.items-center(v-if='state.mainData?.id')
+            .w-24.lg_w-44 Id:
             .flex-1
-                span.text-gray-999 {{ state.mainData?.id }}
-        .flex.items-center.h-8(v-if='state.mainData?.previous')
-            .w-44 Previous:
+                span.text-gray-999.break-all {{ state.mainData?.id }}
+        .flex.items-center(v-if='state.mainData?.previous')
+            .w-24.lg_w-44 Previous:
             .flex-1
-                span.text-green.cursor-pointer(@click='$router.push(`/block/${state.mainData?.previous}`)') {{ state.mainData?.previous }}
-        .flex.items-center.h-8(v-if='state.mainData?.confirmed')
-            .w-44 Confirmations:
+                span.text-green.cursor-pointer.break-all(@click='$router.push(`/block/${state.mainData?.previous}`)') {{ state.mainData?.previous }}
+        .flex.items-center(v-if='state.mainData?.confirmed')
+            .w-24.lg_w-44 Confirmations:
             .flex-1.text-gray-999 {{ state.mainData?.confirmed }}
-        .flex.items-center.h-8(v-if='state.mainData?.action_mroot')
-            .w-44 Action Mroot:
-            .flex-1 {{ state.mainData?.action_mroot }}
-        .flex.items-center.h-8(v-if='state.mainData?.transaction_mroot')
-            .w-44 Transaction Mroot:
-            .flex-1 {{ state.mainData?.transaction_mroot }}
-        .flex.items-center.h-8(v-if='state.time')
-            .w-44 Time:
-            .flex-1.text-gray-999 {{ state.time }}
-        .flex.items-center.h-8(v-if='state.mainData?.transactions')
-            .w-44 Transactions:
-            .flex-1.text-gray-999 {{ state.mainData?.transactions?.length }}
+        .flex.items-center(v-if='state.mainData?.action_mroot')
+            .w-24.lg_w-44 Action Mroot:
+            .flex-1.break-all {{ state.mainData?.action_mroot }}
+        .flex.items-center(v-if='state.mainData?.transaction_mroot')
+            .w-24.lg_w-44 Transaction Mroot:
+            .flex-1.break-all {{ state.mainData?.transaction_mroot }}
+        .flex.items-center(v-if='state.time')
+            .w-24.lg_w-44 Time:
+            .flex-1.text-gray-999.break-all {{ state.time }}
+        .flex.items-center(v-if='state.mainData?.transactions')
+            .w-24.lg_w-44 Transactions:
+            .flex-1.text-gray-999.break-all {{ state.mainData?.transactions?.length }}
 
-        RawDataBase(title='Blockchain Raw Data:', :isopen="true" expand-path="2" :json='state.mainData', v-if='state.mainData?.transactions?.length < 1000')
+        RawDataBase(title='Blockchain Raw Data:', :isopen='true', expand-path='2', :json='state.mainData', v-if='state.mainData?.transactions?.length < 1000')
 
         template(v-if='state.trxArr.length')
             .overflow-scroll

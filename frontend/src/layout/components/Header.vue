@@ -1,16 +1,21 @@
 <template lang="pug">
-.p-4
+.lg_p-4.p-2
     Wrapper.flex.items-center
-        router-link(to='/')
-            img.object-contain(src='@/assets/images/logo.png', style='width: 95px')
+        router-link.mr-2(to='/')
+            img.object-contain.lg_w-24.w-16(src='@/assets/images/logo.png', style='image-rendering: -webkit-optimize-contrast')
         .flex-1.flex.space-x-8.items-center.justify-end.text-sm.font-semibold
-            .flex.w-80.h-8.bg-gray-eee.rounded-full.px-2.items-center
+            .w-full.flex.lg_w-80.h-8.bg-gray-eee.rounded-full.px-2.items-center
                 input.pl-4.bg-transparent.w-full.h-full.outline-none.text-xs(placeholder='Search by block/tx/account/address', v-model='keyword', @keyup='changeInput')
                 i.text-xl.fal.fa-search.text-gray-ca.mr-1.cursor-pointer(@click='search()')
                 //- span.btn.btn-xs.rounded-full(:class='keyword ? "cursor-pointer" : "opacity-50 cursor-not-allowed"', @click='search') Search
-            router-link(to='/analytics') ANALYTICS
-            router-link(to='/ram') RAM
-            router-link(to='/producers') PRODUCERS
+            .space-x-4.hidden.lg_block
+                router-link(to='/analytics') ANALYTICS
+                router-link(to='/ram') RAM
+                router-link(to='/producers') PRODUCERS
+    .lg_hidden.flex.pt-4.space-x-4.flex-nowrap.overflow-x-scroll
+        router-link(to='/analytics') ANALYTICS
+        router-link(to='/ram') RAM
+        router-link(to='/producers') PRODUCERS
 
     //- .alert.alert-error.shadow-l
     //-     div
@@ -30,7 +35,7 @@ export default defineComponent({
         let keyword = ref('');
         const search = () => {
             SEARCCH(keyword.value).then((res: any) => {
-                console.log(res);
+                // console.log(res);
                 if (res.block && !isNaN(+keyword.value)) {
                     router.push({ path: `/block/${res.block.block_num}` });
                 } else if (res.transaction) {

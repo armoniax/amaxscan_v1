@@ -1,19 +1,20 @@
 <template lang="pug">
-.flex.py-6.ram
+.flex.lg_py-6.ram.flex-col.lg_flex-row.py-3.px-2.lg_px-0
     .flex-1
-        .flex.justify-between.items-center
-            p.font-medium.text-2xl
+        .flex.justify-between.lg_items-center.flex-col.lg_flex-row.items-start
+            p.font-medium.text-2xl.mb-4.lg_mb-0
                 | {{ frontConfig?.coin }} RAM Price
                 span.text-sm.ml-2.text-gray-666 {{ frontConfig?.coin }}/kb RAM
             ul.flex.text-sm.space-x-4.font-normal
                 li.bg-gray.rounded.w-8.h-6.flex.items-center.justify-center.cursor-pointer(:class='state.defaultTimeName === t ? "is-active" : ""', v-for='t in state.timeArray', @click='toggleTime(t)') {{ t }}
         v-chart.w-full.h-96(:option='option')
-    .w-80.ml-5
-        p.text-lg Legend
-        .flex.flex-col.items-end.font-normal.text-sm
-            p.text-gray-999.mb-2 {{ frontConfig?.coin }} RAM Price:
+
+    .flex-1.lg_w-80.lg_ml-5.lg_flex-none.ml-0.mt-6.lg_mt-0
+        p.text-lg.lg_mb-0.mb-2 Legend
+        .flex.flex-col.lg_items-end.font-normal.text-sm.items-start
+            p.text-gray-999.lg_mb-2.mb-0 {{ frontConfig?.coin }} RAM Price:
             p.font-medium.text-lg.mb-6 {{ state.ramPrice }} {{ frontConfig?.coin }}/kb
-            p.text-gray-999.mb-2 Overall RAM:
+            p.text-gray-999.lg_mb-2.mb-0 Overall RAM:
             .flex.items-center.justify-between.w-full.font-medium.mb-2
                 span {{ (state.globalStat?.total_ram_bytes_reserved / 1024 / 1024 / 1024).toLocaleString() }} GB / {{ ((state.globalStat?.total_ram_bytes_reserved / state.globalStat?.max_ram_size) * 100).toLocaleString() }} %
                 span {{ (state.globalStat?.max_ram_size / 1024 / 1024 / 1024).toLocaleString() }} GB

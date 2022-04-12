@@ -1,7 +1,7 @@
 <template lang="pug">
 .bg-green
     Wrapper.py-6.pb-4
-        .grid.grid-cols-5.gap-2.mb-3
+        .grid.grid-cols-2.lg_grid-cols-5.gap-2.mb-3.px-2.lg_px-0
             .bg-white.p-4
                 span RAM Price
                 p.mt-2.text-green
@@ -20,18 +20,18 @@
                 span PRODUCER
                 p.mt-2.text-green {{ state.producer }}
 
-        .flex.items-center.justify-between.text-white
+        .flex.items-center.justify-between.text-white.px-2.lg_px-0.text-sm
             span
                 | TPS:
-                span.text-lg.mx-1 {{ state.TPSliveTx }}
+                span.lg_text-lg.mx-1 {{ state.TPSliveTx }}
                 | live
-                span.text-lg.mx-1 {{ state.aggragationData?.max_tps?.toLocaleString() }}
+                span.lg_text-lg.mx-1 {{ state.aggragationData?.max_tps?.toLocaleString() }}
                 | max
                 | users online:
-                span.text-lg.mx-1 {{ state.usersOnline }}
-            span.flex.items-center.cursor-pointer(@click="toggleShow")
+                span.lg_text-lg.mx-1 {{ state.usersOnline }}
+            span.flex.items-center.cursor-pointer(@click='toggleShow')
                 | Live Actions
-                i.fas.fa-chevron-down.ml-2(:class="modelValue ? 'rotate-180' : ''")
+                i.fas.fa-chevron-down.ml-2(:class='modelValue ? "rotate-180" : ""')
 </template>
 
 <script lang="ts">
@@ -46,7 +46,7 @@ import { inject } from 'vue';
 export default defineComponent({
     components: { Wrapper },
     props: {
-        modelValue:{type: Boolean,default: false}
+        modelValue: { type: Boolean, default: false },
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
@@ -151,8 +151,8 @@ export default defineComponent({
 
         const toggleShow = () => {
             // console.log(123)
-            emit('update:modelValue', !props.modelValue)
-        }
+            emit('update:modelValue', !props.modelValue);
+        };
 
         const onInit = () => {
             getData();
@@ -205,7 +205,7 @@ export default defineComponent({
         return {
             frontConfig,
             state,
-            toggleShow
+            toggleShow,
         };
     },
 });

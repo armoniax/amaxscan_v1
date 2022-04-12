@@ -4,8 +4,8 @@ export default io({
     autoConnect: false,
     reconnection: true,
     reconnectionDelay: 1000,
-    reconnectionDelayMax: 5000,
-    reconnectionAttempts: 5,
+    reconnectionDelayMax: 1000,
+    reconnectionAttempts: 1,
     // query: {
     //     EIO: 3,
     //     transport: 'websocket',

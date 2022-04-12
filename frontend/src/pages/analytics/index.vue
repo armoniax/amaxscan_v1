@@ -1,10 +1,10 @@
 <template lang="pug">
-.py-2.space-y-4.analytics.text-sm.font-normal
-    .flex 
+.py-2.space-y-4.analytics.text-sm.font-normal.px-2.lg_px-0
+    .flex.flex-col.lg_flex-row
         .flex-1
             .h-8.text-2xl.font-bold.mb-4 Top 50 accounts
             v-chart.w-full.h-96.bg-gray-fb(:option='option', ref='chart')
-        .w-80.ml-5.mb-4
+        .flex-1.lg_w-80.lg_ml-5.lg_flex-none.ml-0.mt-6.lg_mt-0.mb-4
             .h8.text-lg.font-bold Legend
 
             .divide-y.divide-gray-f4(v-if='pieChart?.length')

@@ -1,16 +1,16 @@
 <template lang="pug">
-.py-2.space-y-4.account
-    h2.text-2xl Account: {{ account || "-" }}
+.py-2.space-y-4.account.px-2.lg_px-0
+    h2.lg_text-2xl.text-xl Account: {{ account || "-" }}
     PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance', :creator='state.creator')
     RawDataBase(title='Contract Raw Data:', :json='state.code')
     RawDataBase(title='Blockchain Raw Data:', :json='state.mainData')
-    RawDataBase(v-for="(elem, ind) in state.tables", :index="ind", v-if="state.tables.length > 0", :title='"Table - " + elem.name + ":"', :json='elem.data')
+    RawDataBase(v-for='(elem, ind) in state.tables', :index='ind', v-if='state.tables.length > 0', :title='"Table - " + elem.name + ":"', :json='elem.data')
     //- div(v-for="(elem, ind) in state.tables", :index="ind", v-if="state.tables.length > 0")
     //-     RawDataBase(:title='"Table - " + elem.name', :json='elem.data')
     //- RawDataBase(v-for="(elem, ind) in [1,2,3,4,5,6]", :key="ind" :title='"Table - " + ind', :json='state.mainData')
-
-    .tabs
-        a.tab.tab-bordered(v-for='item in state.typeActionList', :key='item.key', :class='{ "tab-active": state.typeActionActive === item.key }', @click='state.typeActionActive = item.key') {{ item.name }}
+    .overflow-x-scroll
+        .tabs.flex-nowrap
+            a.tab.tab-bordered(v-for='item in state.typeActionList', :key='item.key', :class='{ "tab-active": state.typeActionActive === item.key }', @click='state.typeActionActive = item.key') {{ item.name }}
 
     .actions-info(v-if='state.typeActionActive === "ActionsInfo"')
         .flex.border-b.w-72.text-gray-ccc.border-b-gray-ccc.text-gray-ca.h-7.items-center
@@ -39,15 +39,15 @@
                         th 
                             strong
                                 span.text-green {{ element?.action_trace?.act?.data?.from }}
-                                span.ml-2.mr-2(v-if="element?.action_trace?.act?.data?.to") →
+                                span.ml-2.mr-2(v-if='element?.action_trace?.act?.data?.to') →
                                 span.text-green {{ element?.action_trace?.act?.data?.to }}
                                 span.ml-2 {{ element?.action_trace?.act?.data?.quantity }}
 
-        .flex.justify-end.items-center.text-gray-666.py-3.text-sm.font-normal(v-if="searVal.length === 0")
+        .flex.justify-end.items-center.text-gray-666.py-3.text-sm.font-normal(v-if='searVal.length === 0')
             //- span Items per pag:
             //- select.outline-none.h-6.w-10.border.rounded.mx-2.border-gray-f4.cursor-pointer
             //-     option(v-for="i in 10", :key="i") {{ i }}
-            span 1 - {{state.totalPage}} of {{state.currentPage}}
+            span 1 - {{ state.totalPage }} of {{ state.currentPage }}
             span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='changePage("up")') &lt;
             span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='changePage("down")') &gt;
 
@@ -64,8 +64,8 @@
                         th Quantity
                         th Tx id
                 tbody
-                    template(v-for='(action, ind) in state.actions' )
-                        tr(v-if="action?.action_trace?.act?.name === 'transfer'", :key='ind')
+                    template(v-for='(action, ind) in state.actions')
+                        tr(v-if='action?.action_trace?.act?.name === "transfer"', :key='ind')
                             th 
                                 strong {{ momentFarmat(action?.block_time).format("lll") }}
                             th 
@@ -117,7 +117,7 @@
                         th Name
                         th Action data
                 tbody
-                    tr(v-for='i in 10', :key='i' v-if="false")
+                    tr(v-for='i in 10', :key='i', v-if='false')
                         th {{ i }}
                         th pojekngj
                         th 2022-06-24
@@ -370,26 +370,26 @@ export default defineComponent({
         };
 
         const resetData = () => {
-            state.typeActionActive= 'ActionsInfo';
-            state.controlledAccount= {};
-            state.mainData= {};
-            state.creator= {};
-            state.unstaked= '0';
-            state.balance= '0';
-            state.time= '';
-            state.position= 1;
-            state.dataSourcePermission= [];
-            state.actionsNotSorted= [];
-            state.actionsArray= [];
-            state.actions= [];
-            state.dataSource= [];
-            state.showDataSource= [];
-            state.tables= [];
-            state.actionsTotal= 0;
-            state.totalPage= 1;
-            state.pageSize= 15;
-            state.currentPage= 0;
-        }
+            state.typeActionActive = 'ActionsInfo';
+            state.controlledAccount = {};
+            state.mainData = {};
+            state.creator = {};
+            state.unstaked = '0';
+            state.balance = '0';
+            state.time = '';
+            state.position = 1;
+            state.dataSourcePermission = [];
+            state.actionsNotSorted = [];
+            state.actionsArray = [];
+            state.actions = [];
+            state.dataSource = [];
+            state.showDataSource = [];
+            state.tables = [];
+            state.actionsTotal = 0;
+            state.totalPage = 1;
+            state.pageSize = 15;
+            state.currentPage = 0;
+        };
 
         const onInit = () => {
             resetData();

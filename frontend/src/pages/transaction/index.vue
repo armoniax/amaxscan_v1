@@ -1,26 +1,27 @@
 <template lang="pug">
-.py-2.space-y-4.account
-    h2.text-2xl Transaction
-    .text-sm
-        .flex.items-center.h-8
-            .w-44 Block Number:
+.py-2.space-y-4.account.px-2.lg_px-0
+    h2.lg_text-2xl.text-xl Transaction
+    .text-sm.space-y-2
+        .flex.items-center
+            .w-24.lg_w-44 Block Number:
             .flex-1 
-                a.text-green(:href='"/block/" + mainData?.block_num ') {{ mainData?.block_num }}
-        .flex.items-center.h-8
-            .w-44 Hash:
-            .flex-1.text-gray-999 {{ mainData?.id}}
-        .flex.items-center.h-8
-            .w-44 Block Time:
-            .flex-1.text-gray-999 {{ time }}
-        .flex.items-center.h-8
-            .w-44 Actions:
-            .flex-1.font-normal {{ mainData?.trx?.trx?.actions?.length }}
+                a.text-green.break-all(:href='"/block/" + mainData?.block_num') {{ mainData?.block_num }}
+        .flex.items-center
+            .w-24.lg_w-44 Hash:
+            .flex-1.text-gray-999.break-all {{ mainData?.id }}
+        .flex.items-center
+            .w-24.lg_w-44 Block Time:
+            .flex-1.text-gray-999.break-all {{ time }}
+        .flex.items-center
+            .w-24.lg_w-44 Actions:
+            .flex-1.font-normal.break-all {{ mainData?.trx?.trx?.actions?.length }}
 
     RawDataBase(title='Blockchain Raw Data:', :json='mainData')
 
-    .tabs
-        a.tab.tab-bordered(v-for='item in typeActionList', :key='item.key', :class='{ "tab-active": typeActionActive === item.key }', @click='typeActionActive = item.key') {{ item.name }}
-    
+    .overflow-x-scroll
+        .tabs.flex-nowrap
+            a.tab.tab-bordered(v-for='item in typeActionList', :key='item.key', :class='{ "tab-active": typeActionActive === item.key }', @click='typeActionActive = item.key') {{ item.name }}
+
     .token-transfer(v-if='typeActionActive === "TokenTransfer"')
         .overflow-x-auto
             table.table.w-full.my-table
@@ -33,7 +34,7 @@
                         th Quantity
                 tbody
                     template(v-for='(action, ind) in mainData?.trx?.trx?.actions')
-                        tr(:key='ind' v-if="action?.name === 'transfer'")
+                        tr(:key='ind', v-if='action?.name === "transfer"')
                             th 
                                 strong.text-green(v-if='action?.data?.to === mainData?.account_name') In
                                 strong.text-red(v-if='action?.data?.to !== mainData?.account_name') Out
@@ -60,12 +61,10 @@
                         th 
                             strong {{ item?.name }}
                         th 
-                            actionViewer(:data="item")
+                            actionViewer(:data='item')
 
     .actions(v-if='typeActionActive === "Actions"')
         JsonViewer(:value='mainData?.trx?.trx?.actions', copyable, sort, :expand-depth=5)
-
-    
 </template>
 
 <script lang="ts">

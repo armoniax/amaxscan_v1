@@ -1,7 +1,7 @@
 <template lang="pug">
 Wrapper.pt-4
-    .flex.space-x-8
-        Block.flex-1(title='Blocks')
+    .grid.grid-cols-1.lg_grid-cols-2.gap-4.lg_gap-8
+        Block(title='Blocks')
             .px-4.font-normal.h-12.items-center.flex(v-if='!state.blocks.length') None yet
             table.table.w-full(v-else)
                 thead
@@ -19,7 +19,7 @@ Wrapper.pt-4
                             span.text-green.cursor-pointer(@click='$router.push(`/producers/${item?.producer}`)') {{ item?.producer }}
                         th.text-center {{ handleTime(item?.timestamp) }}
 
-        Block.flex-1(title='Latest Actions')
+        Block(title='Latest Actions')
             .px-4.font-normal.h-12.items-center.flex(v-if='!state.hashs.length') None yet
             table.table.w-full(v-else)
                 thead
