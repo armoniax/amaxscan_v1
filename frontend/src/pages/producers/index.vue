@@ -150,15 +150,11 @@ export default defineComponent({
             let reward = 0;
             let percentageVotesRewarded = (total_votes / (totalProducerVoteWeight - state.votesToRemove)) * 100;
 
-            if (position < 22) {
-                reward = frontConfig.value.coin === 'EOS' ? reward + 443 : 4909;
-            }
-            if (frontConfig.value.coin === 'EOS') {
-                reward += percentageVotesRewarded * 200;
-            }
-            if (reward < 100) {
+            //86400 * 365 blocks for e 1st year, no reward
+            if (position < 31536000) {
                 reward = 0;
             }
+            
             return Math.floor(reward).toLocaleString();
         };
 
