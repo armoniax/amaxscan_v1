@@ -22,7 +22,7 @@
                     td {{ item.index }}
                     td.flex.flex-col.lg_flex-row.items-center.justify-center.h-16.cursor-pointer(@click='$router.push(`/producers/${item.owner}`)')
                         //- img.w-10.mr-2(:src='item?.image || "../../assets/images/amax.png"')
-                        img.w-10.lg_mr-2(:src='item?.image || "/amax.png"', @click.stop='item?.url && openUrl(item?.url)')
+                        img.w-10.lg_mr-2.lg_ml-10(:src='item?.image || "/amax.png"', @click.stop='item?.url && openUrl(item?.url)')
                         span.font-medium {{ item.owner }}
                     td
                         span.w-24.h-8.rounded-lg.flex.items-center.justify-center.text-white.m-auto(style='background: linear-gradient(139deg, #2ff443 0%, #32d5d8 100%)', v-if='item?.index <= 21 && producer !== item.owner') TOP21
