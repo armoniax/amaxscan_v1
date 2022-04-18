@@ -30,7 +30,7 @@ Wrapper.pt-4
                 tbody
                     tr(v-for='(item, index) in state.hashs', :key='index')
                         th 
-                            span.text-green(@click='$router.push(`/transaction/${item?.block_num}`)') {{ item?.block_num.toLocaleString() }}
+                            span.text-green(@click='$router.push(`/transaction/${item?.txid}`)') {{ item?.txid.substr(0,6) + "***" + item?.txid.substr(item?.txid.length-6,6) }}
                         th.font-medium {{ item?.name }}
                         //- th -
 </template>
@@ -76,7 +76,7 @@ export default defineComponent({
                         let actions = [];
                         if (tr.trx && tr.trx.transaction && tr.trx.transaction.actions) {
                             actions = tr.trx.transaction.actions.map(act => {
-                                act.block_num = tr.trx.id;
+                                act.txid = tr.trx.id;
                             });
                             Array.prototype.push.apply(state.trxObj[elem.block_num], tr.trx.transaction.actions);
                         }
@@ -104,12 +104,12 @@ export default defineComponent({
 
         const calculateEosFromVotes = votes => {
             let date = +new Date() / 1000 - 946684800; // 946... start timestamp
-            if (frontConfig.value.coin === 'WAX') {
-                let weight = parseInt(`${date / (86400 * 7)}`, 10) / 13;
-                return votes / 2 ** weight / 100000000;
-            }
+            // if (frontConfig.value.coin === 'WAX') {
+            //     let weight = parseInt(`${date / (86400 * 7)}`, 10) / 13;
+            //     return votes / 2 ** weight / 100000000;
+            // }
             let weight = parseInt(`${date / (86400 * 7)}`, 10) / 52; // 86400 = seconds per day 24*3600
-            return votes / 2 ** weight / 10000;
+            return votes / 2 ** weight / 100000000;
         };
         const sortArray = (data: any) => {
             if (!data) {
