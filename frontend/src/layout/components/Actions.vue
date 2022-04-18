@@ -30,7 +30,7 @@ Wrapper.pt-4
                 tbody
                     tr(v-for='(item, index) in state.txns', :key='index')
                         th 
-                            span.text-green(@click='$router.push(`/transaction/${item?.txid}`)') {{ item?.txid.substr(0,6) + "***" + item?.txid.substr(item?.txid.length-6,6) }}
+                            span.text-green(@click='$router.push(`/transaction/${item?.txid}`)') {{ item?.txid.substr(0,9) + "***" + item?.txid.substr(item?.txid.length-9,9) }}
                         th.font-medium {{ item?.name }}
                         //- th -
 </template>
