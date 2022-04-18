@@ -2,7 +2,7 @@
 Wrapper.pt-4
     .grid.grid-cols-1.lg_grid-cols-2.gap-4.lg_gap-8
         Block(title='Blocks')
-            .px-4.font-normal.h-12.items-center.flex(v-if='!state.blocks.length') None yet
+            .px-4.font-normal.h-12.items-center.flex(v-if='!state.blocks.length')
             table.table.w-full(v-else)
                 thead
                     tr
@@ -20,7 +20,7 @@ Wrapper.pt-4
                         th.text-center {{ handleTime(item?.timestamp) }}
 
         Block(title='Latest Actions')
-            .px-4.font-normal.h-12.items-center.flex(v-if='!state.hashs.length') None yet
+            .px-4.font-normal.h-12.items-center.flex(v-if='!state.txns.length') None yet
             table.table.w-full(v-else)
                 thead
                     tr
@@ -28,7 +28,7 @@ Wrapper.pt-4
                         th Action Name
                         //- th Data
                 tbody
-                    tr(v-for='(item, index) in state.hashs', :key='index')
+                    tr(v-for='(item, index) in state.txns', :key='index')
                         th 
                             span.text-green(@click='$router.push(`/transaction/${item?.txid}`)') {{ item?.txid.substr(0,6) + "***" + item?.txid.substr(item?.txid.length-6,6) }}
                         th.font-medium {{ item?.name }}
@@ -45,7 +45,7 @@ import { environment } from '@/environments/environment';
 export default defineComponent({
     components: { Block, Wrapper },
     setup() {
-        const offsetPageElems = ref(6);
+        const offsetPageElems = ref(10);
         const frontConfig = ref(environment.frontConfig);
         const socket = inject('socket') as any;
         const ungerKey = ref('AMAX1111111111111111111111111111111114T1Anm');
@@ -53,7 +53,7 @@ export default defineComponent({
             trxObj: {},
             spinner: false,
             blocks: [],
-            hashs: [],
+            txns: [],
         });
 
         const handleTime = (timestamp?: any) => {
@@ -136,7 +136,7 @@ export default defineComponent({
             Ax.get('/v1/get_last_blocks/6')
                 .then((res: any) => {
                     state.blocks = sortArray(res);
-                    state.hashs = createTransactionsArray(res);
+                    state.txns = createTransactionsArray(res);
                     state.spinner = false;
                 })
                 .catch(error => {
@@ -150,7 +150,7 @@ export default defineComponent({
 
             socket.on('get_last_blocks', (res: any) => {
                 state.blocks = sortArray(res);
-                state.hashs = createTransactionsArray(res);
+                state.txns = createTransactionsArray(res);
             });
         };
 
