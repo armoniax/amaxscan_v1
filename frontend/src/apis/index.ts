@@ -44,3 +44,5 @@ export const GET_PRODUCERS_BP_JSON = () => Ax.get('/v1/get_producers_bp_json');
 // export const GET_TABLE_ROWS__GLOBAL = () => Ax.get('/v1/get_table_rows/amax/amax/global/1');
 
 export const GET_TRANSACTION = (transactionId: string) => Ax.get(`/v1/get_transaction/${transactionId}`);
+
+export const GET_KEY_ACCOUNTS = (address: string) => Ax.get(`/v1/get_key_accounts/${address}`);

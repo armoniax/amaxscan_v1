@@ -77,6 +77,16 @@ const router = createRouter({
             ],
         },
         {
+            path: '/address/:address',
+            component: Layout,
+            children: [
+                {
+                    path: '',
+                    component: () => import('@/pages/address/index.vue'),
+                },
+            ],
+        },
+        {
             path: '/transaction/:tx',
             component: Layout,
             children: [
