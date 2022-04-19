@@ -1,7 +1,7 @@
 <template lang="pug">
 .text-sm.font-normal
     .flex.justify-between.lg_items-center.lg_py-7.flex-col.lg_flex-row.items-start.px-2.lg_px-0.py-4
-        .text-green.py-1.px-2.bg-green.bg-opacity-20.rounded.lg_rounded-lg.mb-2.lg_mb-0 Votes: {{ state.chainNumber?.toLocaleString() }} ({{ state.chainPercentage }}%)
+        .text-green.py-1.px-2.bg-green.bg-opacity-20.rounded.lg_rounded-lg.mb-2.lg_mb-0 Votes: {{ state.totalVotes?.toLocaleString() }} ({{ state.votePercentage }}%)
         .flex.border-b.w-72.text-gray-ccc.border-b-gray-ccc.text-gray-ca.h-7.items-center
             i.fal.fa-search.text-gray-ca.mr-2
             input.outline-none.flex-1.h-full(placeholder='Search by producer name', v-model='filterVal')
@@ -65,8 +65,8 @@ export default defineComponent({
         const producer = computed(() => store.state.producer);
         const state = reactive<any>({
             votesToRemove: 0,
-            chainPercentage: '0.00',
-            chainNumber: 0,
+            votePercentage: '0.00',
+            totalVotes: 0,
             spinner: false,
             firstLoad: false,
             total: 0,
@@ -176,8 +176,8 @@ export default defineComponent({
             if (!global || !global.rows || !global.rows[0] || !global.rows[0].total_activated_stake) return;
 
             supply = 1000000000; //hardcode AMA total supply here
-            state.chainPercentage = ((global.rows[0].total_activated_stake / 100000000 / supply) * 100).toFixed(2);
-            state.chainNumber = (global.rows[0].total_activated_stake / supply) * 10;
+            state.totalVotes = (global.rows[0].total_activated_stake / 100000000 / supply);
+            state.votePercentage = ((global.rows[0].total_activated_stake / 100000000 / supply) * 100).toFixed(2);
         };
 
         const joinOtherProducerInfo = (sortedArr: any[], joinArr: any[]) => {
