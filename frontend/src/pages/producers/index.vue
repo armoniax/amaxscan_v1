@@ -177,7 +177,7 @@ export default defineComponent({
 
             let precision = 100000000;
             supply = 1000000000; //hardcode AMA total supply here
-            state.totalVotes = global.rows[0].total_activated_stake / 100000000;
+            state.totalVotes = global.rows[0].total_activated_stake / precision;
             state.votePercentage = ((global.rows[0].total_activated_stake / precision / supply) * 100).toFixed(2);
         };
 
