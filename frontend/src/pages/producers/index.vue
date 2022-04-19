@@ -139,8 +139,9 @@ export default defineComponent({
             data.forEach((elem, index) => {
                 elem.index = index + 1;
                 // elem.total_votes = (elem.total_votes / 10000).toLocaleString();
-                elem.total_votes = elem.total_votes.replace(/,/g, "");
-                console.log("elem.total_votes=" + elem.total_votes + ", Number = " + (Number(elem.total_votes)/1000).toLocaleString() );
+                let precision = 100000000;
+                elem.total_votes = (Number(elem.total_votes.replace(/,/g, "")) / precision).toLocaleString();
+                // console.log("elem.total_votes=" + elem.total_votes + ", Number = " + (Number(elem.total_votes)/10000000).toLocaleString() );
                 elem.rate = !totalProducerVoteWeight ? 0 : ((elem.all_votes / totalProducerVoteWeight) * 100).toLocaleString();
                 elem.rewards = !totalProducerVoteWeight ? 0 : countRewards(elem.all_votes, elem.index, totalProducerVoteWeight);
             });
