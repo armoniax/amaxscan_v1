@@ -10,7 +10,7 @@
             thead.bg-gray.h-10
                 tr
                     th #
-                    th Name
+                    th Producer Name
                     th Status
                     //- th Url
                     th Location
@@ -148,11 +148,11 @@ export default defineComponent({
         const countRewards = (total_votes: number, index: number, totalProducerVoteWeight: number) => {
             let position = index;
             let reward = 0;
-            let percentageVotesRewarded = (total_votes / (totalProducerVoteWeight - state.votesToRemove)) * 100;
 
             //86400 * 365 blocks for e 1st year, no reward
-            if (position < 31536000) {
-                reward = 0;
+            if (position > 31536000) {
+                let percentageVotesRewarded = (total_votes / (totalProducerVoteWeight - state.votesToRemove)) * 100;
+                reward = percentageVotesRewarded; //FIXME
             }
 
             return Math.floor(reward).toLocaleString();
@@ -175,6 +175,7 @@ export default defineComponent({
         const calculateTotalVotes = (global: any, supply: any) => {
             if (!global || !global.rows || !global.rows[0] || !global.rows[0].total_activated_stake) return;
 
+            supply = 1000000000; //hardcode AMA total supply here
             state.chainPercentage = ((global.rows[0].total_activated_stake / 100000000 / supply) * 100).toFixed(2);
             state.chainNumber = (global.rows[0].total_activated_stake / supply) * 10;
         };
