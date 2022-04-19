@@ -32,7 +32,7 @@
                     td
                         img.w-8.m-auto(v-if='item?.location', :src='`/flags/${item?.location}.svg`')
 
-                    td {{ item?.total_votes / 10000 }}
+                    td {{ Number(item?.total_votes) / 10000 }}
                     td.whitespace-nowrap {{ item?.rate }} %
                     td.whitespace-nowrap {{ item?.rewards }} {{ frontConfig?.coin }}
 
