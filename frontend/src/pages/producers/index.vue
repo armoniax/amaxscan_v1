@@ -32,7 +32,7 @@
                     td
                         img.w-8.m-auto(v-if='item?.location', :src='`/flags/${item?.location}.svg`')
 
-                    td {{ Number(item?.total_votes) / 10000 }}
+                    td {{ item?.total_votes }}
                     td.whitespace-nowrap {{ item?.rate }} %
                     td.whitespace-nowrap {{ item?.rewards }} {{ frontConfig?.coin }}
 
@@ -138,6 +138,7 @@ export default defineComponent({
             }, 0);
             data.forEach((elem, index) => {
                 elem.index = index + 1;
+                elem.total_votes = (elem.total_votes / 10000).toLocaleString();
                 elem.rate = !totalProducerVoteWeight ? 0 : ((elem.all_votes / totalProducerVoteWeight) * 100).toLocaleString();
                 elem.rewards = !totalProducerVoteWeight ? 0 : countRewards(elem.all_votes, elem.index, totalProducerVoteWeight);
             });
