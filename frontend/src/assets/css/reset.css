@@ -10,3 +10,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.scroll-hidden::-webkit-scrollbar {
+    width: 0;
+    height: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.scroll-hidden-x::-webkit-scrollbar {
+    width: 0;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.scroll-hidden-y::-webkit-scrollbar {
+    height: 0px;
+    background: transparent; /* make scrollbar transparent */
+}

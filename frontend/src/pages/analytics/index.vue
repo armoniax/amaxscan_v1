@@ -16,7 +16,7 @@
             .divide-y.divide-gray-f4(v-else)
                 .py-4.text-gray-999 None yet
 
-    .overflow-x-auto
+    .overflow-x-auto.scroll-hidden
         table.table.w-full
             thead
                 tr

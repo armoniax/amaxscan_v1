@@ -5,7 +5,7 @@
         .flex.border-b.w-72.text-gray-ccc.border-b-gray-ccc.text-gray-ca.h-7.items-center
             i.fal.fa-search.text-gray-ca.mr-2
             input.outline-none.flex-1.h-full(placeholder='Search by producer name', v-model='filterVal')
-    .overflow-scroll
+    .overflow-scroll.scroll-hidden
         table.w-full.text-center.text-gray-666.table-compact
             thead.bg-gray.h-10
                 tr

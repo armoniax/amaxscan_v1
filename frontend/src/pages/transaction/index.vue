@@ -18,12 +18,12 @@
 
     RawDataBase(title='Blockchain Raw Data:', :json='mainData')
 
-    .overflow-x-scroll
+    .overflow-x-scroll.scroll-hidden
         .tabs.flex-nowrap
             a.tab.tab-bordered(v-for='item in typeActionList', :key='item.key', :class='{ "tab-active": typeActionActive === item.key }', @click='typeActionActive = item.key') {{ item.name }}
 
     .token-transfer(v-if='typeActionActive === "TokenTransfer"')
-        .overflow-x-auto
+        .overflow-x-auto.scroll-hidden
             table.table.w-full.my-table
                 thead
                     tr

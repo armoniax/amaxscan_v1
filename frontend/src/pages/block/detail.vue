@@ -44,7 +44,7 @@
         RawDataBase(title='Blockchain Raw Data:', :isopen='true', expand-path='2', :json='state.mainData', v-if='state.mainData?.transactions?.length < 1000')
 
         template(v-if='state.trxArr.length')
-            .overflow-scroll
+            .overflow-scroll.scroll-hidden
                 table.table.w-full
                     thead
                         tr

@@ -17,7 +17,7 @@
             i.fal.fa-search.text-gray-ca.mr-2
             input.outline-none.flex-1.h-full.text-black(placeholder='Search by producer name', v-model='searVal', @keyup='searchActions')
 
-        .overflow-x-auto
+        .overflow-x-auto.scroll-hidden
             table.table.w-full.my-table
                 thead
                     tr
@@ -52,7 +52,7 @@
             span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='changePage("down")') &gt;
 
     .token-transfer(v-if='state.typeActionActive === "TokenTransfer"')
-        .overflow-x-auto
+        .overflow-x-auto.scroll-hidden
             table.table.w-full.my-table
                 thead
                     tr
@@ -87,7 +87,7 @@
         JsonViewer(:value='state.actions', copyable, sort, :expand-depth=2)
 
     .permissions(v-if='state.typeActionActive === "Permissions"')
-        .overflow-x-auto
+        .overflow-x-auto.scroll-hidden
             table.table.w-full.my-table
                 thead
                     tr
@@ -107,7 +107,7 @@
                             strong {{ item?.required_auth?.keys[0]?.weight }}
 
     .controlled(v-if='state.typeActionActive === "ControlledAccounts"')
-        .overflow-x-auto
+        .overflow-x-auto.scroll-hidden
             table.table.w-full.my-table
                 thead
                     tr
