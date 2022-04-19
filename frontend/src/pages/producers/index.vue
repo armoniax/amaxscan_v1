@@ -138,7 +138,7 @@ export default defineComponent({
             }, 0);
             data.forEach((elem, index) => {
                 elem.index = index + 1;
-                elem.total_votes = (elem.total_votes / 10000).toLocaleString();
+                // elem.total_votes = (elem.total_votes / 10000).toLocaleString();
                 elem.rate = !totalProducerVoteWeight ? 0 : ((elem.all_votes / totalProducerVoteWeight) * 100).toLocaleString();
                 elem.rewards = !totalProducerVoteWeight ? 0 : countRewards(elem.all_votes, elem.index, totalProducerVoteWeight);
             });
