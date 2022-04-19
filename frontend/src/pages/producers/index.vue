@@ -175,9 +175,10 @@ export default defineComponent({
         const calculateTotalVotes = (global: any, supply: any) => {
             if (!global || !global.rows || !global.rows[0] || !global.rows[0].total_activated_stake) return;
 
+            let precision = 100000000;
             supply = 1000000000; //hardcode AMA total supply here
-            state.totalVotes = (global.rows[0].total_activated_stake / 100000000 / supply);
-            state.votePercentage = ((global.rows[0].total_activated_stake / 100000000 / supply) * 100).toFixed(2);
+            state.totalVotes = global.rows[0].total_activated_stake / 100000000;
+            state.votePercentage = ((global.rows[0].total_activated_stake / precision / supply) * 100).toFixed(2);
         };
 
         const joinOtherProducerInfo = (sortedArr: any[], joinArr: any[]) => {
