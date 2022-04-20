@@ -66,10 +66,10 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = process.env.CUSTOMCHAIN || 'http://172.20.142.162:38888';
+config.customChain = process.env.CUSTOMCHAIN || 'http://10.88.0.1:18888';
 
 // api url for history
-config.historyChain = process.env.HISTORYCHAIN || 'http://172.20.142.162:38888'; //still the RPC chain
+config.historyChain = process.env.HISTORYCHAIN || 'http://10.88.0.1:18888'; //still the RPC chain
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
