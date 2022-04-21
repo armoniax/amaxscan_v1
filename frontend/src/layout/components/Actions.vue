@@ -59,7 +59,7 @@ export default defineComponent({
         const local_zone =  moment.tz.guess();
         const local_tz = moment.tz(local_zone).zoneAbbr();
         const handleTime = (timestamp?: any) => {
-            return moment(timestamp).tz(local_tz).format('MMM DD, YYYY hh:mm:ss A');
+            return moment(timestamp).tz(local_tz).format('MMM DD, YYYY hh:mm:ss A z');
         };
 
         const createTransactionsArray = (data: any) => {
