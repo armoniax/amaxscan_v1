@@ -40,7 +40,6 @@ import { defineComponent, reactive, inject, onDeactivated, onUnmounted, ref } fr
 import Wrapper from '@/components/Wrapper.vue';
 import Block from '@/components/Block.vue';
 import moment from 'moment';
-import 'moment-timezone';
 import { Ax } from '@/apis';
 import { environment } from '@/environments/environment';
 export default defineComponent({
@@ -57,10 +56,8 @@ export default defineComponent({
             txns: [],
         });
 
-        const local_zone =  moment.tz.guess();
-        const local_tz = moment.tz(local_zone);
         const handleTime = (timestamp?: any) => {
-            return moment(timestamp).tz(local_tz).format('MMM DD, YYYY hh:mm:ss A z');
+            return moment(timestamp).local().format('MMM DD, YYYY hh:mm:ss A z');
         };
 
         const createTransactionsArray = (data: any) => {
