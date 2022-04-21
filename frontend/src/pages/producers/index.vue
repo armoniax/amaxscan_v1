@@ -209,7 +209,7 @@ export default defineComponent({
         getBlockData();
 
         onDeactivated(() => {
-            console.log(123);
+            // console.log(123);
             socket.removeAllListeners('producers');
         });
 

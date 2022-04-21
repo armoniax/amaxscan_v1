@@ -57,7 +57,7 @@ export default defineComponent({
         });
 
         const handleTime = (timestamp?: any) => {
-            return moment(timestamp).format('lll');
+            return moment(timestamp).format('lllTS');
         };
 
         const createTransactionsArray = (data: any) => {
