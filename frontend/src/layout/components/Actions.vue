@@ -39,7 +39,8 @@ Wrapper.pt-4
 import { defineComponent, reactive, inject, onDeactivated, onUnmounted, ref } from 'vue';
 import Wrapper from '@/components/Wrapper.vue';
 import Block from '@/components/Block.vue';
-import moment from 'moment-timezone';
+import moment from 'moment';
+import 'moment-timezone';
 import { Ax } from '@/apis';
 import { environment } from '@/environments/environment';
 export default defineComponent({
