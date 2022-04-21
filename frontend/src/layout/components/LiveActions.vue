@@ -22,16 +22,16 @@
 
         .flex.items-center.justify-between.text-white.px-2.lg_px-0.text-sm
             span
-                | TPS:
+                |   TPS:
                 span.lg_text-lg.mx-1 {{ state.TPSLiveTx }}
-                | max:
+                |   max:
                 span.lg_text-lg.mx-1 {{ state.TPSMaxTx }}
-                | live:
+                |   live:
                 span.lg_text-lg.mx-1 {{ state.aggragationData?.max_tps?.toLocaleString() }}
-                | users online:
+                |   users online:
                 span.lg_text-lg.mx-1 {{ state.usersOnline }}
             span.flex.items-center.cursor-pointer(@click='toggleShow')
-                | Live Actions
+                |   Live Actions
                 i.fas.fa-chevron-down.ml-2(:class='modelValue ? "rotate-180" : ""')
 </template>
 
