@@ -18,7 +18,7 @@
                 p.mt-2.text-green {{ state.aggragationData?.actions?.toLocaleString() }}
             .bg-white.p-4
                 span PRODUCER
-                p.mt-2.text-green.cursor-pointer(@click='$router.push(`/producers/${state?.producer}`)') {{ state?.producer }}
+                p.mt-2.text-green.cursor-pointer(@click='$router.push(`/producers/${state.producer}`)') {{ state.producer }}
 
         .flex.items-center.justify-between.text-white.px-2.lg_px-0.text-sm
             span
