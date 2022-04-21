@@ -24,11 +24,11 @@
             span
                 |   TPS:
                 span.lg_text-lg.mx-1 {{ state.TPSLiveTx }}
-                |   (live)
+                | live
                 span.lg_text-lg.mx-1 {{ state.aggragationData?.max_tps?.toLocaleString() }}
-                |   (max)
+                | max
+                |   Users Online:
                 span.lg_text-lg.mx-1 {{ state.usersOnline }}
-                |   Users online:
             span.flex.items-center.cursor-pointer(@click='toggleShow')
                 |   Live Actions
                 i.fas.fa-chevron-down.ml-2(:class='modelValue ? "rotate-180" : ""')
