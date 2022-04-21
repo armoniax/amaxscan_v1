@@ -23,10 +23,11 @@
         .flex.items-center.justify-between.text-white.px-2.lg_px-0.text-sm
             span
                 | TPS:
-                span.lg_text-lg.mx-1 {{ state.TPSliveTx }}
+                span.lg_text-lg.mx-1 {{ state.TPSLiveTx }}
                 | live:
                 span.lg_text-lg.mx-1 {{ state.aggragationData?.max_tps?.toLocaleString() }}
                 | max:
+                span.lg_text-lg.mx-1 {{ state.TPSMaxTx }}
                 | users online:
                 span.lg_text-lg.mx-1 {{ state.usersOnline }}
             span.flex.items-center.cursor-pointer(@click='toggleShow')
@@ -62,7 +63,8 @@ export default defineComponent({
             producer: '',
             aggragationData: {},
             blockchainData: {},
-            TPSliveTx: 0,
+            TPSLiveTx: 0,
+            TPSMaxTx: 0,
             usersOnline: 0,
         });
 
@@ -179,7 +181,9 @@ export default defineComponent({
             socket.on('get_tps_blocks', (res: any) => {
                 // console.log('get_tps_blocks', res);
                 if (res && res.length === 2) {
-                    state.TPSliveTx = countTPS(res);
+                    state.TPSLiveTx = countTPS(res);
+                    if (state.TPSLiveTx > state.TPSMaxTx)
+                        state.TPSMaxTx = state.TPSLiveTx;
                     state.producer = state.producer === res[1].producer ? state.producer : res[1].producer;
                     // TODO 切换用户
                     store.dispatch('changeMessage', state.producer);
