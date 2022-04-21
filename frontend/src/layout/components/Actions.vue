@@ -57,7 +57,7 @@ export default defineComponent({
         });
 
         const local_zone =  moment.tz.guess();
-        const local_tz = moment.tz(local_zone).zoneAbbr();
+        const local_tz = moment.tz(local_zone);
         const handleTime = (timestamp?: any) => {
             return moment(timestamp).tz(local_tz).format('MMM DD, YYYY hh:mm:ss A z');
         };
