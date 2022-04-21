@@ -22,13 +22,13 @@
 
         .flex.items-center.justify-between.text-white.px-2.lg_px-0.text-sm
             span
+                |   Users Online:
+                span.lg_text-lg.mx-1 {{ state.usersOnline }}
                 |   TPS:
                 span.lg_text-lg.mx-1 {{ state.TPSLiveTx }}
                 | live
                 span.lg_text-lg.mx-1 {{ state.aggragationData?.max_tps?.toLocaleString() }}
                 | max
-                |   Users Online:
-                span.lg_text-lg.mx-1 {{ state.usersOnline }}
             span.flex.items-center.cursor-pointer(@click='toggleShow')
                 |   Live Actions
                 i.fas.fa-chevron-down.ml-2(:class='modelValue ? "rotate-180" : ""')
