@@ -24,12 +24,11 @@
             span
                 |   TPS:
                 span.lg_text-lg.mx-1 {{ state.TPSLiveTx }}
-                |   max:
-                span.lg_text-lg.mx-1 {{ state.TPSMaxTx }}
-                |   live:
+                |   (live)
                 span.lg_text-lg.mx-1 {{ state.aggragationData?.max_tps?.toLocaleString() }}
-                |   users online:
+                |   (max)
                 span.lg_text-lg.mx-1 {{ state.usersOnline }}
+                |   Users online:
             span.flex.items-center.cursor-pointer(@click='toggleShow')
                 |   Live Actions
                 i.fas.fa-chevron-down.ml-2(:class='modelValue ? "rotate-180" : ""')
@@ -64,7 +63,6 @@ export default defineComponent({
             aggragationData: {},
             blockchainData: {},
             TPSLiveTx: 0,
-            TPSMaxTx: 0,
             usersOnline: 0,
         });
 
@@ -182,8 +180,6 @@ export default defineComponent({
                 // console.log('get_tps_blocks', res);
                 if (res && res.length === 2) {
                     state.TPSLiveTx = countTPS(res);
-                    if (state.TPSLiveTx > state.TPSMaxTx)
-                        state.TPSMaxTx = state.TPSLiveTx;
                     state.producer = state.producer === res[1].producer ? state.producer : res[1].producer;
                     // TODO 切换用户
                     store.dispatch('changeMessage', state.producer);
