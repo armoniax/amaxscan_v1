@@ -11,7 +11,7 @@ config.toInt = 100000000; //precison: 8
 config.coin = 'AMAX';
 // console.log("process.env.MONGO_URI: ===========>>>>>>>>>>", process.env)
 
-config.MONGO_URI = process.env.MONGO_URI || 'mongodb://amax:amax123456@10.88.0.1:27017/AMAXExp';
+config.MONGO_URI = process.env.MONGO_URI || 'mongodb://amax:amax123456@172.17.0.1:27017/AMAXExp';
 // config.MONGO_URI = process.env.MONGO_URI || 'mongodb://deex:deex123456@139.224.250.244:27017/AMAXExp';
 config.MONGO_OPTIONS = {
     socketTimeoutMS: 30000,
@@ -43,7 +43,7 @@ config.telegram = {
 
 // reserved nodes
 config.endpoints = [
-  'http://10.88.0.1:18888',  //localhost access
+  'http://172.17.0.1:18888',  //localhost access
 	'https://expnode.amaxscan.io'
      //'http://bp.cryptolions.io',
      //'https://eos.greymass.com',
@@ -66,10 +66,10 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = process.env.CUSTOMCHAIN || 'http://10.88.0.1:18888';
+config.customChain = process.env.CUSTOMCHAIN || 'http://172.17.0.1:18888';
 
 // api url for history
-config.historyChain = process.env.HISTORYCHAIN || 'http://10.88.0.1:18888'; //still the RPC chain
+config.historyChain = process.env.HISTORYCHAIN || 'http://172.17.0.1:18888'; //still the RPC chain
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
