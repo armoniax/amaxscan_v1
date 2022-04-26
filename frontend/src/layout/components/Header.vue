@@ -39,11 +39,13 @@ export default defineComponent({
                 if (res.block && !isNaN(+keyword.value)) {
                     router.push({ path: `/block/${res.block.block_num}` });
                 } else if (res.transaction) {
-                    router.push({ path: '/transaction', query: { tx: res.transaction.id } });
+                    // router.push({ path: '/transaction', query: { tx: res.transaction.id } });
+                    router.push({ path: `/transaction/${res.transaction.id}`});
                 } else if (res.account) {
                     router.push({ path: `/account/${res.account.account_name}` });
                 } else if (res.key) {
-                    router.push({ path: '/address', query: { address: keyword.value } });
+                    // router.push({ path: '/address', query: { address: keyword.value } });
+                    router.push({ path: `/address/${keyword.value}`});
                 } else {
                     router.push({ path: '/notfound' });
                 }
