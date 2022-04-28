@@ -44,8 +44,8 @@ export default defineComponent({
                 } else if (res.account) {
                     router.push({ path: `/account/${res.account.account_name}` });
                 } else if (res.key) {
-                    // router.push({ path: '/address', query: { address: keyword.value } });
-                    router.push({ path: `/address/${keyword.value}`});
+                    // router.push({ path: '/pubkey', query: { pubkey: keyword.value } });
+                    router.push({ path: `/pubkey/${keyword.value}`});
                 } else {
                     router.push({ path: '/notfound' });
                 }

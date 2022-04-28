@@ -55,10 +55,10 @@
             span.text-gray-999.mx-2 {{ mainData?.voter_info?.last_vote_weight }}
             | Owner:
             span.text-gray-999.mx-2 {{ mainData?.voter_info?.owner }}
-    .flex.items-center(v-if='creator?.act?.data?.creator && !state.frontConfig?.customBalance')
+    .flex.items-center(v-if='creator? && !state.frontConfig?.customBalance')
         .w-24.lg_w-44 Created by:
         .flex-1.font-normal 
-            a(:href='"/address/" + creator?.act?.data?.creator') {{ creator?.act?.data?.creator }}
+            a(:href='"/account/" + creator?.act?.data?.creator') {{ creator?.act?.data?.creator }}
     .flex.items-center
         .w-24.lg_w-44 Created time:
         .flex-1.font-normal {{ time }}

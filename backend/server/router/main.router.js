@@ -20,7 +20,7 @@ module.exports = function(router, config, request, log) {
 	   	res.sendFile(indexPath);
 	});
 	
-	router.get('/address/:id', (req, res) => {
+	router.get('/pubkey/:id', (req, res) => {
 	   	res.sendFile(indexPath);
 	});
 	

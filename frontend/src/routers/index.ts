@@ -77,12 +77,12 @@ const router = createRouter({
             ],
         },
         {
-            path: '/address/:address',
+            path: '/pubkey/:pubkey',
             component: Layout,
             children: [
                 {
                     path: '',
-                    component: () => import('@/pages/address/index.vue'),
+                    component: () => import('@/pages/pubkey/index.vue'),
                 },
             ],
         },
