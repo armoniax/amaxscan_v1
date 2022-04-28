@@ -1,7 +1,7 @@
 <template lang="pug">
 .py-2.space-y-4.account.px-2.lg_px-0
     h2.lg_text-2xl.text-xl Account: {{ account || "-" }}
-    PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance', :creator='state.creator')
+    PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance')
     RawDataBase(title='Contract Raw Data:', :json='state.code')
     RawDataBase(title='Blockchain Raw Data:', :json='state.mainData')
     RawDataBase(v-for='(elem, ind) in state.tables', :index='ind', v-if='state.tables.length > 0', :title='"Table - " + elem.name + ":"', :json='elem.data')
@@ -306,7 +306,7 @@ export default defineComponent({
 
         const getAccountAction = (account: string, actionName: string) => {
             GET_ACTIONS_NAME(account, actionName).then((res: any) => {
-                state.creator = res.actions[0];
+                //- state.creator = res.actions[0];
                 console.log('getAccountAction-----', res);
             });
         };
@@ -373,7 +373,7 @@ export default defineComponent({
             state.typeActionActive = 'ActionsInfo';
             state.controlledAccount = {};
             state.mainData = {};
-            state.creator = {};
+            //- state.creator = {};
             state.unstaked = '0';
             state.balance = '0';
             state.time = '';
