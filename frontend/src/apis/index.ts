@@ -20,7 +20,7 @@ export const GET_INFO = () => Ax.get('/v1/get_info');
 
 export const GET_CONTROLLED_BY_ACCOUNT = (account: string) => Ax.get(`/v1/get_controlled_accounts/${account}`);
 
-export const SEARCCH = (text: string) => Ax.post(`/v1/search`, { text: text.replace(/ /g, '') });
+export const SEARCH_BY = (text: string) => Ax.post(`/v1/search`, { text: text.replace(/ /g, '') });
 
 export const GET_ACCOUNT = (account: string) => Ax.get(`/v1/get_account/${account}`);
 
