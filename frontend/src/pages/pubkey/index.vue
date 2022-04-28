@@ -4,7 +4,7 @@
     .flex.items-center
         .w-24.lg_w-44 Public Key:
         .flex-1
-            span.text-gray-999.break-all {{ address }}
+            span.text-gray-999.break-all {{ pubkey }}
     .flex.items-center
         .w-24.lg_w-44 Accounts:
         .flex-1
@@ -21,10 +21,10 @@ import { GET_KEY_ACCOUNTS } from '@/apis';
 export default defineComponent({
     setup() {
         const route = useRoute();
-        const address = computed(() => route.params.address as string);
+        const pubkey = computed(() => route.params.pubkey as string);
         const state = reactive({
             mainData: null,
-            addressBlock: null,
+            // addressBlock: null,
         });
 
         const getPubkeyAccountData = pubkey => {
@@ -51,14 +51,14 @@ export default defineComponent({
         };
 
         const onInit = () => {
-            getPubkeyAccountData(address.value);
+            getPubkeyAccountData(pubkey.value);
         };
 
         onInit();
 
         return {
             state,
-            address
+            pubkey
         };
     },
 });
