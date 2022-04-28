@@ -58,9 +58,9 @@
     .flex.items-center
         .w-24.lg_w-44 Created by:
         .flex-1.font-normal 
-            a(:href='"/account/" + mainData?.creator) {{ mainData?.creator }}
+            a(:href='"/account/" + mainData?.creator') {{ mainData?.creator }}
     .flex.items-center
-        .w-24.lg_w-44 Created time:
+        .w-24.lg_w-44 Created at:
         .flex-1.font-normal {{ time }}
 </template>
 
