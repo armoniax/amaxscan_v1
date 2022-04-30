@@ -102,6 +102,9 @@ module.exports = (io, mongoMain, metrics) => {
               io.to(SOCKET_ROOM).emit('get_last_blocks', result.blocks);
               io.to(SOCKET_ROOM).emit('get_aggregation', result.stat);
               io.to(SOCKET_ROOM).emit('users_online', userCountHandler);
+
+              //TODO:
+            //   io.to(SOCKET_ROOM).emit('amax_price', amaxPriceHandler);
           }
           setTimeout(getDataSocket, getSleepTime(timeRequestStart));
       });
