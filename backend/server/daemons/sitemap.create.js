@@ -7,7 +7,7 @@ fs.createReadStream(path.join(__dirname, '../../accs.csv'))
   .pipe(csv())
   .on('data', function (data) {
       fs.appendFile(path.join(__dirname, '../../sitemap.xml'), 
-      	`<url><loc>https://eosweb.net/account/${data.account_name}</loc></url>
+      	`<url><loc>https://amaxscan.io/account/${data.account_name}</loc></url>
       	`, (err) => {
   		 if (err) throw err;
  		 console.log(count++);
