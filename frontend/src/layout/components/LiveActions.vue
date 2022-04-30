@@ -154,8 +154,8 @@ export default defineComponent({
         };
 
         const onInit = () => {
-            getData();
-            getChart();
+            // getData();
+            // getChart();
             getBlockchainData();
             getAggregationData();
             getRam();
