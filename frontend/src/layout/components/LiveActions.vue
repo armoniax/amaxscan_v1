@@ -24,9 +24,9 @@
             span
                 |   Users Online:
                 span.lg_text-lg.mx-1 {{ state.usersOnline }}
-                |   TPS_max:
+                |   TPS.max:
                 span.lg_text-lg.mx-1 {{ state.aggragationData?.max_tps?.toLocaleString() }}
-                |   TPS_live:
+                |   TPS.live:
                 span.lg_text-lg.mx-1 {{ state.TPSLiveTx }}
             span.flex.items-center.cursor-pointer(@click='toggleShow')
                 |   Live Actions
