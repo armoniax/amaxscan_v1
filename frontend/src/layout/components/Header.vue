@@ -36,7 +36,7 @@ export default defineComponent({
         const search = () => {
             SEARCH_BY(keyword.value).then((res: any) => {
                 console.log(res);
-                
+
                 if (res.block && !isNaN(+keyword.value)) {
                     router.push({ path: `/block/${res.block.block_num}` });
 
@@ -47,7 +47,7 @@ export default defineComponent({
                 } else if (res.account) {
                     router.push({ path: `/account/${res.account.account_name}` });
 
-                } else if (res.key) {
+                } else if (res.pubkey) {
                     // router.push({ path: '/pubkey', query: { pubkey: keyword.value } });
                     router.push({ path: `/pubkey/${keyword.value}`});
 

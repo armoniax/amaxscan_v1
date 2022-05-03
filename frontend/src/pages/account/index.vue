@@ -100,7 +100,7 @@
                         th 
                             strong {{ item?.perm_name }}
                         th 
-                            a(:href='"/address/" + item.required_auth.keys[0].key') {{ item?.required_auth?.keys[0]?.key }}
+                            a(:href='"/pubkey/" + item.required_auth.keys[0].key') {{ item?.required_auth?.keys[0]?.key }}
                         th 
                             strong {{ item?.required_auth?.threshold }}
                         th 

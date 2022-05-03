@@ -76,7 +76,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 					cb(null, null);
 				}
 			},
-			key: (cb) => {
+			pubkey: (cb) => {
 				log.info("to search public_key");
 				if (text.length == 52) {	//PubKey length
 					log.info(">>> search public_key: " + text);
