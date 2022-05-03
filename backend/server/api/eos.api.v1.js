@@ -252,7 +252,8 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	* params - block_num_or_id
 	*/
 	router.get('/api/v1/get_block/:block_num_or_id', (req, res) => {
-	   	 global.eos.getBlock({ block_num_or_id: req.params.block_num_or_id })
+		if (!isNaN(req.params.block_num_or_id)) {
+	   	 	global.eos.getBlock({ block_num_or_id: req.params.block_num_or_id })
 	   	 	.then(result => {
 	   	 		res.json(result);
 	   	 	})
@@ -260,6 +261,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	   	 		log.error(err);
 	   	 		res.status(501).end();
 	   	 	});
+		}
 	});
 
     /*
