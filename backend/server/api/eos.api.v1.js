@@ -489,7 +489,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	* router - get_info
 	*/
 	router.get('/api/v1/get_info', (req, res) => {
-      	console.log(req);
+      	// console.log(req);
 		global.eos.getInfo({})
 		.then(result => {
 			res.json(result);

@@ -67,7 +67,7 @@ app.set('view engine', 'html');
 app.set('views', 'dist');
 
 // ################### create http node express server
-const debug = require('debug')('asd:server');
+// const debug = require('debug')('asd:server');
 const http = require('http');
 const port = normalizePort(process.env.PORT || '3039');
 app.set('port', port);

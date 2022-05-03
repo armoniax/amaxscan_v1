@@ -8,6 +8,7 @@ request.get(`${config.historyChain}/v1/history/get_actions`, (err, response, bod
 		log.error(err);
 		process.exit(1);
 	}
+	
 	let data;
 	try{
 		log.info(`${config.historyChain}/v1/history/get_actions: ` + body);
@@ -16,6 +17,7 @@ request.get(`${config.historyChain}/v1/history/get_actions`, (err, response, bod
 		log.error(err);
 		process.exit(1);
 	}
+
 	SETTINGS_DB.findOneAndUpdate({}, {actions: data.actions, transactions: data.transactions}, (err) => {
 		if (err){
 			log.error(err);
