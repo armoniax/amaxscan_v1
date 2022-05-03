@@ -32,9 +32,9 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 
 		async.parallel({
 			block: (cb) =>{
-				log.info("search block");
+				log.info(">>> search block");
 				if (!isNaN(text)) {	//text is a block number
-					log.error("search block: " + text);
+					log.info("search block: " + text);
         			global.eos.getBlock({ block_num_or_id: text })
 						.then(result => {
 							cb(null, result);
@@ -46,9 +46,9 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 				}
 			},
 			transaction: (cb) =>{
-				log.info("search TxID");
+				log.info(">>> search TxID");
 				if (text.length == 64) {	//TxID length
-					log.error("search TxID: " + text);
+					log.info("search TxID: " + text);
 					global.eos.getTransaction({ id: text })
 						.then(result => {
 							cb(null, result);
@@ -59,9 +59,9 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 				}
 			},
 			account: (cb) =>{
-				log.info("search account_name");
+				log.info(">>> search account_name");
 				if (text.length <= 12) {	//Account name length
-					log.error("search account_name: " + text);
+					log.info("search account_name: " + text);
 					global.eos.getAccount({ account_name: text })
 						.then(result => {
 							cb(null, result);
@@ -72,9 +72,9 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 				}
 			},
 			key: (cb) => {
-				log.info("search public_key");
+				log.info(">>> search public_key");
 				if (text.length == 52) {	//PubKey length
-					log.error("search public_key: " + text);
+					log.info("search public_key: " + text);
 					global.eos.getKeyAccounts({ public_key: text })
 						.then(result => {
 							cb(null, result);
