@@ -26,7 +26,7 @@ async function getMaxTps(){
 	}
 	
 	let info = await wrapper.toStrong(eos.getInfo({}));
-	if (!info.last_irreversible_block_num){
+	if (!info.last_irreversible_block_num) {
 		return log.error('Cant get info from blockchain!');
 	}
 	let start = settings.cursor_max_tps;
@@ -34,7 +34,7 @@ async function getMaxTps(){
 
 	await getBlockRecursive(settings, info, elements);
 
-	log.info('===== end getMaxTPS ', settings);
+	// log.info('===== end getMaxTPS ', settings);
 	setTimeout(getMaxTps, config.MAX_TPS_TIME_UPDATE);
 };
 
