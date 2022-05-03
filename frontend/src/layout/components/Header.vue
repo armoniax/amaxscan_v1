@@ -5,7 +5,7 @@
             img.object-contain.lg_w-24.w-16(src='@/assets/images/logo.png', style='image-rendering: -webkit-optimize-contrast')
         .flex-1.flex.space-x-8.items-center.justify-end.text-sm.font-semibold
             .w-full.flex.lg_w-96.h-8.bg-gray-eee.rounded-full.px-2.items-center
-                input.pl-4.bg-transparent.w-full.h-full.outline-none.text-xs(placeholder='Search by Account / Public Key / Txn Hash / Block', v-model='keyword', @keyup='changeInput')
+                input.pl-4.bg-transparent.w-full.h-full.outline-none.text-xs(placeholder='Search by Block # / Account / Public Key / TxID', v-model='keyword', @keyup='changeInput')
                 i.text-xl.fal.fa-search.text-gray-ca.mr-1.cursor-pointer(@click='search()')
                 //- span.btn.btn-xs.rounded-full(:class='keyword ? "cursor-pointer" : "opacity-50 cursor-not-allowed"', @click='search') Search
             .space-x-4.hidden.lg_block
