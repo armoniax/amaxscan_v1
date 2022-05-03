@@ -366,8 +366,8 @@ export default defineComponent({
             end = state.currentPage * state.pageSize;
             state.showDataSource = state.dataSource.slice(start, end);
 
-            console.log('state.dataSource：-----', state.dataSource);
-            console.log('state.showDataSource：-----', state.showDataSource);
+            //- console.log('state.dataSource：-----', state.dataSource);
+            //- console.log('state.showDataSource：-----', state.showDataSource);
         };
 
         const resetData = () => {
