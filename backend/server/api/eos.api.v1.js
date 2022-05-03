@@ -475,7 +475,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	});
 
     /*
-	* router - get_account
+	* router - get_key_accounts
 	* params - name
 	*/
 	router.get('/api/v1/get_key_accounts/:key', (req, res) => {
@@ -536,23 +536,25 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	* params - name
 	*/
 	router.get('/api/v1/get_account/:name', (req, res) => {
-	   	 global.eos.getAccount({
+		if (req.params.name && req.params.name.length <= 12) {
+	   	 	global.eos.getAccount({
 	   	 		account_name: req.params.name
 	   	 	})
 	   	 	.then(result => {
 	   	 		res.json(result);
 	   	 	})
 	   	 	.catch(err => {
-	   	 		log.error(err);
+	   	 		// log.error(err);
 	   	 		res.status(501).end();
 	   	 	});
+		}
 	});
 
 	//============ END of Account API
 
 	//============ Prod API
 	/*
-	* router - get_account
+	* router - get_currency_stats
 	* params - name
 	*/
 	router.get('/api/v1/get_currency_stats/:code/:symbol', (req, res) => {
