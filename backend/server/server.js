@@ -80,6 +80,8 @@ server.on('listening', onListening);
 
 //========= socket io connection
 const io  = require('socket.io').listen(server);
+io.set('log level', 0); //error log only
+
 require(`./api/eos.api.${config.apiV}.socket`)(io, mongoMain, metrics);
 
 if (config.CRON) {
