@@ -223,11 +223,11 @@ export default defineComponent({
         };
 
         // pending状态
-        //- const getAllTokens = (account: string) => {
-        //-     GET_ACCOUNT_TOKENS(account).then((res: any) => {
-        //-         console.log('GET_ACCOUNT_TOKENS-----', res);
-        //-     });
-        //- };
+        const getAllTokens = (account: string) => {
+            GET_ACCOUNT_TOKENS(account).then((res: any) => {
+                console.log('GET_ACCOUNT_TOKENS-----', res);
+            });
+        };
 
         const getBalance = (account: string) => {
             GET_CURRENCY_BALANCE({ tokenContract: frontConfig.tokenContract, account, tokenSymbol: frontConfig.coin }).then((res: any) => {
@@ -396,7 +396,7 @@ export default defineComponent({
             resetData();
             getBlockData(account.value);
             getControlledAccounts(account.value);
-            getAllTokens(account.value);
+            //- getAllTokens(account.value);
         };
 
         onInit();
