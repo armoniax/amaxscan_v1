@@ -60,7 +60,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 			},
 			account: (cb) =>{
 				log.info("search account_name");
-				if (isNaN(text) && text.length <= 12) {	//Account name length
+				if (text.length <= 12) {	//Account name length
 					log.error("search account_name: " + text);
 					global.eos.getAccount({ account_name: text })
 						.then(result => {
@@ -84,16 +84,6 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 						});
 				}
 			}
-			/*,
-			contract: (cb) =>{
-				global.eos.getCode({ json: true, account_name: text })
-	   	 			.then(result => {
-	   	 				cb(null, result)
-	   	 			})
-	   	 			.catch(err => {
-	   	 				cb(null, null);
-	   	 			});
-			}*/
 		}, (err, result) => {
 			if (err){
 				log.error(err);
