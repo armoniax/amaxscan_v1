@@ -215,7 +215,7 @@ export default defineComponent({
 
                 getBalance(account);
                 getActions(state.mainData.account_name, state.position); // Table Actions info
-                getAccountAction(state.mainData.account_name, state.mainData.action_name); //TODO: is action_name definition correct?
+                //- getActionsByName(state.mainData.account_name, state.mainData.action_name); //TODO: is action_name definition correct?
                 getCode(state.mainData.account_name);
 
                 console.log('getAccount-----', res);
@@ -223,11 +223,11 @@ export default defineComponent({
         };
 
         // pending状态
-        const getAllTokens = (account: string) => {
-            GET_ACCOUNT_TOKENS(account).then((res: any) => {
-                console.log('GET_ACCOUNT_TOKENS-----', res);
-            });
-        };
+        //- const getAllTokens = (account: string) => {
+        //-     GET_ACCOUNT_TOKENS(account).then((res: any) => {
+        //-         console.log('GET_ACCOUNT_TOKENS-----', res);
+        //-     });
+        //- };
 
         const getBalance = (account: string) => {
             GET_CURRENCY_BALANCE({ tokenContract: frontConfig.tokenContract, account, tokenSymbol: frontConfig.coin }).then((res: any) => {
@@ -304,10 +304,11 @@ export default defineComponent({
             return result;
         };
 
-        const getAccountAction = (account: string, actionName: string) => {
+        const getActionsByName = (account: string, actionName: string) => {
+            console.log('GET_ACTIONS_NAME by name:', actionName);
             GET_ACTIONS_NAME(account, actionName).then((res: any) => {
                 //- state.creator = res.actions[0];
-                console.log('getAccountAction-----', res);
+                console.log('GET_ACTIONS_NAME-----', res);
             });
         };
 
