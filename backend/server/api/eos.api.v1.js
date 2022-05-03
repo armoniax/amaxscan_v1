@@ -538,7 +538,9 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	* params - name
 	*/
 	router.get('/api/v1/get_account/:name', (req, res) => {
-		if (req.params.name && req.params.name.length <= 12) {
+		if (req.params.name && 
+			req.params.name.length <= 12 &&
+			req.params.name != 'undefined') {
 	   	 	global.eos.getAccount({
 	   	 		account_name: req.params.name
 	   	 	})
