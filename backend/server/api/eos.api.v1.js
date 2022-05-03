@@ -42,6 +42,8 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 							log.error(err);
 							cb(null, null);
 						});
+				} else {
+					cb(null, null);
 				}
 			},
 			transaction: (cb) =>{
@@ -55,6 +57,8 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 						.catch(err => {
 							cb(null, null);
 						});
+				} else {
+					cb(null, null);
 				}
 			},
 			account: (cb) =>{
@@ -68,6 +72,8 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 						.catch(err => {
 							cb(null, null);
 						});
+				} else {
+					cb(null, null);
 				}
 			},
 			key: (cb) => {
@@ -81,6 +87,8 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 						.catch(err => {
 							cb(null, null);
 						});
+				} else {
+					cb(null, null);
 				}
 			}
 		}, (err, result) => {
