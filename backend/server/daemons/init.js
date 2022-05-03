@@ -33,7 +33,7 @@ module.exports = () => {
 
         if (!config.CUSTOM_GLOBA_STATS) {
             startAccountsDaemon();
-            startGlobalStatAnalytics();
+        //     startGlobalStatAnalytics();
 
             cron.schedule('*/10 * * * *', () => {
                 if (ACCOUNTS_PROCESS === 0){
@@ -41,12 +41,12 @@ module.exports = () => {
                   startAccountsDaemon();
                 }
             });
-            cron.schedule('*/1 * * * *', () => {
-               if (ACCOUNTS_STAT_PROCESS === 0){
-                  console.log('====== new global stat daemon');
-                  startGlobalStatAnalytics();
-                }
-            });
+        //     cron.schedule('*/1 * * * *', () => {
+        //        if (ACCOUNTS_STAT_PROCESS === 0){
+        //           console.log('====== new global stat daemon');
+        //           startGlobalStatAnalytics();
+        //         }
+        //     });
         }
         
         if (config.TPS_ENABLE){
