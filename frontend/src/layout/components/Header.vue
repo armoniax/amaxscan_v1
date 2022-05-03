@@ -38,17 +38,22 @@ export default defineComponent({
                 // console.log(res);
                 if (res.block && !isNaN(+keyword.value)) {
                     router.push({ path: `/block/${res.block.block_num}` });
+
                 } else if (res.transaction) {
                     // router.push({ path: '/transaction', query: { tx: res.transaction.id } });
                     router.push({ path: `/transaction/${res.transaction.id}`});
+
                 } else if (res.account) {
                     router.push({ path: `/account/${res.account.account_name}` });
+
                 } else if (res.key) {
                     // router.push({ path: '/pubkey', query: { pubkey: keyword.value } });
                     router.push({ path: `/pubkey/${keyword.value}`});
+
                 } else {
                     router.push({ path: '/notfound' });
                 }
+                
                 keyword.value = '';
             });
         };

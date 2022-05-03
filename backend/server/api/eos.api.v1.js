@@ -30,42 +30,51 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 
 		async.parallel({
 			block: (cb) =>{
-        		global.eos.getBlock({ block_num_or_id: text })
-	   			 	.then(result => {
-	   			 		cb(null, result);
-	   			 	})
-	   			 	.catch(err => {
-	   			 		log.error(err);
-	   			 		cb(null, null);
-	   			 	});
+				if (!isNaN(text)) {	//text is a block number
+        			global.eos.getBlock({ block_num_or_id: text })
+						.then(result => {
+							cb(null, result);
+						})
+						.catch(err => {
+							log.error(err);
+							cb(null, null);
+						});
+				}
 			},
 			transaction: (cb) =>{
-				global.eos.getTransaction({ id: text })
-	   			 	.then(result => {
-	   			 		cb(null, result);
-	   			 	})
-	   			 	.catch(err => {
-	   			 		cb(null, null);
-	   			 	});
+				if (text.length == 64) {	//TxID length
+					global.eos.getTransaction({ id: text })
+						.then(result => {
+							cb(null, result);
+						})
+						.catch(err => {
+							cb(null, null);
+						});
+				}
 			},
 			account: (cb) =>{
-				global.eos.getAccount({ account_name: text })
-	   			 	.then(result => {
-	   			 		cb(null, result);
-	   			 	})
-	   			 	.catch(err => {
-	   			 		cb(null, null);
-	   			 	});
+				if (text.length <= 12) {	//Account name length
+					global.eos.getAccount({ account_name: text })
+						.then(result => {
+							cb(null, result);
+						})
+						.catch(err => {
+							cb(null, null);
+						});
+				}
 			},
 			key: (cb) => {
-				global.eos.getKeyAccounts({ public_key: text })
-	   	 			.then(result => {
-	   	 				cb(null, result);
-	   	 			})
-	   	 			.catch(err => {
-	   	 				cb(null, null);
-	   	 			});
-			},
+				if (text.length == 52) {	//PubKey length
+					global.eos.getKeyAccounts({ public_key: text })
+						.then(result => {
+							cb(null, result);
+						})
+						.catch(err => {
+							cb(null, null);
+						});
+				}
+			}
+			/*,
 			contract: (cb) =>{
 				global.eos.getCode({ json: true, account_name: text })
 	   	 			.then(result => {
@@ -74,7 +83,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	   	 			.catch(err => {
 	   	 				cb(null, null);
 	   	 			});
-			}
+			}*/
 		}, (err, result) => {
 			if (err){
 				log.error(err);
