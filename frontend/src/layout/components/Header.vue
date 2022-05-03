@@ -35,7 +35,7 @@ export default defineComponent({
         let keyword = ref('');
         const search = () => {
             SEARCH_BY(keyword.value).then((res: any) => {
-                console.log(res);
+                // console.log(res);
 
                 if (res.block && !isNaN(+keyword.value)) {
                     router.push({ path: `/block/${res.block.block_num}` });
