@@ -33,7 +33,7 @@ async function getAccountsAnalytics (){
 				});
 			}, (err) => {
 				if (err){
-					log.error(err);
+					// log.error(err);
 				}
 				log.info('===== end analytics function, cursor', usersMaxSkip);
 				usersMaxSkip += accounts.length;

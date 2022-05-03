@@ -570,7 +570,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	   	 		res.json(result);
 	   	 	})
 	   	 	.catch(err => {
-	   	 		log.error(err);
+	   	 		// log.error(err);
 	   	 		res.status(501).end();
 	   	 	});
 	});
