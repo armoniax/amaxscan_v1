@@ -1,9 +1,15 @@
 <template lang="pug">
 .py-2.space-y-4.analytics.text-sm.font-normal.px-2.lg_px-0
+    .analytics_token
+        span Token:
+        router-link(:class={'active': token === 'amax'})(to='/analytics/amax') AMAX
+        router-link(:class={'active': token === 'cnyd'})(to='/analytics/cnyd') CNYD
+        router-link(:class={'active': token === 'apl'})(to='/analytics/apl') APL
+    
     .flex.flex-col.lg_flex-row
         .flex-1
             .h-8.text-2xl.font-bold.mb-4 Top 50 accounts
-            v-chart.w-full.h-96.bg-gray-fb(:option='option', ref='chart')
+            v-chart.w-full.h-96.bg-gray-fb.analytics_chart(:option='option', ref='chart')
         .flex-1.lg_w-80.lg_ml-5.lg_flex-none.ml-0.mt-6.lg_mt-0.mb-4
             .h8.text-lg.font-bold Legend
 
@@ -22,30 +28,31 @@
                 tr
                     th #
                     th Name
-                    th Unstaked
-                    th Staked
-                    th.text-center Total Balance
+                    th AMAX
+                    th CNYD
+                    th APL
             tbody
-                tr(v-for='(element, i) in dataSource', :key='i')
+                tr(v-for='(element, i) in tableList', :key='i')
                     th {{ i + 1 }}
                     th
-                        span.text-green.cursor-pointer(@click='$router.push(`/account/${element?.account_name}`)') {{ element?.account_name }}
-                    th {{ element?.unstaked?.toLocaleString() }} {{ frontConfig?.coin }}
-                    th {{ element?.staked?.toLocaleString() }} {{ frontConfig?.coin }}
-                    th.text-center {{ element?.balance_eos?.toLocaleString() }} {{ frontConfig?.coin }}
+                        span.text-green.cursor-pointer(@click='$router.push(`/account/${element?.name}`)') {{ element?.name }}
+                    th {{ element?.amax }}
+                    th {{ element?.cnyd }}
+                    th {{ element?.apl }}
 
     .flex.justify-end.items-center.text-gray-666.py-3
-        span Items per pag:
-        select.outline-none.h-6.w-10.border.rounded.mx-2.border-gray-f4.cursor-pointer
-            option(v-for='i in 10', :key='i') {{ i }}
-        span 1 - 40 of 40
-        span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center &lt;
-        span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center >
+        span(style="margin-right: 1.5rem;") Current Page: {{ pageIndex }}
+        //- select.outline-none.h-6.w-10.border.rounded.mx-2.border-gray-f4.cursor-pointer
+        //-     option(v-for='i in 10', :key='i') {{ i }}
+        //- span 1 - 40 of 40
+        span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click="pageIndex !== 1 && getTableList(pageIndex-1)") &lt;
+        span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click="(tableList.length === 20 ) && getTableList(pageIndex+1)") >
 </template>
 
 <script lang="ts">
-import { compile, computed, defineComponent, onMounted, reactive, ref } from 'vue';
+import { compile, computed, defineComponent, onMounted, reactive, ref, watch, toRefs } from 'vue';
 import { use } from 'echarts/core';
+import { useRoute } from 'vue-router';
 import { CanvasRenderer } from 'echarts/renderers';
 import { PieChart } from 'echarts/charts';
 import { GridComponent } from 'echarts/components';
@@ -73,6 +80,8 @@ export default defineComponent({
         const dataSource = ref([]);
         const mainData = ref([]);
         const pieChart = ref();
+        const route = useRoute();
+        const token = computed(() => route.params.token as string);
 
         const option = computed(() => {
             return {
@@ -92,101 +101,95 @@ export default defineComponent({
             };
         });
         const state = reactive({
-            spinner: false,
+            spinner: true,
+            tableList: [],
+            pageIndex: 1,
+        });
+
+
+        watch(route, (newVlaue, oldValue) => {
+            onInit();
         });
 
         const getAccounts = () => {
-            state.spinner = true;
-            Ax.get(`/v1/get_accounts_analytics/50`)
+            Ax.get(`http://172.20.142.169:18092/account/getTop/${token.value}/10`)
                 .then((res: any) => {
-                    // mainData.value = res;
-
-                    pieChart.value = createPieChart(res);
-                    // let ELEMENT_DATA: Element[] = this.mainData;
-
-                    dataSource.value = res;
-
-                    state.spinner = false;
+                    pieChart.value = createPieChart(res.data, token.value);
+                    dataSource.value = res.data;
                 })
-                .catch(error => {
-                    console.error(error);
-                    state.spinner = false;
-                });
         };
 
-        const createPieChart = data => {
+        const createPieChart = (data, token) => {
             if (!data) {
                 return;
             }
             let result = data.map(elem => {
-                return { name: elem.account_name, value: Math.floor(elem.unstaked) };
+                let value;
+                switch(token){
+                    case 'amax': value = Math.floor(elem.amax); break;
+                    case 'cnyd': value = Math.floor(elem.cnyd); break;
+                    default: value = Math.floor(elem.apl); break;
+                }
+                return { name: elem.name, value };
             });
             //result.shift();
             return result;
         };
 
-        const getChart = () => {
-            Ax.post(`/v1/get_trx_actions`, { date: +new Date() - 7 * 24 * 60 * 60 * 1000 })
+        const getTableList = (pageIndex = 1) => {
+            state.pageIndex = pageIndex;
+            Ax.get(`http://172.20.142.169:18092/account/listbyceator?token=${token.value}&pageIndex=${pageIndex}&pageSize=20`)
                 .then((res: any) => {
-                    createChart(res);
+                    state.tableList = res.data;
                 })
-                .catch(err => {
-                    console.error(err);
-                });
-        };
-
-        const createChart = data => {
-            if (!data) {
-                return console.log('========= data error chart', data);
-            }
-            const trx = [];
-            const actions = [];
-            data.forEach(elem => {
-                trx.push({ name: new Date(`${elem._id.year}/${elem._id.month}/${elem._id.dayOfMonth}`), value: elem.transactions[elem.transactions.length - 1] - elem.transactions[0] });
-                actions.push({ name: new Date(`${elem._id.year}/${elem._id.month}/${elem._id.dayOfMonth}`), value: elem.actions[elem.actions.length - 1] - elem.actions[0] });
-            });
-            console.log(trx, actions);
-        };
-
-        const getGlobal = () => {
-            Ax.get(`/v1/get_table_rows/amax/amax/global/10`)
-                .then((res: any) => {
-                    if (!res || !res.rows) {
-                        return console.error('data error', res);
-                    }
-                    const globalStat = res.rows[0];
-                })
-                .catch(err => {
-                    console.error(err);
-                });
-        };
+        }
 
         const onInit = () => {
             getAccounts();
-            getGlobal();
-            getChart();
+            getTableList();
         };
 
         onInit();
 
         return {
+            ...toRefs(state),
+            token,
             chart,
             option,
             pieChart,
-            // Legends,
             dataSource,
             state,
             frontConfig,
+            getTableList
         };
     },
 });
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .analytics {
     th {
         @apply font-normal text-sm text-gray-666;
+    }
+    .analytics_token{
+        font-size: 1.1rem;
+        margin-top: .5rem;
+        
+        span{
+            margin-right: 2rem;
+            font-weight: 700;
+        }
+        a{
+            font-weight: 500;
+            margin-right: 1rem;
+        }
+        .active{
+            color: rgb(48, 168, 115);
+        }
+    }
+    .analytics_chart{
+        height: 27rem;
     }
 }
 </style>

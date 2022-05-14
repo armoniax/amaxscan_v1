@@ -57,7 +57,7 @@ const router = createRouter({
             ],
         },
         {
-            path: '/analytics',
+            path: '/analytics/:token',
             component: Layout,
             children: [
                 {
