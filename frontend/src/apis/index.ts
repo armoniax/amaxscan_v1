@@ -7,6 +7,7 @@ export const Ax = axios.create({
 });
 
 console.log('AmaxExpSrv_Ver: ---->>>>>>> v0.5.31', process.env.NODE_ENV)
+console.log(import.meta.env)
 
 Ax.interceptors.response.use(response => {
     return response.data;

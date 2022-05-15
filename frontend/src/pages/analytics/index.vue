@@ -49,6 +49,7 @@
         span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click="(tableList.length === 20 ) && getTableList(pageIndex+1)") >
 </template>
 
+
 <script lang="ts">
 import { compile, computed, defineComponent, onMounted, reactive, ref, watch, toRefs } from 'vue';
 import { use } from 'echarts/core';
@@ -62,6 +63,7 @@ import { environment } from '@/environments/environment';
 
 use([CanvasRenderer, PieChart, GridComponent]);
 
+const vite_api = (window as any).env.VITE_API;
 export default defineComponent({
     components: { VChart },
     setup() {
@@ -112,7 +114,7 @@ export default defineComponent({
         });
 
         const getAccounts = () => {
-            Ax.get(`http://172.20.142.169:18092/account/getTop/${token.value}/10`)
+            Ax.get(`${vite_api}/api/stats/account/getTop/${token.value}/10`)
                 .then((res: any) => {
                     pieChart.value = createPieChart(res.data, token.value);
                     dataSource.value = res.data;
@@ -138,7 +140,7 @@ export default defineComponent({
 
         const getTableList = (pageIndex = 1) => {
             state.pageIndex = pageIndex;
-            Ax.get(`http://172.20.142.169:18092/account/listbyceator?token=${token.value}&pageIndex=${pageIndex}&pageSize=20`)
+            Ax.get(`${vite_api}/api/stats/account/listbyceator?creator=${token.value}&pageIndex=${pageIndex}&pageSize=20`)
                 .then((res: any) => {
                     state.tableList = res.data;
                 })
