@@ -11,7 +11,7 @@ config.toInt = 100000000; //precison: 8
 config.coin = 'AMAX';
 // console.log("process.env.MONGO_URI: ===========>>>>>>>>>>", process.env)
 
-config.MONGO_URI = process.env.MONGO_URI || 'mongodb://amax:amax123456@dds-gs54d21f519cf2d41.mongodb.singapore.rds.aliyuncs.com:3717/AMAXExpProd';
+config.MONGO_URI = process.env.MONGO_URI || 'mongodb://deex:deex123456@dds-gs54d21f519cf2d41.mongodb.singapore.rds.aliyuncs.com:3717/AMAXExpProd';
 // config.MONGO_URI = process.env.MONGO_URI || 'mongodb://deex:deex123456@139.224.250.244:27017/AMAXExp';
 config.MONGO_OPTIONS = {
     socketTimeoutMS: 30000,
