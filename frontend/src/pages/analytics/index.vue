@@ -1,7 +1,7 @@
 <template lang="pug">
 .py-2.space-y-4.analytics.text-sm.font-normal.px-2.lg_px-0
     .analytics_token
-        span Token:
+        //- span Token:
         router-link(v-for='item in coinList',:class='token === item.coin ? "active" : ""' :to="'/analytics/'+ item.coin", ) {{item.coin}}
         //- router-link(:class={'active': token === 'cnyd'})(to='/analytics/cnyd') CNYD  :class={'active': token === item.coin}, 
         //- router-link(:class={'active': token === 'apl'})(to='/analytics/apl') APL
@@ -90,11 +90,11 @@ export default defineComponent({
                         height: 400,
                         name: 'Top 50 accounts',
                         type: 'pie',
-                        center: ['50%', '50%'],
-                        roseType: 'area',
-                        itemStyle: {
-                            borderRadius: 8,
-                        },
+                        // center: ['50%', '50%'],
+                        // roseType: 'area',
+                        // itemStyle: {
+                        //     borderRadius: 8,
+                        // },
                         data: pieChart.value,
                     },
                 ],
