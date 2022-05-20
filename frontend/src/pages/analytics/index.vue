@@ -2,13 +2,13 @@
 .py-2.space-y-4.analytics.text-sm.font-normal.px-2.lg_px-0
     .analytics_token
         span Token:
-        router-link(:class={'active': token === 'amax'})(to='/analytics/amax') AMAX
-        router-link(:class={'active': token === 'cnyd'})(to='/analytics/cnyd') CNYD
-        router-link(:class={'active': token === 'apl'})(to='/analytics/apl') APL
+        router-link(v-for='item in coinList',:class='token === item.coin ? "active" : ""' :to="'/analytics/'+ item.coin", ) {{item.coin}}
+        //- router-link(:class={'active': token === 'cnyd'})(to='/analytics/cnyd') CNYD  :class={'active': token === item.coin}, 
+        //- router-link(:class={'active': token === 'apl'})(to='/analytics/apl') APL
     
     .flex.flex-col.lg_flex-row
         .flex-1
-            .h-8.text-2xl.font-bold.mb-4 Top 50 accounts
+            .h-8.text-2xl.font-bold.mb-4 Top 10 accounts
             v-chart.w-full.h-96.bg-gray-fb.analytics_chart(:option='option', ref='chart')
         .flex-1.lg_w-80.lg_ml-5.lg_flex-none.ml-0.mt-6.lg_mt-0.mb-4
             .h8.text-lg.font-bold Legend
@@ -28,24 +28,22 @@
                 tr
                     th #
                     th Name
-                    th AMAX
-                    th CNYD
-                    th APL
+                    th(style="text-align: right;") Balance({{currentCoinInfo.coin}})
+                    
             tbody
                 tr(v-for='(element, i) in tableList', :key='i')
                     th {{ i + 1 }}
                     th
-                        span.text-green.cursor-pointer(@click='$router.push(`/account/${element?.name}`)') {{ element?.name }}
-                    th {{ element?.amax }}
-                    th {{ element?.cnyd }}
-                    th {{ element?.apl }}
+                        span.text-green.cursor-pointer(@click='$router.push(`/account/${element?.scope}`)') {{ element?.scope }}
+                    th(style="text-align: right;") {{ toFixed(element.balance) }}
+                    
 
     .flex.justify-end.items-center.text-gray-666.py-3
-        span(style="margin-right: 1.5rem;") Current Page: {{ pageIndex }}
+        span(style="margin-right: 1.5rem;") Current Page: {{ pageIndex + 1 }}
         //- select.outline-none.h-6.w-10.border.rounded.mx-2.border-gray-f4.cursor-pointer
         //-     option(v-for='i in 10', :key='i') {{ i }}
         //- span 1 - 40 of 40
-        span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click="pageIndex !== 1 && getTableList(pageIndex-1)") &lt;
+        span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click="pageIndex !== 0 && getTableList(pageIndex-1)") &lt;
         span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click="(tableList.length === 20 ) && getTableList(pageIndex+1)") >
 </template>
 
@@ -60,6 +58,7 @@ import { GridComponent } from 'echarts/components';
 import VChart from 'vue-echarts';
 import { Ax } from '@/apis';
 import { environment } from '@/environments/environment';
+import { $toFixed } from '@/utils/met';
 
 use([CanvasRenderer, PieChart, GridComponent]);
 
@@ -80,10 +79,9 @@ export default defineComponent({
         //     { value: 18, name: 'rose 8' },
         // ]);
         const dataSource = ref([]);
-        const mainData = ref([]);
         const pieChart = ref();
         const route = useRoute();
-        const token = computed(() => route.params.token as string);
+        const token = computed(() => (route.params.token as string).toUpperCase());
 
         const option = computed(() => {
             return {
@@ -105,7 +103,14 @@ export default defineComponent({
         const state = reactive({
             spinner: true,
             tableList: [],
-            pageIndex: 1,
+            coinList: [],
+            currentCoinInfo: {
+                coin: '',
+                code: '',
+                precision: 1
+            },
+            pageIndex: 0,
+
         });
 
 
@@ -114,10 +119,10 @@ export default defineComponent({
         });
 
         const getAccounts = () => {
-            Ax.get(`${vite_api}/api/stats/account/getTop/${token.value}/10`)
+            Ax.get(`${vite_api}/api/stats/account/list?coin=${state.currentCoinInfo.coin}&code=${state.currentCoinInfo.code}&pageIndex=0&pageSize=10`)
                 .then((res: any) => {
-                    pieChart.value = createPieChart(res.data, token.value);
-                    dataSource.value = res.data;
+                    pieChart.value = createPieChart(res.data.content, token.value);
+                    dataSource.value = res.data.content;
                 })
         };
 
@@ -126,29 +131,47 @@ export default defineComponent({
                 return;
             }
             let result = data.map(elem => {
-                let value;
-                switch(token){
-                    case 'amax': value = Math.floor(elem.amax); break;
-                    case 'cnyd': value = Math.floor(elem.cnyd); break;
-                    default: value = Math.floor(elem.apl); break;
-                }
-                return { name: elem.name, value };
+                let value = toFixed(elem.balance);
+                // switch(token){
+                //     case 'amax': value = Math.floor(elem.amax); break;
+                //     case 'cnyd': value = Math.floor(elem.cnyd); break;
+                //     default: value = Math.floor(elem.apl); break;
+                // }
+                return { name: elem.scope, value };
             });
             //result.shift();
             return result;
         };
 
-        const getTableList = (pageIndex = 1) => {
+        const getTableList = (pageIndex = 0) => {
             state.pageIndex = pageIndex;
-            Ax.get(`${vite_api}/api/stats/account/listbyceator?creator=${token.value}&pageIndex=${pageIndex}&pageSize=20`)
+            console.log('state.currentCoinInfo', state.currentCoinInfo)
+            Ax.get(`${vite_api}/api/stats/account/list?coin=${state.currentCoinInfo.coin}&code=${state.currentCoinInfo.code}&pageIndex=${pageIndex}&pageSize=20`)
+            // Ax.get(`${vite_api}/api/stats/account/listbyceator?creator=${state.currentCoinInfo.coin.toLowerCase()}&pageIndex=${pageIndex}&pageSize=20`)
                 .then((res: any) => {
-                    state.tableList = res.data;
+                    state.tableList = res.data.content;
                 })
         }
 
+        const getCoinList = () => {
+            Ax.get(`${vite_api}/api/stats/coin/list`)
+                .then((res: any) => {
+                    state.coinList = res.data;
+                    state.currentCoinInfo = res.data.find(ele => ele.coin === token.value);
+                    getAccounts();
+                    getTableList();
+                })
+        }
+
+
         const onInit = () => {
-            getAccounts();
-            getTableList();
+            getCoinList();
+           
+            // getTableList();
+        };
+
+        const toFixed = (value) => {
+            return $toFixed(value, state.currentCoinInfo.precision)
         };
 
         onInit();
@@ -156,6 +179,7 @@ export default defineComponent({
         return {
             ...toRefs(state),
             token,
+            toFixed,
             chart,
             option,
             pieChart,

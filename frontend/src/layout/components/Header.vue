@@ -9,7 +9,7 @@
                 i.text-xl.fal.fa-search.text-gray-ca.mr-1.cursor-pointer(@click='search()')
                 //- span.btn.btn-xs.rounded-full(:class='keyword ? "cursor-pointer" : "opacity-50 cursor-not-allowed"', @click='search') Search
             .space-x-4.hidden.lg_block
-                router-link(to='/analytics/amax') ANALYTICS
+                router-link(to='/analytics/AMAX') ANALYTICS
                 router-link(to='/ram') RAM
                 router-link(to='/producers') PRODUCERS
     .lg_hidden.flex.pt-4.space-x-4.flex-nowrap.overflow-x-scroll
