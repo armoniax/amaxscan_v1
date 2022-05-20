@@ -18,7 +18,7 @@
                     .flex.items-center
                         .w-4.h-4.rounded-sm.bg-green
                         span.ml-2(@click='$router.push(`/account/${item.name}`)') {{ item.name }}
-                    span {{ item.value }}
+                    span {{ numFormat(item.value) }}
             .divide-y.divide-gray-f4(v-else)
                 .py-4.text-gray-999 None yet
 
@@ -35,7 +35,7 @@
                     th {{ i + 1 }}
                     th
                         span.text-green.cursor-pointer(@click='$router.push(`/account/${element?.scope}`)') {{ element?.scope }}
-                    th(style="text-align: right;") {{ toFixed(element.balance) }}
+                    th(style="text-align: right;") {{ numFormat(toFixed(element.balance)) }}
                     
 
     .flex.justify-end.items-center.text-gray-666.py-3
@@ -163,15 +163,16 @@ export default defineComponent({
                 })
         }
 
-
         const onInit = () => {
             getCoinList();
-           
             // getTableList();
         };
 
         const toFixed = (value) => {
-            return $numFormat($toFixed(value, state.currentCoinInfo.precision), true)
+            return $toFixed(value, state.currentCoinInfo.precision)
+        };
+        const numFormat = (value) => {
+            return $numFormat(value, true)
         };
 
         onInit();
@@ -180,6 +181,7 @@ export default defineComponent({
             ...toRefs(state),
             token,
             toFixed,
+            numFormat,
             chart,
             option,
             pieChart,
