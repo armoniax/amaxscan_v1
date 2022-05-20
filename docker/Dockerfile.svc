@@ -7,8 +7,10 @@ COPY ./backend /opt/expsvr/
 WORKDIR /opt/expsvr/server
 
 
-RUN npm update -g && npm install -g pm2@3.5.1
+
+RUN npm update -g
 RUN npm install --legacy-peer-deps
+RUN npm install -g pm2@3.5.1
 RUN npm install -g express
 RUN npm install -g
 RUN npm install -g express --save
