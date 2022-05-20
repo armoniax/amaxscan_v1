@@ -58,7 +58,7 @@ import { GridComponent } from 'echarts/components';
 import VChart from 'vue-echarts';
 import { Ax } from '@/apis';
 import { environment } from '@/environments/environment';
-import { $toFixed } from '@/utils/met';
+import { $toFixed, $numFormat } from '@/utils/met';
 
 use([CanvasRenderer, PieChart, GridComponent]);
 
@@ -171,7 +171,7 @@ export default defineComponent({
         };
 
         const toFixed = (value) => {
-            return $toFixed(value, state.currentCoinInfo.precision)
+            return $numFormat($toFixed(value, state.currentCoinInfo.precision), true)
         };
 
         onInit();
