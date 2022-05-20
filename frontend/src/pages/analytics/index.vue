@@ -90,11 +90,11 @@ export default defineComponent({
                         height: 400,
                         name: 'Top 50 accounts',
                         type: 'pie',
-                        // center: ['50%', '50%'],
+                        center: ['50%', '50%'],
                         // roseType: 'area',
-                        // itemStyle: {
-                        //     borderRadius: 8,
-                        // },
+                        itemStyle: {
+                            borderRadius: 8,
+                        },
                         data: pieChart.value,
                     },
                 ],
