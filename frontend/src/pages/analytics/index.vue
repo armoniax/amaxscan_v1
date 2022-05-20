@@ -17,7 +17,7 @@
                 .flex.p-3.items-center.justify-between.cursor-pointer.hover_bg-gray.transition.duration-300(v-for='(item, index) in pieChart', :key='index')
                     .flex.items-center
                         .w-4.h-4.rounded-sm.bg-green
-                        span.ml-2 {{ item.name }}
+                        span.ml-2(@click='$router.push(`/account/${item.name}`)') {{ item.name }}
                     span {{ item.value }}
             .divide-y.divide-gray-f4(v-else)
                 .py-4.text-gray-999 None yet
