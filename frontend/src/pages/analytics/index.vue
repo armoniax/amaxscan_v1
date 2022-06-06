@@ -3,9 +3,9 @@
     .analytics_token
         //- span Token:
         router-link(v-for='item in coinList',:class='token === item.coin ? "active" : ""' :to="'/analytics/'+ item.coin", ) {{item.coin}}
-        //- router-link(:class={'active': token === 'cnyd'})(to='/analytics/cnyd') CNYD  :class={'active': token === item.coin}, 
+        //- router-link(:class={'active': token === 'cnyd'})(to='/analytics/cnyd') CNYD  :class={'active': token === item.coin},
         //- router-link(:class={'active': token === 'apl'})(to='/analytics/apl') APL
-    
+
     .flex.flex-col.lg_flex-row
         .flex-1
             .h-8.text-2xl.font-bold.mb-4 Top 10 accounts
@@ -29,14 +29,14 @@
                     th #
                     th Name
                     th(style="text-align: right;") Balance({{currentCoinInfo.coin}})
-                    
+
             tbody
                 tr(v-for='(element, i) in tableList', :key='i')
                     th {{ i + 1 }}
                     th
                         span.text-green.cursor-pointer(@click='$router.push(`/account/${element?.scope}`)') {{ element?.scope }}
                     th(style="text-align: right;") {{ numFormat(toFixed(element.balance)) }}
-                    
+
 
     .flex.justify-end.items-center.text-gray-666.py-3
         span(style="margin-right: 1.5rem;") Current Page: {{ pageIndex + 1 }}
@@ -46,7 +46,6 @@
         span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click="pageIndex !== 0 && getTableList(pageIndex-1)") &lt;
         span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click="(tableList.length === 20 ) && getTableList(pageIndex+1)") >
 </template>
-
 
 <script lang="ts">
 import { compile, computed, defineComponent, onMounted, reactive, ref, watch, toRefs } from 'vue';
@@ -107,23 +106,20 @@ export default defineComponent({
             currentCoinInfo: {
                 coin: '',
                 code: '',
-                precision: 1
+                precision: 1,
             },
             pageIndex: 0,
-
         });
-
 
         watch(route, (newVlaue, oldValue) => {
             onInit();
         });
 
         const getAccounts = () => {
-            Ax.get(`${vite_api}/api/stats/account/list?coin=${state.currentCoinInfo.coin}&code=${state.currentCoinInfo.code}&pageIndex=0&pageSize=10`)
-                .then((res: any) => {
-                    pieChart.value = createPieChart(res.data.content, token.value);
-                    dataSource.value = res.data.content;
-                })
+            Ax.get(`/stats/account/list?coin=${state.currentCoinInfo.coin}&code=${state.currentCoinInfo.code}&pageIndex=0&pageSize=10`).then((res: any) => {
+                pieChart.value = createPieChart(res.data?.content, token.value);
+                dataSource.value = res.data.content;
+            });
         };
 
         const createPieChart = (data, token) => {
@@ -145,34 +141,33 @@ export default defineComponent({
 
         const getTableList = (pageIndex = 0) => {
             state.pageIndex = pageIndex;
-            console.log('state.currentCoinInfo', state.currentCoinInfo)
-            Ax.get(`${vite_api}/api/stats/account/list?coin=${state.currentCoinInfo.coin}&code=${state.currentCoinInfo.code}&pageIndex=${pageIndex}&pageSize=20`)
-            // Ax.get(`${vite_api}/api/stats/account/listbyceator?creator=${state.currentCoinInfo.coin.toLowerCase()}&pageIndex=${pageIndex}&pageSize=20`)
+            console.log('state.currentCoinInfo', state.currentCoinInfo);
+            Ax.get(`/stats/account/list?coin=${state.currentCoinInfo.coin}&code=${state.currentCoinInfo.code}&pageIndex=${pageIndex}&pageSize=20`)
+                // Ax.get(`/stats/account/listbyceator?creator=${state.currentCoinInfo.coin.toLowerCase()}&pageIndex=${pageIndex}&pageSize=20`)
                 .then((res: any) => {
                     state.tableList = res.data.content;
-                })
-        }
+                });
+        };
 
         const getCoinList = () => {
-            Ax.get(`${vite_api}/api/stats/coin/list`)
-                .then((res: any) => {
-                    state.coinList = res.data;
-                    state.currentCoinInfo = res.data.find(ele => ele.coin === token.value);
-                    getAccounts();
-                    getTableList();
-                })
-        }
+            Ax.get('/stats/coin/list').then((res: any) => {
+                state.coinList = res.data;
+                state.currentCoinInfo = res.data.find(ele => ele.coin === token.value);
+                getAccounts();
+                getTableList();
+            });
+        };
 
         const onInit = () => {
             getCoinList();
             // getTableList();
         };
 
-        const toFixed = (value) => {
-            return $toFixed(value, state.currentCoinInfo.precision)
+        const toFixed = value => {
+            return $toFixed(value, state.currentCoinInfo.precision);
         };
-        const numFormat = (value) => {
-            return $numFormat(value, true)
+        const numFormat = value => {
+            return $numFormat(value, true);
         };
 
         onInit();
@@ -188,35 +183,34 @@ export default defineComponent({
             dataSource,
             state,
             frontConfig,
-            getTableList
+            getTableList,
         };
     },
 });
 </script>
-
 
 <style lang="scss" scoped>
 .analytics {
     th {
         @apply font-normal text-sm text-gray-666;
     }
-    .analytics_token{
+    .analytics_token {
         font-size: 1.1rem;
-        margin-top: .5rem;
-        
-        span{
+        margin-top: 0.5rem;
+
+        span {
             margin-right: 2rem;
             font-weight: 700;
         }
-        a{
+        a {
             font-weight: 500;
             margin-right: 1rem;
         }
-        .active{
+        .active {
             color: rgb(48, 168, 115);
         }
     }
-    .analytics_chart{
+    .analytics_chart {
         height: 27rem;
     }
 }

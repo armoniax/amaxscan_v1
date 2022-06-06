@@ -1,22 +1,22 @@
 <template lang="pug">
 .bg-green
     Wrapper.py-6.pb-4
-        .grid.grid-cols-2.lg_grid-cols-5.gap-2.mb-3.px-2.lg_px-0
-            .bg-white.p-4
+        .grid.grid-cols-2.lg_grid-cols-5.gap-4.mb-3.px-2.lg_px-0
+            .bg-white.p-4.rounded-md
                 span RAM Price
                 p.mt-2.text-green
                     | {{ state.ramPrice }}
                     span.ml-1.text-xs.font-normal {{ frontConfig?.coin }}/KB
-            .bg-white.p-4
+            .bg-white.p-4.rounded-md
                 span ACCOUNTS
                 p.mt-2.text-green {{ state.aggragationData?.accounts?.toLocaleString() }}
-            .bg-white.p-4
+            .bg-white.p-4.rounded-md
                 span BLOCKS
                 p.mt-2.text-green {{ state.blockchainData?.head_block_num?.toLocaleString() }}
-            .bg-white.p-4
+            .bg-white.p-4.rounded-md
                 span ACTIONS
                 p.mt-2.text-green {{ state.aggragationData?.actions?.toLocaleString() }}
-            .bg-white.p-4
+            .bg-white.p-4.rounded-md
                 span PRODUCER
                 p.mt-2.text-green.cursor-pointer(@click='$router.push(`/producers/${state.producer}`)') {{ state.producer }}
 

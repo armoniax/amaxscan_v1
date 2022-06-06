@@ -1,6 +1,9 @@
 <template lang="pug">
 .py-2.space-y-4.account.px-2.lg_px-0
-    h2.lg_text-2xl.text-xl Account: {{ account || "-" }}
+    .flex.justify-between.items-center
+      h2.lg_text-2xl.text-xl Account: {{ account || "-" }}
+      .text-sm Created time：
+        span.text-gray-999 {{ state.time || "-" }}
     PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance')
     RawDataBase(title='Contract Raw Data:', :json='state.code')
     RawDataBase(title='Blockchain Raw Data:', :json='state.mainData')
@@ -29,14 +32,14 @@
                 tbody
                     tr(v-for='(element, index) in state.showDataSource', :key='index')
                         th {{ searVal ? (state.currentPage - 1) * state.pageSize + index + 1 : index + 1 }}
-                        th 
+                        th
                             a(:href='"/transaction/" + element?.action_trace?.trx_id') {{ hash(element?.action_trace?.trx_id) }}
                         th {{ momentFarmat(element?.block_time).format("lll") }}
-                        th 
-                            strong 
+                        th
+                            strong
                                 span.mr-1.text-green {{ element?.action_trace?.act?.account }}
                                 | - {{ element?.action_trace?.act?.name }}
-                        th 
+                        th
                             strong
                                 span.text-green {{ element?.action_trace?.act?.data?.from }}
                                 span.ml-2.mr-2(v-if='element?.action_trace?.act?.data?.to') →
@@ -66,21 +69,21 @@
                 tbody
                     template(v-for='(action, ind) in state.actions')
                         tr(v-if='action?.action_trace?.act?.name === "transfer"', :key='ind')
-                            th 
+                            th
                                 strong {{ momentFarmat(action?.block_time).format("lll") }}
-                            th 
+                            th
                                 strong.text-green(v-if='action?.action_trace?.act?.data?.to === state.mainData?.account_name') In
                                 strong.text-red(v-if='action?.action_trace?.act?.data?.to !== state.mainData?.account_name') Out
-                            th 
-                                a(:href='"/account/" + action?.action_trace?.act?.data?.from') 
+                            th
+                                a(:href='"/account/" + action?.action_trace?.act?.data?.from')
                                     strong {{ action?.action_trace?.act?.data?.from }}
-                            th 
-                                a(:href='"/account/" + action?.action_trace?.act?.data?.to') 
+                            th
+                                a(:href='"/account/" + action?.action_trace?.act?.data?.to')
                                     strong {{ action?.action_trace?.act?.data?.to }}
                             th {{ action?.action_trace?.act?.data?.memo }}
-                            th 
+                            th
                                 strong {{ action?.action_trace?.act?.data?.quantity }}
-                            th 
+                            th
                                 a.text-green(:href='"/transaction/" + action?.action_trace?.trx_id') {{ hash(action?.action_trace?.trx_id) }}
 
     .actions(v-if='state.typeActionActive === "Actions"')
@@ -97,13 +100,13 @@
                         th Weight
                 tbody
                     tr(v-for='(item, index) in state.dataSourcePermission', :key='index')
-                        th 
+                        th
                             strong {{ item?.perm_name }}
-                        th 
+                        th
                             a(:href='"/pubkey/" + item.required_auth.keys[0].key') {{ item?.required_auth?.keys[0]?.key }}
-                        th 
+                        th
                             strong {{ item?.required_auth?.threshold }}
-                        th 
+                        th
                             strong {{ item?.required_auth?.keys[0]?.weight }}
 
     .controlled(v-if='state.typeActionActive === "ControlledAccounts"')
