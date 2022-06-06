@@ -52,7 +52,7 @@
     .flex.flex-col.justify-between
       .font-normal
         .w-24.lg_w-44 CPU
-          span.font-normal.text-xs.ml-4.text-gray-666 {{ (mainData?.cpu_limit?.used / 1000000).toFixed(2) }} sec / {{ (mainData?.cpu_limit?.max / 1000000).toFixed(2) }} sec
+          span.font-normal.text-xs.ml-4.text-gray-666 {{ (mainData?.cpu_limit?.used / 1000000).toFixed(4) }} sec / {{ (mainData?.cpu_limit?.max / 1000000).toFixed(4) }} sec
         .flex-1.flex.items-center.w-full
             .lg_flex-none.w-full.flex-1.lg_w-80.bg-green.bg-opacity-20.relative.h-2.overflow-hidden.rounded-full
                 .absolute.h-full.top-0.left-0.transition-all.duration-300.bg-green.rounded-full(:style='{ width: (mainData?.cpu_limit?.used / mainData?.cpu_limit?.max) * 100 + "%" }')
