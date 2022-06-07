@@ -4,7 +4,7 @@
     .text-sm.space-y-2
         .flex.items-center
             .w-24.lg_w-44 Block Number:
-            .flex-1 
+            .flex-1
                 a.text-green.break-all(:href='"/block/" + mainData?.block_num') {{ mainData?.block_num }}
         .flex.items-center
             .w-24.lg_w-44 Hash:
@@ -35,18 +35,18 @@
                 tbody
                     template(v-for='(action, ind) in mainData?.trx?.trx?.actions')
                         tr(:key='ind', v-if='action?.name === "transfer"')
-                            th 
+                            th
                                 strong.text-green(v-if='action?.data?.to === mainData?.account_name') In
                                 strong.text-red(v-if='action?.data?.to !== mainData?.account_name') Out
-                            th 
-                                a(:href='"/account/" + action?.data?.from') 
+                            th
+                                a(:href='"/account/" + action?.data?.from')
                                     strong {{ action?.data?.from }}
-                            th 
-                                a(:href='"/account/" + action?.data?.to') 
+                            th
+                                a(:href='"/account/" + action?.data?.to')
                                     strong {{ action?.data?.to }}
-                            th 
+                            th
                                 sapn {{ action?.data?.memo }}
-                            th 
+                            th
                                 strong {{ action?.data?.quantity }}
 
     .permissions(v-if='typeActionActive === "ActionsInfo"')
@@ -55,12 +55,12 @@
                 thead
                     tr
                         th Actions Info
-                        th 
+                        th
                 tbody
                     tr(v-for='(item, index) in dataSource?.trx?.actions', :key='index')
-                        th 
+                        th
                             strong {{ item?.name }}
-                        th 
+                        th
                             actionViewer(:data='item')
 
     .actions(v-if='typeActionActive === "Actions"')

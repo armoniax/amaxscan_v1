@@ -1,6 +1,6 @@
 <template lang="pug">
 .flex.justify-between.text-sm.items-stretch
-    table.table.border.rounded.border-green.flex-1.mr-12
+    table.table.border.rounded.border-green.flex-1.lg_mr-12
       tbody
         tr.h-10
           td.border.border-green.align-top.space-y-2
@@ -51,19 +51,19 @@
                 span.mx-2 {{ mainData?.voter_info?.owner }}
     .flex.flex-col.justify-between
       .font-normal
-        .w-24.lg_w-44 CPU
+        .w-full CPU
           span.font-normal.text-xs.ml-4.text-gray-666 {{ (mainData?.cpu_limit?.used / 1000000).toFixed(4) }} sec / {{ (mainData?.cpu_limit?.max / 1000000).toFixed(4) }} sec
         .flex-1.flex.items-center.w-full
             .lg_flex-none.w-full.flex-1.lg_w-80.bg-green.bg-opacity-20.relative.h-2.overflow-hidden.rounded-full
                 .absolute.h-full.top-0.left-0.transition-all.duration-300.bg-green.rounded-full(:style='{ width: (mainData?.cpu_limit?.used / mainData?.cpu_limit?.max) * 100 + "%" }')
       .font-normal
-        .w-24.lg_w-44 NET
+        .w-full NET
           span.font-normal.text-xs.ml-4.text-gray-666 {{ (mainData?.net_limit?.used / 1024).toFixed(2) }} kb / {{ (mainData?.net_limit?.max / 1024).toFixed(2) }} kb
         .flex-1.flex.items-center.w-full
             .lg_flex-none.w-full.flex-1.lg_w-80.bg-blue.bg-opacity-20.relative.h-2.overflow-hidden.rounded-full
                 .absolute.h-full.top-0.left-0.transition-all.duration-300.bg-blue.rounded-full(:style='{ width: (mainData?.net_limit?.used / mainData?.net_limit?.max) * 100 + "%" }')
       .font-normal
-        .w-24.lg_w-44 RAM
+        .w-full RAM
           span.font-normal.text-xs.ml-4.text-gray-666 {{ (mainData?.ram_usage / 1024).toFixed(2) }} kb / {{ (mainData?.ram_quota / 1024).toFixed(2) }} kb
         .flex-1.flex.items-center.w-full
             .lg_flex-none.w-full.flex-1.lg_w-80.bg-purple.bg-opacity-20.relative.h-2.overflow-hidden.rounded-full

@@ -126,6 +126,27 @@
                         th 2022-06-24
                         th lsafkljaioswng
                         th 2022-06-24
+    .creations(v-if='state.typeActionActive === "Creations"')
+        .overflow-x-auto.scroll-hidden
+            table.table.w-full.my-table
+                thead
+                    tr
+                        th #
+                        th Create Account
+                        th Date
+                        th Details
+                tbody
+                    tr(v-for='(element, index) in state.showDataSourceCreation', :key='index')
+                        th {{ index + 1 }}
+                        th {{ element?.name }}
+                        th {{ momentFarmat(element?.block_time).format("lll") }}
+                        th.cursor-pointer
+                            img(src="@/assets/images/d.png", @click="$router.push(`/account/${element.name}`)")
+
+        .flex.justify-end.items-center.text-gray-666.py-3.text-sm.font-normal
+            span 1 - {{ state.dataSourceCreation.totalPages }} of {{ state.pager + 1 }}
+            span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='handlePrev') &lt;
+            span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='handleNext') &gt;
 </template>
 
 <script lang="ts">
@@ -138,7 +159,7 @@ import { useRoute } from 'vue-router';
 import PageAccountBase from '@/components/Page/Account/Base.vue';
 import RawDataBase from '@/components/RawData/Base.vue';
 import { environment } from '@/environments/environment';
-import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10 } from '@/apis';
+import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10, GET_ACCOUNT_BY_CREATOR } from '@/apis';
 
 const frontConfig = environment.frontConfig;
 export default defineComponent({
@@ -153,6 +174,7 @@ export default defineComponent({
                 { name: 'Actions (Raw Data)', key: 'Actions' },
                 { name: 'Permissions', key: 'Permissions' },
                 { name: 'Controlled Accounts', key: 'ControlledAccounts' },
+                { name: 'Creations', key: 'Creations' },
             ],
             typeActionActive: 'ActionsInfo',
             controlledAccount: {},
@@ -173,6 +195,10 @@ export default defineComponent({
             totalPage: 1,
             pageSize: 15,
             currentPage: 0,
+            dataSourceCreation: {},
+            showDataSourceCreation: [],
+            pager: 0,
+            size: 10,
         });
         const route = useRoute();
         const searVal = ref('');
@@ -213,7 +239,7 @@ export default defineComponent({
             GET_ACCOUNT(account).then((res: any) => {
                 state.mainData = res;
                 state.dataSourcePermission = res.permissions; // Table Permissions
-                state.typeActionList[3].name = `${state.typeActionList[3].name} (${res.permissions.length ?? 0})`;
+                state.typeActionList[3].name = `${state.typeActionList[3].key} (${res.permissions.length ?? 0})`;
                 state.time = moment(state.mainData.created).format('MMMM Do YYYY, h:mm:ss a');
 
                 getBalance(account);
@@ -224,6 +250,15 @@ export default defineComponent({
                 console.log('getAccount-----', res);
             });
         };
+
+        const getAccountCreator = (creator: string) => {
+          GET_ACCOUNT_BY_CREATOR({ creator, pageIndex: state.pager, pageSize: state.size }).then((res: any) => {
+            state.dataSourceCreation = res.data;
+            state.showDataSourceCreation = res.data?.content;
+            state.typeActionList[5].name = `${state.typeActionList[5].key} (${res.data?.totalElements ?? 0})`;
+            console.log('getAccountCreator-----', res);
+          })
+        }
 
         // pending状态
         const getAllTokens = (account: string) => {
@@ -373,6 +408,18 @@ export default defineComponent({
             //- console.log('state.showDataSource：-----', state.showDataSource);
         };
 
+        const handlePrev = () => {
+          if(state.dataSourceCreation?.first) return;
+          state.pager -= 1;
+          getAccountCreator(account.value);
+        }
+
+        const handleNext = () => {
+          if(state.dataSourceCreation?.last) return;
+          state.pager += 1;
+          getAccountCreator(account.value);
+        }
+
         const resetData = () => {
             state.typeActionActive = 'ActionsInfo';
             state.controlledAccount = {};
@@ -393,11 +440,15 @@ export default defineComponent({
             state.totalPage = 1;
             state.pageSize = 15;
             state.currentPage = 0;
+            state.dataSourceCreation = {};
+            state.showDataSourceCreation = [];
+            state.pager = 0;
         };
 
         const onInit = () => {
             resetData();
             getBlockData(account.value);
+            getAccountCreator(account.value);
             getControlledAccounts(account.value);
             //- getAllTokens(account.value);
         };
@@ -412,6 +463,8 @@ export default defineComponent({
             searchActions,
             changePage,
             hash,
+            handlePrev,
+            handleNext,
         };
     },
 });
