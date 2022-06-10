@@ -1,8 +1,8 @@
 <template lang="pug">
 .py-2.space-y-4.account.px-2.lg_px-0
     .flex.justify-between.items-center
-      h2.lg_text-2xl.text-xl Account: {{ account || "-" }}
-      .text-sm Created time：
+      h2.lg_text-2xl.text-xl {{ $t('message.account_detail') }} {{ account || "-" }}
+      .text-sm {{ $t('message.account_detail_time') }}
         span.text-gray-999 {{ state.time || "-" }}
     PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance')
     RawDataBase(title='Contract Raw Data:', :json='state.code')

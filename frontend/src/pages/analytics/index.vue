@@ -8,10 +8,10 @@
 
     .flex.flex-col.lg_flex-row
         .flex-1
-            .h-8.text-2xl.font-bold.mb-4 Top 10 accounts
+            .h-8.text-2xl.font-bold.mb-4 {{ $t('message.top10') }}
             v-chart.w-full.h-96.bg-gray-fb.analytics_chart(:option='option', ref='chart')
         .flex-1.lg_w-80.lg_ml-5.lg_flex-none.ml-0.mt-6.lg_mt-0.mb-4
-            .h8.text-lg.font-bold Legend
+            .h8.text-lg.font-bold {{ $t('message.legend') }}
 
             .divide-y.divide-gray-f4(v-if='pieChart?.length')
                 .flex.p-3.items-center.justify-between.cursor-pointer.hover_bg-gray.transition.duration-300(v-for='(item, index) in pieChart', :key='index')
@@ -20,15 +20,15 @@
                         span.ml-2(@click='$router.push(`/account/${item.name}`)') {{ item.name }}
                     span {{ numFormat(item.value) }}
             .divide-y.divide-gray-f4(v-else)
-                .py-4.text-gray-999 None yet
+                .py-4.text-gray-999 {{ $t('message.notyet') }}
 
     .overflow-x-auto.scroll-hidden
         table.table.w-full
             thead
                 tr
                     th #
-                    th Name
-                    th(style="text-align: right;") Balance({{currentCoinInfo.coin}})
+                    th {{ $t('message.legend_th1') }}
+                    th(style="text-align: right;") {{ $t('message.legend_th2') }}({{currentCoinInfo.coin}})
 
             tbody
                 tr(v-for='(element, i) in tableList', :key='i')
@@ -39,7 +39,7 @@
 
 
     .flex.justify-end.items-center.text-gray-666.py-3
-        span(style="margin-right: 1.5rem;") Current Page: {{ pageIndex + 1 }}
+        span(style="margin-right: 1.5rem;") {{ $t('message.currentPage') }} {{ pageIndex + 1 }}
         //- select.outline-none.h-6.w-10.border.rounded.mx-2.border-gray-f4.cursor-pointer
         //-     option(v-for='i in 10', :key='i') {{ i }}
         //- span 1 - 40 of 40

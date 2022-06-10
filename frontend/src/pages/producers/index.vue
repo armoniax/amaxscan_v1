@@ -1,22 +1,22 @@
 <template lang="pug">
 .text-sm.font-normal
     .flex.justify-between.lg_items-center.lg_py-7.flex-col.lg_flex-row.items-start.px-2.lg_px-0.py-4
-        .text-green.py-1.px-2.bg-green.bg-opacity-20.rounded.lg_rounded-lg.mb-2.lg_mb-0 Votes: {{ state.totalVotes?.toLocaleString() }} ({{ state.votePercentage }}%)
+        .text-green.py-1.px-2.bg-green.bg-opacity-20.rounded.lg_rounded-lg.mb-2.lg_mb-0 {{ $t('message.votes') }} {{ state.totalVotes?.toLocaleString() }} ({{ state.votePercentage }}%)
         .flex.border-b.w-72.text-gray-ccc.border-b-gray-ccc.text-gray-ca.h-7.items-center
             i.fal.fa-search.text-gray-ca.mr-2
-            input.outline-none.flex-1.h-full(placeholder='Search by producer name', v-model='filterVal')
+            input.outline-none.flex-1.h-full(:placeholder='$t("message.producer_search")', v-model='filterVal')
     .overflow-scroll.scroll-hidden
         table.w-full.text-center.text-gray-666.table-compact
             thead.bg-gray.h-10
                 tr
                     th #
-                    th Producer Name
-                    th Status
+                    th {{ $t('message.producer_th1') }}
+                    th {{ $t('message.producer_th2') }}
                     //- th Url
-                    th Location
-                    th.whitespace-nowrap Total Votes ({{ frontConfig?.coin }})
-                    th Rate
-                    th.whitespace-nowrap Rewards Per Day
+                    th {{ $t('message.producer_th3') }}
+                    th.whitespace-nowrap {{ $t('message.producer_th4') }} ({{ frontConfig?.coin }})
+                    th {{ $t('message.producer_th5') }}
+                    th.whitespace-nowrap {{ $t('message.producer_th6') }}
             tbody
                 tr.h-16.border-b.border-b-gray-f4(v-for='item in DataList', :key='item.index')
                     td {{ item.index }}

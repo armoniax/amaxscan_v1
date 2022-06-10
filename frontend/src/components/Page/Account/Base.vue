@@ -4,50 +4,50 @@
       tbody
         tr.h-10
           td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold Total Balance
+            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb1') }}
             .text-gray-999 {{ balance }} {{ state.frontConfig?.coin }}
           td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold Unstaked
+            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb2') }}
             .text-gray-999 {{ unstaked }} {{ state.frontConfig?.coin }}
           td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold Staked
+            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb3') }}
             .text-gray-999 {{ mainData?.voter_info?.staked ? mainData?.voter_info?.staked / 100000000 : 0 }} {{ state.frontConfig?.coin }}
         tr.h-10
           td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold Total Resources
+            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb4') }}
             .font-normal
               .text-gray-999
-                | CPU weight:
+                | {{ $t('message.account_detail_tb4_1') }}
                 span.mx-2 {{ mainData?.total_resources?.cpu_weight }}
               .text-gray-999
-                | NET weight:
+                | {{ $t('message.account_detail_tb4_2') }}
                 span.mx-2 {{ mainData?.total_resources?.net_weight }}
               .text-gray-999
-                | Owner:
+                | {{ $t('message.account_detail_tb4_3') }}
                 span.mx-2 {{ mainData?.total_resources?.owner }}
           td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold Delegated Bandwidth
+            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb5') }}
             .font-normal
               .text-gray-999
-                | CPU weight:
+                | {{ $t('message.account_detail_tb5_1') }}
                 span.mx-2 {{ mainData?.delegated_bandwidth?.cpu_weight }}
               .text-gray-999
-                | from:
+                | {{ $t('message.account_detail_tb5_2') }}
                 span.mx-2 {{ mainData?.delegated_bandwidth?.from }}
               .text-gray-999
-                | NET weight:
+                | {{ $t('message.account_detail_tb5_3') }}
                 span.mx-2 {{ mainData?.delegated_bandwidth?.net_weight }}
               .text-gray-999
-                | to:
+                | {{ $t('message.account_detail_tb5_4') }}
                 span.mx-2 {{ mainData?.delegated_bandwidth?.to }}
           td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold Voter Info
+            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb6') }}
             .font-normal
               .text-gray-999
-                | Last vote weight:
+                | {{ $t('message.account_detail_tb6_1') }}
                 span.mx-2 {{ mainData?.voter_info?.last_vote_weight }}
               .text-gray-999
-                | Owner:
+                | {{ $t('message.account_detail_tb6_2') }}
                 span.mx-2 {{ mainData?.voter_info?.owner }}
     .flex.flex-col.justify-between
       .font-normal

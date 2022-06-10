@@ -1,19 +1,19 @@
 <template lang="pug">
 .py-2.space-y-4.account.px-2.lg_px-0
-    h2.lg_text-2xl.text-xl Transaction
+    h2.lg_text-2xl.text-xl {{ $t('message.transaction_detail') }}
     .text-sm.space-y-2
         .flex.items-center
-            .w-24.lg_w-44 Block Number:
+            .w-24.lg_w-44 {{ $t('message.transaction_detail_tb1') }}
             .flex-1
                 a.text-green.break-all(:href='"/block/" + mainData?.block_num') {{ mainData?.block_num }}
         .flex.items-center
-            .w-24.lg_w-44 Hash:
+            .w-24.lg_w-44 {{ $t('message.transaction_detail_tb2') }}
             .flex-1.text-gray-999.break-all {{ mainData?.id }}
         .flex.items-center
-            .w-24.lg_w-44 Block Time:
+            .w-24.lg_w-44 {{ $t('message.transaction_detail_tb3') }}
             .flex-1.text-gray-999.break-all {{ time }}
         .flex.items-center
-            .w-24.lg_w-44 Actions:
+            .w-24.lg_w-44 {{ $t('message.transaction_detail_tb4') }}
             .flex-1.font-normal.break-all {{ mainData?.trx?.trx?.actions?.length }}
 
     RawDataBase(title='Blockchain Raw Data:', :json='mainData')
@@ -27,11 +27,11 @@
             table.table.w-full.my-table
                 thead
                     tr
-                        th Direction
-                        th From
-                        th To
-                        th Memo
-                        th Quantity
+                        th {{ $t('message.transaction_detail_th1') }}
+                        th {{ $t('message.transaction_detail_th2') }}
+                        th {{ $t('message.transaction_detail_th3') }}
+                        th {{ $t('message.transaction_detail_th4') }}
+                        th {{ $t('message.transaction_detail_th5') }}
                 tbody
                     template(v-for='(action, ind) in mainData?.trx?.trx?.actions')
                         tr(:key='ind', v-if='action?.name === "transfer"')
@@ -54,7 +54,7 @@
             table.table.w-full.my-table
                 thead
                     tr
-                        th Actions Info
+                        th {{ $t('message.transaction_detail_th6') }}
                         th
                 tbody
                     tr(v-for='(item, index) in dataSource?.trx?.actions', :key='index')

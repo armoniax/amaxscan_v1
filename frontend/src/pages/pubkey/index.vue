@@ -1,12 +1,12 @@
 <template lang="pug">
 .py-4.space-y-4.mb-8.px-2.lg_px-0
-    h2.lg_text-2xl.text-xl Accounts by Public Key:
+    h2.lg_text-2xl.text-xl {{ $t('message.publick_key_detail') }}
     .flex.items-center
-        .w-24.lg_w-44 Public Key:
+        .w-24.lg_w-44 {{ $t('message.publick_key_lb1') }}
         .flex-1
             span.text-gray-999.break-all {{ pubkey }}
     .flex.items-center
-        .w-24.lg_w-44 Accounts:
+        .w-24.lg_w-44 {{ $t('message.publick_key_lb2') }}
         .flex-1
             .text-green.cursor-pointer.break-all(v-for='(name, index) in state.mainData?.account_names', :key='index', @click='$router.push(`/account/${name}`)') {{ name }}
 </template>
@@ -29,7 +29,7 @@ export default defineComponent({
 
         const getPubkeyAccountData = pubkey => {
             console.log('pubkey======', pubkey)
-            
+
             GET_KEY_ACCOUNTS(pubkey).then((res: any) => {
                 state.mainData = (res && !res.account_names) ? createArrayAccounts(res): res;
             });
@@ -44,8 +44,8 @@ export default defineComponent({
             }
             data.forEach(elem => {
                 if (elem.permission === "active"){
-                    result.account_names.push(elem.account); 
-                }  
+                    result.account_names.push(elem.account);
+                }
             });
             return result;
         };
