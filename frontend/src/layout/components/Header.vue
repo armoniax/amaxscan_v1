@@ -7,18 +7,17 @@
                 router-link(to='/analytics/AMAX') {{ $t('message.nav1') }}
                 router-link(to='/ram') {{ $t('message.nav2') }}
                 router-link(to='/producers') {{ $t('message.nav3') }}
-        .flex.lg_space-x-8.space-x-2.items-center.justify-end.text-sm
+        .flex.flex-1.lg_space-x-8.space-x-2.items-center.justify-end.text-sm
             .w-full.flex.lg_w-96.h-8.bg-gray-eee.rounded-full.px-2.items-center
                 input.pl-4.bg-transparent.w-full.h-full.outline-none.text-xs(:placeholder='$t("message.placeholder")', v-model='keyword', @keyup='changeInput')
                 i.text-xl.fal.fa-search.text-gray-ca.mr-1.cursor-pointer(@click='search()')
                 //- span.btn.btn-xs.rounded-full(:class='keyword ? "cursor-pointer" : "opacity-50 cursor-not-allowed"', @click='search') Search
             .relative.cursor-pointer.text-gray-333.group
               .flex.items-center
-                span English
+                span.hidden.lg_block {{ currentLang }}
                 img.object-contain.lg_w-4.w-4(src='@/assets/images/lang.png', style='image-rendering: -webkit-optimize-contrast')
-              .absolute.-left-4.w-24.bg-white.bg-opacity-90.rounded-md.shadow-sm.hidden.group-hover_block
-                .text-center.h-8.leading-8.hover_bg-gray-d2(@click="switchLanguage('cn')") 简体中文
-                .text-center.h-8.leading-8.hover_bg-gray-d2(@click="switchLanguage('en')") English
+              .absolute.right-0.w-24.bg-white.bg-opacity-90.rounded-md.shadow-sm.hidden.group-hover_block
+                .text-center.h-8.leading-8.hover_bg-gray-d2(v-for='lang in langs', @click="switchLanguage(lang.value)") {{ lang.name }}
     .lg_hidden.flex.pt-4.space-x-4.flex-nowrap.overflow-x-scroll
         router-link(to='/analytics') {{ $t('message.nav1') }}
         router-link(to='/ram') {{ $t('message.nav2') }}
@@ -36,10 +35,16 @@ import { defineComponent, getCurrentInstance, ref } from 'vue';
 import Wrapper from '@/components/Wrapper.vue';
 import { SEARCH_BY } from '@/apis';
 import router from '@/routers';
+import lang from '@/lang';
 export default defineComponent({
     components: { Wrapper },
     setup() {
         let keyword = ref('');
+
+        const langs = [
+          { name: '简体中文', value: 'zh' },
+          { name: 'English', value: 'en' },
+        ]
         const search = () => {
             SEARCH_BY(keyword.value).then((res: any) => {
                 // console.log(res);
@@ -68,12 +73,14 @@ export default defineComponent({
             }
         };
 
-        const lang = ref(localStorage.getItem("lang") || "en");
+        const getLangName = (type: string) => langs.find(lang => lang.value === type).name;
+        let currentLang = ref(getLangName(localStorage.getItem('lang')));
+
         const { proxy } = getCurrentInstance()
-        const switchLanguage = (val) => {
+        const switchLanguage = (val: string) => {
           proxy.$i18n.locale = val;
-          localStorage.setItem("lang", val);
-          lang.value = val;
+          localStorage.setItem('lang', val);
+          currentLang.value = getLangName(val)
         };
 
         return {
@@ -81,6 +88,8 @@ export default defineComponent({
             search,
             changeInput,
             switchLanguage,
+            langs,
+            currentLang
         };
     },
 });
