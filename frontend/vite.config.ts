@@ -8,7 +8,8 @@ export default defineConfig({
     server: {
         proxy: {
             // '/api': 'http://120.77.26.105:3039',
-            '/api': 'https://testnet.amaxscan.io',
+            // '/api': 'https://testnet.amaxscan.io',
+            '/api': 'https://testnet-dev.ambt.art',
             // "/api": "https://www.amaxscan.io",
             // '/api': 'https://dev-exp.ambt.art',
             // "/api": "https://expnode.amaxscan.io",
@@ -20,7 +21,8 @@ export default defineConfig({
                 // target: 'http://prod-exp-proxy.ambt.art',
                 // target: 'http://expnode.mgps.me',
                 // target: 'https://dev-exp.ambt.art',
-                target: 'https://testnet.amaxscan.io',
+                // target: 'https://testnet.amaxscan.io',
+                target: 'https://testnet-dev.ambt.art',
                 // secure: true,
                 changeOrigin: true,
                 // secure: false,
