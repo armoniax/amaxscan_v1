@@ -3,7 +3,7 @@
     .flex.justify-between.items-center
       .lg_text-2xl.text-xl.flex.items-end
         h2 {{ $t('message.account_detail') }} {{ account || "-" }}
-        span.text-sm(v-if="state.mainData?.creator") ({{ $t('message.account_detail_by', { msg: state.mainData?.creator}) }})
+        a.text-sm.text-green(v-if="state.mainData?.creator", :href='"/account/" + state.mainData?.creator') ({{ $t('message.account_detail_by', { msg: state.mainData?.creator}) }})
       .text-sm {{ $t('message.account_detail_time') }}
         span.text-gray-999 {{ state.time || "-" }}
     PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance')
@@ -162,21 +162,25 @@ import PageAccountBase from '@/components/Page/Account/Base.vue';
 import RawDataBase from '@/components/RawData/Base.vue';
 import { environment } from '@/environments/environment';
 import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10, GET_ACCOUNT_BY_CREATOR } from '@/apis';
+import { useI18n } from 'vue-i18n';
 
 const frontConfig = environment.frontConfig;
 export default defineComponent({
     components: { PageAccountBase, RawDataBase, JsonViewer },
     setup() {
         // const type = ref(1)
+        const { t } = useI18n();
+        let row4 = ref(t('message.account_detail_row4'));
+        let row6 = ref(t('message.account_detail_row6'));
 
         let state = reactive<Record<string, any>>({
             typeActionList: [
-                { name: 'Actions info', key: 'ActionsInfo' },
-                { name: 'Token transfer', key: 'TokenTransfer' },
-                { name: 'Actions (Raw Data)', key: 'Actions' },
-                { name: 'Permissions', key: 'Permissions' },
-                { name: 'Controlled Accounts', key: 'ControlledAccounts' },
-                { name: 'Creations', key: 'Creations' },
+                { name: computed(() => t('message.account_detail_row1')), key: 'ActionsInfo' },
+                { name: computed(() => t('message.account_detail_row2')), key: 'TokenTransfer' },
+                { name: computed(() => t('message.account_detail_row3')), key: 'Actions' },
+                { name: computed({ get: () => row4.value, set: val => row4.value = val }), key: 'Permissions' },
+                { name: computed(() => t('message.account_detail_row5')), key: 'ControlledAccounts' },
+                { name: computed({ get: () => row6.value, set: val => row6.value = val }), key: 'Creations' },
             ],
             typeActionActive: 'ActionsInfo',
             controlledAccount: {},
@@ -236,11 +240,11 @@ export default defineComponent({
             });
             return result;
         };
-
         const getBlockData = (account: string) => {
             GET_ACCOUNT(account).then((res: any) => {
                 state.mainData = res;
                 state.dataSourcePermission = res.permissions; // Table Permissions
+                console.log(1111, state.typeActionList[3].name)
                 state.typeActionList[3].name = `${state.typeActionList[3].key} (${res.permissions.length ?? 0})`;
                 state.time = moment(state.mainData.created).format('MMMM Do YYYY, h:mm:ss a');
 
