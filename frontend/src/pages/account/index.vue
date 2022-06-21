@@ -1,6 +1,11 @@
 <template lang="pug">
 .py-2.space-y-4.account.px-2.lg_px-0
-    h2.lg_text-2xl.text-xl Account: {{ account || "-" }}
+    .flex.justify-between.items-center
+      .lg_text-2xl.text-xl.flex.items-end
+        h2 {{ $t('message.account_detail') }} {{ account || "-" }}
+        span.text-sm(v-if="state.mainData?.creator") ({{ $t('message.account_detail_by', { msg: state.mainData?.creator}) }})
+      .text-sm {{ $t('message.account_detail_time') }}
+        span.text-gray-999 {{ state.time || "-" }}
     PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance')
     RawDataBase(title='Contract Raw Data:', :json='state.code')
     RawDataBase(title='Blockchain Raw Data:', :json='state.mainData')
@@ -29,14 +34,14 @@
                 tbody
                     tr(v-for='(element, index) in state.showDataSource', :key='index')
                         th {{ searVal ? (state.currentPage - 1) * state.pageSize + index + 1 : index + 1 }}
-                        th 
+                        th
                             a(:href='"/transaction/" + element?.action_trace?.trx_id') {{ hash(element?.action_trace?.trx_id) }}
                         th {{ momentFarmat(element?.block_time).format("lll") }}
-                        th 
-                            strong 
+                        th
+                            strong
                                 span.mr-1.text-green {{ element?.action_trace?.act?.account }}
                                 | - {{ element?.action_trace?.act?.name }}
-                        th 
+                        th
                             strong
                                 span.text-green {{ element?.action_trace?.act?.data?.from }}
                                 span.ml-2.mr-2(v-if='element?.action_trace?.act?.data?.to') →
@@ -66,21 +71,21 @@
                 tbody
                     template(v-for='(action, ind) in state.actions')
                         tr(v-if='action?.action_trace?.act?.name === "transfer"', :key='ind')
-                            th 
+                            th
                                 strong {{ momentFarmat(action?.block_time).format("lll") }}
-                            th 
+                            th
                                 strong.text-green(v-if='action?.action_trace?.act?.data?.to === state.mainData?.account_name') In
                                 strong.text-red(v-if='action?.action_trace?.act?.data?.to !== state.mainData?.account_name') Out
-                            th 
-                                a(:href='"/account/" + action?.action_trace?.act?.data?.from') 
+                            th
+                                a(:href='"/account/" + action?.action_trace?.act?.data?.from')
                                     strong {{ action?.action_trace?.act?.data?.from }}
-                            th 
-                                a(:href='"/account/" + action?.action_trace?.act?.data?.to') 
+                            th
+                                a(:href='"/account/" + action?.action_trace?.act?.data?.to')
                                     strong {{ action?.action_trace?.act?.data?.to }}
                             th {{ action?.action_trace?.act?.data?.memo }}
-                            th 
+                            th
                                 strong {{ action?.action_trace?.act?.data?.quantity }}
-                            th 
+                            th
                                 a.text-green(:href='"/transaction/" + action?.action_trace?.trx_id') {{ hash(action?.action_trace?.trx_id) }}
 
     .actions(v-if='state.typeActionActive === "Actions"')
@@ -97,13 +102,13 @@
                         th Weight
                 tbody
                     tr(v-for='(item, index) in state.dataSourcePermission', :key='index')
-                        th 
+                        th
                             strong {{ item?.perm_name }}
-                        th 
+                        th
                             a(:href='"/pubkey/" + item.required_auth.keys[0].key') {{ item?.required_auth?.keys[0]?.key }}
-                        th 
+                        th
                             strong {{ item?.required_auth?.threshold }}
-                        th 
+                        th
                             strong {{ item?.required_auth?.keys[0]?.weight }}
 
     .controlled(v-if='state.typeActionActive === "ControlledAccounts"')
@@ -123,6 +128,27 @@
                         th 2022-06-24
                         th lsafkljaioswng
                         th 2022-06-24
+    .creations(v-if='state.typeActionActive === "Creations"')
+        .overflow-x-auto.scroll-hidden
+            table.table.w-full.my-table
+                thead
+                    tr
+                        th #
+                        th Create Account
+                        th Date
+                        th Details
+                tbody
+                    tr(v-for='(element, index) in state.showDataSourceCreation', :key='index')
+                        th {{ index + 1 }}
+                        th {{ element?.name }}
+                        th {{ momentFarmat(element?.block_time).format("lll") }}
+                        th.cursor-pointer
+                            img(src="@/assets/images/d.png", @click="$router.push(`/account/${element.name}`)")
+
+        .flex.justify-end.items-center.text-gray-666.py-3.text-sm.font-normal
+            span 1 - {{ state.dataSourceCreation.totalPages }} of {{ state.pager + 1 }}
+            span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='handlePrev') &lt;
+            span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='handleNext') &gt;
 </template>
 
 <script lang="ts">
@@ -135,7 +161,7 @@ import { useRoute } from 'vue-router';
 import PageAccountBase from '@/components/Page/Account/Base.vue';
 import RawDataBase from '@/components/RawData/Base.vue';
 import { environment } from '@/environments/environment';
-import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10 } from '@/apis';
+import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10, GET_ACCOUNT_BY_CREATOR } from '@/apis';
 
 const frontConfig = environment.frontConfig;
 export default defineComponent({
@@ -150,6 +176,7 @@ export default defineComponent({
                 { name: 'Actions (Raw Data)', key: 'Actions' },
                 { name: 'Permissions', key: 'Permissions' },
                 { name: 'Controlled Accounts', key: 'ControlledAccounts' },
+                { name: 'Creations', key: 'Creations' },
             ],
             typeActionActive: 'ActionsInfo',
             controlledAccount: {},
@@ -170,6 +197,10 @@ export default defineComponent({
             totalPage: 1,
             pageSize: 15,
             currentPage: 0,
+            dataSourceCreation: {},
+            showDataSourceCreation: [],
+            pager: 0,
+            size: 10,
         });
         const route = useRoute();
         const searVal = ref('');
@@ -210,7 +241,7 @@ export default defineComponent({
             GET_ACCOUNT(account).then((res: any) => {
                 state.mainData = res;
                 state.dataSourcePermission = res.permissions; // Table Permissions
-                state.typeActionList[3].name = `${state.typeActionList[3].name} (${res.permissions.length ?? 0})`;
+                state.typeActionList[3].name = `${state.typeActionList[3].key} (${res.permissions.length ?? 0})`;
                 state.time = moment(state.mainData.created).format('MMMM Do YYYY, h:mm:ss a');
 
                 getBalance(account);
@@ -221,6 +252,15 @@ export default defineComponent({
                 console.log('getAccount-----', res);
             });
         };
+
+        const getAccountCreator = (creator: string) => {
+          GET_ACCOUNT_BY_CREATOR({ creator, pageIndex: state.pager, pageSize: state.size }).then((res: any) => {
+            state.dataSourceCreation = res.data;
+            state.showDataSourceCreation = res.data?.content;
+            state.typeActionList[5].name = `${state.typeActionList[5].key} (${res.data?.totalElements ?? 0})`;
+            console.log('getAccountCreator-----', res);
+          })
+        }
 
         // pending状态
         const getAllTokens = (account: string) => {
@@ -370,6 +410,18 @@ export default defineComponent({
             //- console.log('state.showDataSource：-----', state.showDataSource);
         };
 
+        const handlePrev = () => {
+          if(state.dataSourceCreation?.first) return;
+          state.pager -= 1;
+          getAccountCreator(account.value);
+        }
+
+        const handleNext = () => {
+          if(state.dataSourceCreation?.last) return;
+          state.pager += 1;
+          getAccountCreator(account.value);
+        }
+
         const resetData = () => {
             state.typeActionActive = 'ActionsInfo';
             state.controlledAccount = {};
@@ -390,11 +442,15 @@ export default defineComponent({
             state.totalPage = 1;
             state.pageSize = 15;
             state.currentPage = 0;
+            state.dataSourceCreation = {};
+            state.showDataSourceCreation = [];
+            state.pager = 0;
         };
 
         const onInit = () => {
             resetData();
             getBlockData(account.value);
+            getAccountCreator(account.value);
             getControlledAccounts(account.value);
             //- getAllTokens(account.value);
         };
@@ -409,6 +465,8 @@ export default defineComponent({
             searchActions,
             changePage,
             hash,
+            handlePrev,
+            handleNext,
         };
     },
 });
