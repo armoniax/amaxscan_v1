@@ -16,7 +16,7 @@
               .flex.items-center
                 span.hidden.lg_block {{ currentLang }}
                 img.object-contain.lg_w-4.w-4(src='@/assets/images/lang.png', style='image-rendering: -webkit-optimize-contrast')
-              .absolute.right-0.w-24.bg-white.bg-opacity-90.rounded-md.shadow-sm.hidden.group-hover_block
+              .absolute.right-0.w-24.bg-white.bg-opacity-90.rounded-md.shadow-sm.hidden.group-hover_block.overflow-hidden.z-50
                 .text-center.h-8.leading-8.hover_bg-gray-d2(v-for='lang in langs', @click="switchLanguage(lang.value)") {{ lang.name }}
     .lg_hidden.flex.pt-4.space-x-4.flex-nowrap.overflow-x-scroll
         router-link(to='/analytics') {{ $t('message.nav1') }}
@@ -36,6 +36,7 @@ import Wrapper from '@/components/Wrapper.vue';
 import { SEARCH_BY } from '@/apis';
 import router from '@/routers';
 import lang from '@/lang';
+
 export default defineComponent({
     components: { Wrapper },
     setup() {
@@ -73,8 +74,9 @@ export default defineComponent({
             }
         };
 
-        const getLangName = (type: string) => langs.find(lang => lang.value === type).name;
-        let currentLang = ref(getLangName(localStorage.getItem('lang')));
+
+        const getLangName = (type: string) => (langs.find(lang => lang.value === type)).name;
+        let currentLang = ref(getLangName(localStorage.getItem('lang') || 'en'));
 
         const { proxy } = getCurrentInstance()
         const switchLanguage = (val: string) => {

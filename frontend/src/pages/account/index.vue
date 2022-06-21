@@ -1,7 +1,9 @@
 <template lang="pug">
 .py-2.space-y-4.account.px-2.lg_px-0
     .flex.justify-between.items-center
-      h2.lg_text-2xl.text-xl {{ $t('message.account_detail') }} {{ account || "-" }}
+      .lg_text-2xl.text-xl.flex.items-end
+        h2 {{ $t('message.account_detail') }} {{ account || "-" }}
+        span.text-sm(v-if="state.mainData?.creator") ({{ $t('message.account_detail_by', { msg: state.mainData?.creator}) }})
       .text-sm {{ $t('message.account_detail_time') }}
         span.text-gray-999 {{ state.time || "-" }}
     PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance')
