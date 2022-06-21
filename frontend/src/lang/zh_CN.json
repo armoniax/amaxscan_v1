@@ -17,6 +17,7 @@
         "account_detail_tb6": "投票人信息",
         "account_detail_tb6_1": "最后投票权重：",
         "account_detail_tb6_2": "质押人：",
+        "account_detail_tb6_2": "持有人：",
         "account_detail_time": "创建时间：",
         "block_detail": "区块号",
         "block_detail_lb1": "出块节点：",
