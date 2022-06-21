@@ -170,17 +170,17 @@ export default defineComponent({
     setup() {
         // const type = ref(1)
         const { t } = useI18n();
-        let row4 = ref(t('message.account_detail_row4'));
-        let row6 = ref(t('message.account_detail_row6'));
+        let row4 = computed(() => t('message.account_detail_row4'));
+        let row6 = computed(() => t('message.account_detail_row6'));
 
         let state = reactive<Record<string, any>>({
             typeActionList: [
                 { name: computed(() => t('message.account_detail_row1')), key: 'ActionsInfo' },
                 { name: computed(() => t('message.account_detail_row2')), key: 'TokenTransfer' },
                 { name: computed(() => t('message.account_detail_row3')), key: 'Actions' },
-                { name: computed({ get: () => row4.value, set: val => row4.value = val }), key: 'Permissions' },
+                { name: row4, key: 'Permissions' },
                 { name: computed(() => t('message.account_detail_row5')), key: 'ControlledAccounts' },
-                { name: computed({ get: () => row6.value, set: val => row6.value = val }), key: 'Creations' },
+                { name: row6, key: 'Creations' },
             ],
             typeActionActive: 'ActionsInfo',
             controlledAccount: {},
@@ -244,8 +244,7 @@ export default defineComponent({
             GET_ACCOUNT(account).then((res: any) => {
                 state.mainData = res;
                 state.dataSourcePermission = res.permissions; // Table Permissions
-                console.log(1111, state.typeActionList[3].name)
-                state.typeActionList[3].name = `${state.typeActionList[3].key} (${res.permissions.length ?? 0})`;
+                state.typeActionList[3].name = computed(() => `${row4.value} (${res.permissions.length ?? 0})`);
                 state.time = moment(state.mainData.created).format('MMMM Do YYYY, h:mm:ss a');
 
                 getBalance(account);
@@ -261,7 +260,7 @@ export default defineComponent({
           GET_ACCOUNT_BY_CREATOR({ creator, pageIndex: state.pager, pageSize: state.size }).then((res: any) => {
             state.dataSourceCreation = res.data;
             state.showDataSourceCreation = res.data?.content;
-            state.typeActionList[5].name = `${state.typeActionList[5].key} (${res.data?.totalElements ?? 0})`;
+            state.typeActionList[5].name = computed(() => `${row6.value} (${res.data?.totalElements ?? 0})`);
             console.log('getAccountCreator-----', res);
           })
         }
