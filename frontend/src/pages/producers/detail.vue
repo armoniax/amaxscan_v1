@@ -56,9 +56,10 @@
                     strong(v-if='voter?.currency !== frontConfig?.coin')
                         span {{ voter?.act?.data?.voter }}
                         span {{ $t('message.producer_detail_lb7_1') }} {{ voter?.stake ? voter?.stake?.toLocaleString() : 0 }} {{ frontConfig?.coin }}
-        .flex.items-center.h-8
-            .w-24.lg_w-44 {{ $t('message.producer_detail_lb8') }}
-            .flex-1.text-gray-666 {{ bpData?.nodes?.length }}
+        // remove nodes
+        //- .flex.items-center.h-8
+        //-     .w-24.lg_w-44 {{ $t('message.producer_detail_lb8') }}
+        //-     .flex-1.text-gray-666 {{ bpData?.nodes?.length }}
 
     .w-full.h-96.rounded-lg.bg-gray-fb.hidden
         LMap(:zoom='option.zoom', :center='option.center')
