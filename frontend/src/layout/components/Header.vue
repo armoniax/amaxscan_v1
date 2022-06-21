@@ -35,6 +35,7 @@ import { defineComponent, getCurrentInstance, ref } from 'vue';
 import Wrapper from '@/components/Wrapper.vue';
 import { SEARCH_BY } from '@/apis';
 import router from '@/routers';
+import lang from '@/lang';
 
 export default defineComponent({
     components: { Wrapper },
@@ -72,6 +73,7 @@ export default defineComponent({
                 search();
             }
         };
+
 
         const getLangName = (type: string) => (langs.find(lang => lang.value === type)).name;
         let currentLang = ref(getLangName(localStorage.getItem('lang') || 'en'));
