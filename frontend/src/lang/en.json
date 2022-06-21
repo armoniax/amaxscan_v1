@@ -1,6 +1,7 @@
 {
     "message": {
         "account_detail": "Account:",
+        "account_detail_by": "Created by:{msg}",
         "account_detail_tb1": "Total Balance",
         "account_detail_tb2": "Unstaked",
         "account_detail_tb3": "Staked",
