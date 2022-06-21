@@ -10,7 +10,7 @@
         v-chart.w-full.h-96(:option='option')
 
     .flex-1.lg_w-80.lg_ml-5.lg_flex-none.ml-0.mt-6.lg_mt-0
-        p.text-lg.lg_mb-0.mb-2 {{ $t('message.legend') }}
+        //- p.text-lg.lg_mb-0.mb-2 {{ $t('message.legend') }}
         .flex.flex-col.lg_items-end.font-normal.text-sm.items-start
             p.text-gray-999.lg_mb-2.mb-0 {{ frontConfig?.coin }} {{ $t('message.ram_title') }}:
             p.font-medium.text-lg.mb-6 {{ state.ramPrice }} {{ frontConfig?.coin }}/kb
