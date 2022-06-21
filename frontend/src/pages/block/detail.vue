@@ -1,71 +1,71 @@
 <template lang="pug">
 .py-4.space-y-4.mb-8.px-2.lg_px-0
     .flex.items-center.justify-start.space-x-4
-        h2.lg_text-2xl.text-xl Block No. {{ state.mainData?.block_num }}
+        h2.lg_text-2xl.text-xl {{ $t('message.block_detail') }} {{ state.mainData?.block_num }}
         span.text-green.cursor-pointer(v-if='state.mainData?.block_num', @click='$router.push(`/block/${Number(state.mainData?.block_num) - 1}`)')
             i.far.fa-long-arrow-left.mr-1
-            | Prev
+            | {{ $t('message.block_detail_prev') }}
         span.text-green.cursor-pointer(v-if='state.mainData?.block_num', @click='$router.push(`/block/${Number(state.mainData?.block_num) + 1}`)')
-            | Next
+            | {{ $t('message.block_detail_next') }}
             i.far.fa-long-arrow-right.ml-1
 
     .flex.justify-center.items-center(v-if='state.spinner', style='height: 100%')
-        span.font-medium.lg_text-7xl.text-gray-999.text-xl Loading...
+        span.font-medium.lg_text-7xl.text-gray-999.text-xl {{ $t('message.block_detail_loading') }}
 
-    template(v-else) 
+    template(v-else)
         .flex.items-center(v-if='state.mainData?.producer')
-            .w-24.lg_w-44 Producer:
+            .w-24.lg_w-44 {{ $t('message.block_detail_lb1') }}
             .flex-1.text-green
                 span.cursor-pointer.break-all(@click='$router.push(`/account/${state.mainData?.producer}`)') {{ state.mainData?.producer }}
         .flex.items-center(v-if='state.mainData?.id')
-            .w-24.lg_w-44 Id:
+            .w-24.lg_w-44 {{ $t('message.block_detail_lb2') }}
             .flex-1
                 span.text-gray-999.break-all {{ state.mainData?.id }}
         .flex.items-center(v-if='state.mainData?.previous')
-            .w-24.lg_w-44 Previous:
+            .w-24.lg_w-44 {{ $t('message.block_detail_lb3') }}
             .flex-1
                 span.text-green.cursor-pointer.break-all(@click='$router.push(`/block/${state.mainData?.previous}`)') {{ state.mainData?.previous }}
         .flex.items-center(v-if='state.mainData?.confirmed')
-            .w-24.lg_w-44 Confirmations:
+            .w-24.lg_w-44 {{ $t('message.block_detail_lb4') }}
             .flex-1.text-gray-999 {{ state.mainData?.confirmed }}
         .flex.items-center(v-if='state.mainData?.action_mroot')
-            .w-24.lg_w-44 Action Mroot:
+            .w-24.lg_w-44 {{ $t('message.block_detail_lb5') }}
             .flex-1.break-all {{ state.mainData?.action_mroot }}
         .flex.items-center(v-if='state.mainData?.transaction_mroot')
-            .w-24.lg_w-44 Transaction Mroot:
+            .w-24.lg_w-44 {{ $t('message.block_detail_lb6') }}
             .flex-1.break-all {{ state.mainData?.transaction_mroot }}
         .flex.items-center(v-if='state.time')
-            .w-24.lg_w-44 Time:
+            .w-24.lg_w-44 {{ $t('message.block_detail_lb7') }}
             .flex-1.text-gray-999.break-all {{ state.time }}
         .flex.items-center(v-if='state.mainData?.transactions')
-            .w-24.lg_w-44 Transactions:
+            .w-24.lg_w-44 {{ $t('message.block_detail_lb8') }}
             .flex-1.text-gray-999.break-all {{ state.mainData?.transactions?.length }}
 
-        RawDataBase(title='Blockchain Raw Data:', :isopen='true', expand-path='2', :json='state.mainData', v-if='state.mainData?.transactions?.length < 1000')
+        RawDataBase(:title='$t("message.block_detail_lb9")', :isopen='true', expand-path='2', :json='state.mainData', v-if='state.mainData?.transactions?.length < 1000')
 
         template(v-if='state.trxArr.length')
             .overflow-scroll.scroll-hidden
                 table.table.w-full
                     thead
                         tr
-                            th Expiration
-                            th CPU
-                            th NET
-                            th Id
-                            th Status
-                            th Actions
+                            th {{ $t('message.block_detail_th1') }}
+                            th {{ $t('message.block_detail_th2') }}
+                            th {{ $t('message.block_detail_th3') }}
+                            th {{ $t('message.block_detail_th4') }}
+                            th {{ $t('message.block_detail_th5') }}
+                            th {{ $t('message.block_detail_th6') }}
                     tbody
                         tr(v-for='(item, index) in state.trxArr', :key='index')
                             th {{ formatTime(item?.expiration) }}
                             th {{ item?.cpu }}
                             th {{ item?.net }}
-                            th 
+                            th
                                 span.text-green.cursor-pointer(@click='$router.push(`/transaction/${item?.hash}`)') {{ item?.hash }}
                             th {{ item?.status }}
                             th {{ item?.action?.name }}
 
             .flex.justify-end.items-center.text-gray-666.py-3
-                span Items per page:
+                span {{ $t('message.block_detail_pager') }}
                 select.outline-none.h-6.w-20.border.rounded.mx-2.border-gray-f4.cursor-pointer(v-model='state.listQuery.size')
                     option(value='20') 20
                     option(value='50') 50

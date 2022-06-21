@@ -1,32 +1,32 @@
 <template lang="pug">
 .py-2.space-y-4.producers
-    h2.text-2xl.lg_px-0.px-2 Producer: {{ producer }}
+    h2.text-2xl.lg_px-0.px-2 {{ $t('message.producer_detail') }} {{ producer }}
 
     .lg_px-0.px-2.text-xs.lg_text-base
         .flex.items-center.h-8
-            .w-24.lg_w-44 Producer:
+            .w-24.lg_w-44 {{ $t('message.producer_detail') }}
             .flex-1.text-green {{ producer }}
         .flex.items-center.h-8
-            .w-24.lg_w-44 Votes:
+            .w-24.lg_w-44 {{ $t('message.votes') }}
             .flex-1.text-gray-666
                 span.text-black {{ mainElement?.rate?.toLocaleString() }} %
                 |
                 | /
                 | {{ mainElement?.total_votes?.toLocaleString() }} {{ frontConfig?.coin }}
         .flex.items-center.h-8(v-if='voters?.votesCounter')
-            .w-24.lg_w-44 All voters:
+            .w-24.lg_w-44 {{ $t('message.producer_detail_lb1') }}
             .flex-1.text-gray-666 {{ voters?.votesCounter?.toLocaleString() }}
         .flex.items-center.h-8
-            .w-24.lg_w-44 Rewards:
+            .w-24.lg_w-44 {{ $t('message.producer_detail_lb2') }}
             .flex-1.text-gray-666 {{ mainElement?.rewards?.toLocaleString() }} {{ frontConfig?.coin }}
         .flex.items-center.h-8
-            .w-24.lg_w-44 Position:
+            .w-24.lg_w-44 {{ $t('message.producer_detail_lb3') }}
             .flex-1.text-gray-666 # {{ mainElement?.index }}
         .flex.items-center.h-8
-            .w-24.lg_w-44 Location:
+            .w-24.lg_w-44 {{ $t('message.producer_detail_lb4') }}
             .flex-1.text-gray-666 {{ bpData?.org?.location?.country }}, {{ bpData?.org?.location?.name }}
         .flex.items-center.h-8
-            .w-24.lg_w-44 Links:
+            .w-24.lg_w-44 {{ $t('message.producer_detail_lb5') }}
             .flex-1.text-gray-666
                 a(:href='mainElement?.url', v-if='mainElement?.url', target='_blank')
                     i.far.fa-desktop-alt
@@ -47,17 +47,17 @@
                 a(:href='`https://www.keybase.io/${bpData?.org?.social?.keybase}`', v-if='bpData?.org?.social?.keybase', target='_blank')
                     i.fab.fa-keybase
         .flex.items-center.h-8
-            .w-24.lg_w-44 Public Key:
+            .w-24.lg_w-44 {{ $t('message.producer_detail_lb6') }}
             .flex-1.text-green.break-all {{ mainElement?.producer_key }}
         .flex.items-center.h-8(v-if='voters?.voters')
-            .w-24.lg_w-44 Last voters:
+            .w-24.lg_w-44 {{ $t('message.producer_detail_lb7') }}
             .flex-1.text-gray-666
                 span(v-for='voter in voters?.voters')
                     strong(v-if='voter?.currency !== frontConfig?.coin')
                         span {{ voter?.act?.data?.voter }}
-                        span stake {{ voter?.stake ? voter?.stake?.toLocaleString() : 0 }} {{ frontConfig?.coin }}
+                        span {{ $t('message.producer_detail_lb7_1') }} {{ voter?.stake ? voter?.stake?.toLocaleString() : 0 }} {{ frontConfig?.coin }}
         .flex.items-center.h-8
-            .w-24.lg_w-44 Nodes:
+            .w-24.lg_w-44 {{ $t('message.producer_detail_lb8') }}
             .flex-1.text-gray-666 {{ bpData?.nodes?.length }}
 
     .w-full.h-96.rounded-lg.bg-gray-fb.hidden

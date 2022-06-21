@@ -1,35 +1,35 @@
 <template lang="pug">
 .bg-green
     Wrapper.py-6.pb-4
-        .grid.grid-cols-2.lg_grid-cols-5.gap-2.mb-3.px-2.lg_px-0
-            .bg-white.p-4
-                span RAM Price
+        .grid.grid-cols-2.lg_grid-cols-5.gap-4.mb-3.px-2.lg_px-0
+            .bg-white.p-4.rounded-md
+                span {{ $t('message.head1') }}
                 p.mt-2.text-green
                     | {{ state.ramPrice }}
                     span.ml-1.text-xs.font-normal {{ frontConfig?.coin }}/KB
-            .bg-white.p-4
-                span ACCOUNTS
+            .bg-white.p-4.rounded-md
+                span {{ $t('message.head2') }}
                 p.mt-2.text-green {{ state.aggragationData?.accounts?.toLocaleString() }}
-            .bg-white.p-4
-                span BLOCKS
+            .bg-white.p-4.rounded-md
+                span {{ $t('message.head3') }}
                 p.mt-2.text-green {{ state.blockchainData?.head_block_num?.toLocaleString() }}
-            .bg-white.p-4
-                span ACTIONS
+            .bg-white.p-4.rounded-md
+                span {{ $t('message.head4') }}
                 p.mt-2.text-green {{ state.aggragationData?.actions?.toLocaleString() }}
-            .bg-white.p-4
-                span PRODUCER
+            .bg-white.p-4.rounded-md
+                span {{ $t('message.head5') }}
                 p.mt-2.text-green.cursor-pointer(@click='$router.push(`/producers/${state.producer}`)') {{ state.producer }}
 
         .flex.items-center.justify-between.text-white.px-2.lg_px-0.text-sm
             span
-                |   Users Online:
+                |   {{ $t('message.head6_1') }}
                 span.lg_text-lg.mx-1 {{ state.usersOnline }}
-                |   TPS.max:
+                |   {{ $t('message.head6_2') }}
                 span.lg_text-lg.mx-1 {{ state.aggragationData?.max_tps?.toLocaleString() }}
-                |   TPS.live:
+                |   {{ $t('message.head6_3') }}
                 span.lg_text-lg.mx-1 {{ state.TPSLiveTx }}
             span.flex.items-center.cursor-pointer(@click='toggleShow')
-                |   Live Actions
+                |   {{ $t('message.head6_4') }}
                 i.fas.fa-chevron-down.ml-2(:class='modelValue ? "rotate-180" : ""')
 </template>
 

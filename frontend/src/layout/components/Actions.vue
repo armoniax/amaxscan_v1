@@ -1,15 +1,15 @@
 <template lang="pug">
 Wrapper.pt-4
     .grid.grid-cols-1.lg_grid-cols-2.gap-4.lg_gap-8
-        Block(title='Blocks')
+        Block(:title='$t("message.blocks")')
             .px-4.font-normal.h-12.items-center.flex(v-if='!state.blocks.length')
             table.table.w-full(v-else)
                 thead
                     tr
-                        th Number
-                        th Transactions
-                        th Producer
-                        th Time
+                        th {{ $t('message.blocks_th1') }}
+                        th {{ $t('message.blocks_th2') }}
+                        th {{ $t('message.blocks_th3') }}
+                        th {{ $t('message.blocks_th4') }}
                 tbody
                     tr(v-for='(item, index) in state.blocks', :key='index')
                         th
@@ -19,17 +19,17 @@ Wrapper.pt-4
                             span.text-green.cursor-pointer(@click='$router.push(`/producers/${item?.producer}`)') {{ item?.producer }}
                         th.text-center {{ handleTime(item?.timestamp) }}
 
-        Block(title='Latest Actions')
-            .px-4.font-normal.h-12.items-center.flex(v-if='!state.txns.length') None yet
+        Block(:title='$t("message.latestActions")')
+            .px-4.font-normal.h-12.items-center.flex(v-if='!state.txns.length') {{ $t('message.notyet') }}
             table.table.w-full(v-else)
                 thead
                     tr
-                        th Tx Hash
-                        th Action Name
+                        th {{ $t('message.la_th1') }}
+                        th {{ $t('message.la_th2') }}
                         //- th Data
                 tbody
                     tr(v-for='(item, index) in state.txns', :key='index')
-                        th 
+                        th
                             span.text-green.cursor-pointer(@click='$router.push(`/transaction/${item?.txid}`)') {{ item?.txid.substr(0, 9) + "..." + item?.txid.substr(item?.txid.length - 9, 9) }}
                         th.font-medium {{ item?.name }}
                         //- th -
