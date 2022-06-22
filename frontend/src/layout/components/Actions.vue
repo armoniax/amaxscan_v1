@@ -123,8 +123,8 @@ export default defineComponent({
                     return;
                 }
                 let eos_votes = Math.floor(calculateEosFromVotes(elem.total_votes));
-                elem.all_votes = elem.total_votes;
-                elem.total_votes = Number(eos_votes).toLocaleString();
+                elem.all_votes = Number(eos_votes).toLocaleString();
+                // elem.total_votes = Number(eos_votes).toLocaleString();
 
                 result.push(elem);
             });

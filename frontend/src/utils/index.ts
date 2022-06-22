@@ -13,9 +13,9 @@ export const sortArray = (data: any[], ungerKey = 'EOS11111111111111111111111111
         if (elem.producer_key === ungerKey) {
             return;
         }
-        let eos_votes = Math.floor(calculateAmaxFromVotes(elem.total_votes));
-        elem.all_votes = elem.total_votes;
-        elem.total_votes = Number(eos_votes).toLocaleString();
+        let eos_votes = Math.floor(calculateAmaxFromVotes(elem.total_votes)) / 100000000;
+        elem.all_votes = Number(eos_votes).toLocaleString();
+        // elem.total_votes = Number(eos_votes).toLocaleString();
 
         result.push(elem);
     });
