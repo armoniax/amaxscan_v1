@@ -2,12 +2,8 @@
 .py-2.space-y-4.account.px-2.lg_px-0
     .flex.justify-between.items-center
       .lg_text-2xl.text-xl.flex.items-end
-        h2 {{ $t('message.account_detail') }} {{ account || "-" }}
-<<<<<<< HEAD
-        span.text-sm(v-if="state.mainData?.creator") ({{ $t('message.account_detail_by', { msg: state.mainData?.creator}) }})
-=======
-        a.text-sm.text-green(v-if="state.mainData?.creator", :href='"/account/" + state.mainData?.creator') ({{ $t('message.account_detail_by', { msg: state.mainData?.creator}) }})
->>>>>>> origin/prod
+        h2 {{ $t('message.account_detail') }} {{ account || "-" }}  
+        a.text-sm.text-green(v-if="state.mainData?.creator", :href='"/account/" + state.mainData?.creator') {{ $t('message.account_detail_by', { msg: state.mainData?.creator}) }}
       .text-sm {{ $t('message.account_detail_time') }}
         span.text-gray-999 {{ state.time || "-" }}
     PageAccountBase(:time='state.time', :mainData='state.mainData', :unstaked='state.unstaked', :balance='state.balance')
