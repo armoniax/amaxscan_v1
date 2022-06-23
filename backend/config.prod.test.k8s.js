@@ -1,4 +1,11 @@
 /*
+ * @Author: Will
+ * @Date: 2022-06-23 16:03:52
+ * @LastEditors: Will
+ * @LastEditTime: 2022-06-23 16:25:28
+ * @Description: 请填写简介
+ */
+/*
   App configuration example created by eoswebnetbp1
 */
 const path = require('path');
@@ -43,7 +50,7 @@ config.telegram = {
 
 // reserved nodes
 config.endpoints = [
-  'http://172.31.12.229:18888'
+  'http://172.31.12.214:18888'
 ];
 
 // eosjs
@@ -61,10 +68,10 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = process.env.CUSTOMCHAIN || 'http://172.31.12.229:18888';
+config.customChain = process.env.CUSTOMCHAIN || 'http://172.31.12.214:18888';
 
 // api url for history
-config.historyChain = process.env.HISTORYCHAIN || 'http://172.31.12.229:18888'; //still the RPC chain
+config.historyChain = process.env.HISTORYCHAIN || 'http://172.31.12.214:18888'; //still the RPC chain
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
