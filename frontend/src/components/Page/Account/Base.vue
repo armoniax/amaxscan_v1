@@ -1,55 +1,57 @@
 <template lang="pug">
-.flex.justify-between.text-sm.items-stretch
-    table.table.border.rounded.border-green.flex-1.lg_mr-12
-      tbody
-        tr.h-10
-          td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb1') }}
-            .text-gray-999 {{ balance }} {{ state.frontConfig?.coin }}
-          td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb2') }}
-            .text-gray-999 {{ unstaked }} {{ state.frontConfig?.coin }}
-          td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb3') }}
-            .text-gray-999 {{ mainData?.voter_info?.staked ? mainData?.voter_info?.staked / 100000000 : 0 }} {{ state.frontConfig?.coin }}
-        tr.h-10
-          td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb4') }}
-            .font-normal
-              .text-gray-999
-                | {{ $t('message.account_detail_tb4_1') }}
-                span.mx-2 {{ mainData?.total_resources?.cpu_weight }}
-              .text-gray-999
-                | {{ $t('message.account_detail_tb4_2') }}
-                span.mx-2 {{ mainData?.total_resources?.net_weight }}
-              .text-gray-999
-                | {{ $t('message.account_detail_tb4_3') }}
-                span.mx-2 {{ mainData?.total_resources?.owner }}
-          td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb5') }}
-            .font-normal
-              .text-gray-999
-                | {{ $t('message.account_detail_tb5_1') }}
-                span.mx-2 {{ mainData?.delegated_bandwidth?.cpu_weight }}
-              .text-gray-999
-                | {{ $t('message.account_detail_tb5_2') }}
-                span.mx-2 {{ mainData?.delegated_bandwidth?.from }}
-              .text-gray-999
-                | {{ $t('message.account_detail_tb5_3') }}
-                span.mx-2 {{ mainData?.delegated_bandwidth?.net_weight }}
-              .text-gray-999
-                | {{ $t('message.account_detail_tb5_4') }}
-                span.mx-2 {{ mainData?.delegated_bandwidth?.to }}
-          td.border.border-green.align-top.space-y-2
-            .w-24.lg_w-44.text-black.font-bold {{ $t('message.account_detail_tb6') }}
-            .font-normal
-              .text-gray-999
-                | {{ $t('message.account_detail_tb6_1') }}
-                span.mx-2 {{ mainData?.voter_info?.last_vote_weight }}
-              .text-gray-999
-                | {{ $t('message.account_detail_tb6_2') }}
-                span.mx-2 {{ mainData?.voter_info?.owner }}
-    .flex.flex-col.justify-between
+.flex.flex-col.lg_flex-row.justify-between
+    .overflow-scroll.scroll-hidden
+      div
+        table.table.w-full.lg_mr-12
+          tbody
+            tr.h-10
+              td.border.border-green.align-top.space-y-2
+                .text-black.font-bold {{ $t('message.account_detail_tb1') }}
+                .text-gray-999 {{ balance }} {{ state.frontConfig?.coin }}
+              td.border.border-green.align-top.space-y-2
+                .text-black.font-bold {{ $t('message.account_detail_tb2') }}
+                .text-gray-999 {{ unstaked }} {{ state.frontConfig?.coin }}
+              td.border.border-green.align-top.space-y-2
+                .text-black.font-bold {{ $t('message.account_detail_tb3') }}
+                .text-gray-999 {{ mainData?.voter_info?.staked ? mainData?.voter_info?.staked / 100000000 : 0 }} {{ state.frontConfig?.coin }}
+            tr.h-10
+              td.border.border-green.align-top.space-y-2
+                .text-black.font-bold {{ $t('message.account_detail_tb4') }}
+                .font-normal
+                  .text-gray-999
+                    | {{ $t('message.account_detail_tb4_1') }}
+                    span.mx-2 {{ mainData?.total_resources?.cpu_weight }}
+                  .text-gray-999
+                    | {{ $t('message.account_detail_tb4_2') }}
+                    span.mx-2 {{ mainData?.total_resources?.net_weight }}
+                  .text-gray-999
+                    | {{ $t('message.account_detail_tb4_3') }}
+                    span.mx-2 {{ mainData?.total_resources?.owner }}
+              td.border.border-green.align-top.space-y-2
+                .text-black.font-bold {{ $t('message.account_detail_tb5') }}
+                .font-normal
+                  .text-gray-999
+                    | {{ $t('message.account_detail_tb5_1') }}
+                    span.mx-2 {{ mainData?.delegated_bandwidth?.cpu_weight }}
+                  .text-gray-999
+                    | {{ $t('message.account_detail_tb5_2') }}
+                    span.mx-2 {{ mainData?.delegated_bandwidth?.from }}
+                  .text-gray-999
+                    | {{ $t('message.account_detail_tb5_3') }}
+                    span.mx-2 {{ mainData?.delegated_bandwidth?.net_weight }}
+                  .text-gray-999
+                    | {{ $t('message.account_detail_tb5_4') }}
+                    span.mx-2 {{ mainData?.delegated_bandwidth?.to }}
+              td.border.border-green.align-top.space-y-2
+                .text-black.font-bold {{ $t('message.account_detail_tb6') }}
+                .font-normal
+                  .text-gray-999
+                    | {{ $t('message.account_detail_tb6_1') }}
+                    span.mx-2 {{ mainData?.voter_info?.last_vote_weight }}
+                  .text-gray-999
+                    | {{ $t('message.account_detail_tb6_2') }}
+                    span.mx-2 {{ mainData?.voter_info?.owner }}
+    .flex.flex-col.space-y-6.lg_mt-0.mt-4
       .font-normal
         .w-full CPU
           span.font-normal.text-xs.ml-4.text-gray-666 {{ (mainData?.cpu_limit?.used / 1000000).toFixed(4) }} sec / {{ (mainData?.cpu_limit?.max / 1000000).toFixed(4) }} sec

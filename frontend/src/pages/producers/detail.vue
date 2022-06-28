@@ -118,16 +118,16 @@ export default defineComponent({
                 return;
             }
             state.votesToRemove = data.reduce((acc, cur) => {
-                const percentageVotes = (cur.all_votes / totalProducerVoteWeight) * 100;
+                const percentageVotes = (cur.total_votes / totalProducerVoteWeight) * 100;
                 if (percentageVotes * 200 < 100) {
-                    acc += parseFloat(cur.all_votes);
+                    acc += parseFloat(cur.total_votes);
                 }
                 return acc;
             }, 0);
             data.forEach((elem, index) => {
                 elem.index = index + 1;
-                elem.rate = !totalProducerVoteWeight ? 0 : ((elem.all_votes / totalProducerVoteWeight) * 100).toLocaleString();
-                elem.rewards = !totalProducerVoteWeight ? 0 : countRewards(elem.all_votes, elem.index, totalProducerVoteWeight);
+                elem.rate = !totalProducerVoteWeight ? 0 : ((elem.total_votes / totalProducerVoteWeight) * 100).toLocaleString();
+                elem.rewards = !totalProducerVoteWeight ? 0 : countRewards(elem.total_votes, elem.index, totalProducerVoteWeight);
             });
 
             return data;
