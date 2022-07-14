@@ -47,9 +47,9 @@ module.exports = {
                 DEFAULT: '#7C53F2',
             },
         },
-        spacing: {
-            70: '24rem',
-        },
+        // spacing: {
+        //     70: '24rem',
+        // },
         extend: {
             spacing: {   // margin padding  height
                 90: '20rem',
