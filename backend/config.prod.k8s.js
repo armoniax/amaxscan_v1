@@ -43,7 +43,7 @@ config.telegram = {
 
 // reserved nodes
 config.endpoints = [
-  'http://sg-exp3.vmi.nchain.me:8889',  //localhost access
+  'http://expnode-service.amax-prod:8889',  //localhost access
 	'https://expnode.amaxscan.io'
 ];
 
@@ -62,10 +62,10 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = process.env.CUSTOMCHAIN || 'http://sg-exp3.vmi.nchain.me:8889';
+config.customChain = process.env.CUSTOMCHAIN || 'http://expnode-service.amax-prod:8889';
 
 // api url for history
-config.historyChain = process.env.HISTORYCHAIN || 'http://sg-exp3.vmi.nchain.me:8889'; //still the RPC chain
+config.historyChain = process.env.HISTORYCHAIN || 'http://expnode-service.amax-prod:8889'; //still the RPC chain
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
