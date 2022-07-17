@@ -37,6 +37,9 @@ module.exports = {
             blue: {
                 DEFAULT: '#0263FF',
             },
+            main: {
+                DEFAULT: '#1BA03A',
+            },
             red: {
                 DEFAULT: '#e36956',
             },
@@ -45,7 +48,7 @@ module.exports = {
             },
         },
         extend: {
-            spacing: {
+            spacing: {   // margin padding  height
                 90: '20rem',
             },
             container: {

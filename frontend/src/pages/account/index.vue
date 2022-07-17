@@ -141,7 +141,7 @@
                     tr(v-for='(element, index) in state.showDataSourceCreation', :key='index')
                         th {{ index + 1 }}
                         th {{ element?.name }}
-                        th {{ momentFarmat(element?.block_time).format("lll") }}
+                        th {{ momentFarmat(element?.creation_date).format("lll") }}
                         th.cursor-pointer
                             img(src="@/assets/images/d.png", @click="$router.push(`/account/${element.name}`)")
 
