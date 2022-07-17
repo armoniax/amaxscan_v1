@@ -473,12 +473,12 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	});
 
     /*
-	* router - get_key_accounts
+	* router - get_accounts_by_authorizers
 	* params - name
 	*/
-	router.get('/api/v1/get_key_accounts/:key', (req, res) => {
-	   	let data = { public_key: req.params.key };
-	   	request.post({url:`${config.historyChain}/v1/history/get_key_accounts`, json: data }).pipe(res);
+	router.get('/api/v1/get_accounts_by_authorizers/:pubkey', (req, res) => {
+	   	let data = { keys: [req.params.pubkey] };
+	   	request.post({url:`${config.customChain}/v1/chain/get_accounts_by_authorizers`, json: data }).pipe(res);
 	});
 
 	/*
