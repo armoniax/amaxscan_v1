@@ -55,7 +55,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 						.catch(err => {
 							cb(null, null);
 						});
-				} else {
+				} else { 
 					cb(null, null);
 				}
 			},
@@ -78,10 +78,16 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 					log.info("search public_key: " + text);
 					
 					let data = { keys: [text] };
-					request.post({url:`${config.customChain}/v1/chain/get_accounts_by_authorizers`, json: data })
+					fetch(`${config.customChain}/v1/chain/get_accounts_by_authorizers`, {
+						method: 'POST',
+						body: JSON.stringify(data)
+					}).then(response => response.json())
+					// request.post({url:`${config.customChain}/v1/chain/get_accounts_by_authorizers`, json: data })
 					.then(result => {
+						console.log('success-----', result)
 						cb(null, result);
 					}).catch(err => {
+						console.log('err------', err)
 						cb(null, null);
 					});
 
