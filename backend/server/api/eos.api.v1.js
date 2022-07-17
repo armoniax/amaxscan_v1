@@ -76,13 +76,15 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 			pubkey: (cb) => {
 				if (text.length == 52) {	//PubKey length
 					log.info("search public_key: " + text);
-					global.eos.getKeyAccounts({ public_key: text })
-						.then(result => {
-							cb(null, result);
-						})
-						.catch(err => {
-							cb(null, null);
-						});
+					
+					let data = { keys: [text] };
+					request.post({url:`${config.customChain}/v1/chain/get_accounts_by_authorizers`, json: data })
+					.then(result => {
+						cb(null, result);
+					}).catch(err => {
+						cb(null, null);
+					});
+
 				} else {
 					cb(null, null);
 				}
