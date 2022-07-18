@@ -6,7 +6,7 @@ export const Ax = axios.create({
     baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/api',
 });
 
-console.log('AmaxExpSrv_Ver: ---->>>>>>> v0.5.31', process.env.NODE_ENV)
+console.log('AmaxExpSrv_Ver: ---->>>>>>> v0.5.32', process.env.NODE_ENV)
 console.log(import.meta.env)
 
 Ax.interceptors.response.use(response => {
