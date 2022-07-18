@@ -112,7 +112,8 @@ module.exports = (io, mongoMain, metrics) => {
 
   function getTPS(){
       let timeRequestStart = +new Date(); 
-      customFunctions.getLastBlocks(eos, [1, 2], (err, result) => {
+      // customFunctions.getLastBlocks(eos, [1, 2], (err, result) => {
+      customFunctions.getLastBlocks(eos, [1], (err, result) => {
             if (err){
                 console.error(err);
                 return setTimeout(getTPS, getSleepTimeTPS(timeRequestStart));
