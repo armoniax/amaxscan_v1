@@ -13,8 +13,8 @@ const request         = require('request');
 const { logWrapper } = require('../utils/main.utils');
 const log            = new logWrapper('socket_io');
 
-const customSlack   = require('../modules/slack.module');
-const logSlack      = customSlack.configure(config.loggerSlack.alerts);
+// const customSlack   = require('../modules/slack.module');
+// const logSlack      = customSlack.configure(config.loggerSlack.alerts);
 
 const updateTimeBlocks = config.blockUpdateTime;
 const updateTPS        = config.updateTPS;
