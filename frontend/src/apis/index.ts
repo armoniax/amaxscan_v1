@@ -6,7 +6,7 @@ export const Ax = axios.create({
     baseURL: process.env.NODE_ENV === 'development' ? '/api' : '/api',
 });
 
-console.log('AmaxExpSrv_Ver: ---->>>>>>> v0.5.31', process.env.NODE_ENV)
+console.log('AmaxExpSrv_Ver: ---->>>>>>> v0.5.32', process.env.NODE_ENV)
 console.log(import.meta.env)
 
 Ax.interceptors.response.use(response => {
@@ -46,6 +46,6 @@ export const GET_PRODUCERS_BP_JSON = () => Ax.get('/v1/get_producers_bp_json');
 
 export const GET_TRANSACTION = (transactionId: string) => Ax.get(`/v1/get_transaction/${transactionId}`);
 
-export const GET_KEY_ACCOUNTS = (address: string) => Ax.get(`/v1/get_key_accounts/${address}`);
+export const GET_KEY_ACCOUNTS = (pubkey: string) => Ax.get(`/v1/get_accounts_by_authorizers/${pubkey}`);
 
 export const GET_ACCOUNT_BY_CREATOR = ({ creator, pageIndex, pageSize }) => Ax.get(`/stats/account/listbyceator?creator=${creator}&pageIndex=${pageIndex}&pageSize=${pageSize}`);

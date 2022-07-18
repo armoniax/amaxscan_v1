@@ -32,6 +32,7 @@ export default defineComponent({
 
             GET_KEY_ACCOUNTS(pubkey).then((res: any) => {
                 state.mainData = (res && !res.account_names) ? createArrayAccounts(res): res;
+                console.log('GET_KEY_ACCOUNTS======', state.mainData)
             });
         };
 
@@ -39,13 +40,13 @@ export default defineComponent({
             let result = {
                 account_names: []
             };
-            if (data && data.account_names){
-                data = data.account_names;
-            }
+            if (data && data.accounts)
+                data = data.accounts;
+            
             data.forEach(elem => {
-                if (elem.permission === "active"){
-                    result.account_names.push(elem.account);
-                }
+                // if (elem.permission_name === "active"){
+                    result.account_names.push(elem.account_name);
+                // }
             });
             return result;
         };

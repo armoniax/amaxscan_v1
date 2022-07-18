@@ -55,7 +55,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 						.catch(err => {
 							cb(null, null);
 						});
-				} else {
+				} else { 
 					cb(null, null);
 				}
 			},
@@ -76,13 +76,21 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 			pubkey: (cb) => {
 				if (text.length == 52) {	//PubKey length
 					log.info("search public_key: " + text);
-					global.eos.getKeyAccounts({ public_key: text })
-						.then(result => {
-							cb(null, result);
-						})
-						.catch(err => {
-							cb(null, null);
-						});
+					
+					let data = { keys: [text] };
+					fetch(`${config.customChain}/v1/chain/get_accounts_by_authorizers`, {
+						method: 'POST',
+						body: JSON.stringify(data)
+					}).then(response => response.json())
+					// request.post({url:`${config.customChain}/v1/chain/get_accounts_by_authorizers`, json: data })
+					.then(result => {
+						console.log('success-----', result)
+						cb(null, result);
+					}).catch(err => {
+						console.log('err------', err)
+						cb(null, null);
+					});
+
 				} else {
 					cb(null, null);
 				}
@@ -473,12 +481,12 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	});
 
     /*
-	* router - get_key_accounts
+	* router - get_accounts_by_authorizers
 	* params - name
 	*/
-	router.get('/api/v1/get_key_accounts/:key', (req, res) => {
-	   	let data = { public_key: req.params.key };
-	   	request.post({url:`${config.historyChain}/v1/history/get_key_accounts`, json: data }).pipe(res);
+	router.get('/api/v1/get_accounts_by_authorizers/:pubkey', (req, res) => {
+	   	let data = { keys: [req.params.pubkey] };
+	   	request.post({url:`${config.customChain}/v1/chain/get_accounts_by_authorizers`, json: data }).pipe(res);
 	});
 
 	/*
