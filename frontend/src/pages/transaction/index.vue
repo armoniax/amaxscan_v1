@@ -49,33 +49,42 @@
                             th
                                 strong {{ action?.data?.quantity }}
 
-    //- .permissions(v-if='typeActionActive === "ActionsInfo"')
-    //-     .overflow-x-auto
-    //-         table.table.w-full.my-table
-    //-             thead
-    //-                 tr
-    //-                     th {{ $t('message.transaction_detail_th6') }}
-    //-                     th
-    //-             tbody
-    //-                 tr(v-for='(item, index) in dataSource?.trx?.actions', :key='index')
-    //-                     th
-    //-                         strong {{ item?.name }}
-    //-                     th
-    //-                         actionViewer(:data='item')
     .permissions(v-if='typeActionActive === "ActionsInfo"')
-        .overflow-x-auto.flex
-            .w-70
-                .top.text-main push.sx
-                img.lg_w-24.w-24(src="@/assets/images/procss1.png")
+        .overflow-x-auto
+            table.table.w-full.my-table
+                thead
+                    tr
+                        th {{ $t('message.transaction_detail_th6') }}
+                        th
+                tbody
+                    tr(v-for='(item, index) in dataSource?.trx?.actions', :key='index')
+                        th
+                            strong {{ item?.name }}
+                        th
+                            actionViewer(:data='item')
+    //- .permissions(v-if='typeActionActive === "ActionsInfo"')
+    //-     .overflow-x-auto.flex
+    //-         .w-60
+    //-             .top.text-main.text-lg.mb-1 push.sx
+    //-             img.lg_w-24.w-24(src="@/assets/images/procss1.png")
 
-            .w-70
-                .top.text-main push.sx: 
-                    span.text-gray-333 mine
-                img.lg_w-24.w-24.object-contain(src="@/assets/images/procss2.png" style="image-rendering: -webkit-optimize-contrast;")
+    //-         .w-64
+    //-             .top.text-main.text-lg.mb-1 push.sx: 
+    //-                 span.text-gray-333.font-normal mine
+    //-             img.lg_w-24.w-24.object-contain(src="@/assets/images/procss2.png" style="image-rendering: -webkit-optimize-contrast;")
 
-            .flex-4 
-                .top push.sx
-                .h-md.bg-main
+    //-         .flex-1
+    //-             .top.mb-1.text-lg push.sx
+    //-             .min-h-40.bg-main-content.p-3.font-normal 
+    //-                 .leading-2.flex
+    //-                     .w-16 count: 
+    //-                     span 50
+    //-                 .leading-2.flex 
+    //-                     .w-16 nonce: 
+    //-                     span 6404
+    //-                 .leading-2.flex 
+    //-                     .w-16 type:
+    //-                     span 232
             
 
     .actions(v-if='typeActionActive === "Actions"')
@@ -106,6 +115,7 @@ export default defineComponent({
                 { name: 'Actions (Raw Data)', key: 'Actions' },
             ],
             typeActionActive: 'TokenTransfer',
+            //- typeActionActive: 'ActionsInfo',
             mainData: null,
             dataSource: null,
             time: '',

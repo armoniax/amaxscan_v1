@@ -39,6 +39,7 @@ module.exports = {
             },
             main: {
                 DEFAULT: '#1BA03A',
+                content: '#F6FBF7'
             },
             red: {
                 DEFAULT: '#e36956',
@@ -47,9 +48,17 @@ module.exports = {
                 DEFAULT: '#7C53F2',
             },
         },
+        minHeight: {
+            40: "10rem",
+        },
         extend: {
-            spacing: {   // margin padding  height
+            spacing: {   // margin padding  height width
                 90: '20rem',
+                less2: "0.2rem",
+                4: "1rem",
+            },
+            lineHeight: {
+                2: "2rem"
             },
             container: {
                 center: true,

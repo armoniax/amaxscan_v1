@@ -1,11 +1,4 @@
 /*
- * @Author: Will
- * @Date: 2022-05-23 23:12:24
- * @LastEditors: Will
- * @LastEditTime: 2022-06-22 17:31:51
- * @Description: 请填写简介
- */
-/*
   App configuration example created by eoswebnetbp1
 */
 const path = require('path');
@@ -50,11 +43,8 @@ config.telegram = {
 
 // reserved nodes
 config.endpoints = [
-<<<<<<< HEAD
   'http://172.31.12.229:8888',  //localhost access
-=======
   'http://sg-exp3.vmi.nchain.me:8889',  //localhost access
->>>>>>> dev
 	'https://expnode.amaxscan.io'
 ];
 
@@ -74,16 +64,22 @@ config.eosConfig = {
 
 // api url for producers list
 <<<<<<< HEAD
+<<<<<<< HEAD
 config.customChain = process.env.CUSTOMCHAIN || 'http://172.31.12.229:8888';
 
 // api url for history
 config.historyChain = process.env.HISTORYCHAIN || 'http://172.31.12.229:8888'; //still the RPC chain
 =======
+=======
+>>>>>>> eff642becacdc08b9bc8a7fe09d9c9d52f9d871a
 config.customChain = process.env.CUSTOMCHAIN || 'http://sg-exp3.vmi.nchain.me:8889';
 
 // api url for history
 config.historyChain = process.env.HISTORYCHAIN || 'http://sg-exp3.vmi.nchain.me:8889'; //still the RPC chain
+<<<<<<< HEAD
 >>>>>>> dev
+=======
+>>>>>>> eff642becacdc08b9bc8a7fe09d9c9d52f9d871a
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';

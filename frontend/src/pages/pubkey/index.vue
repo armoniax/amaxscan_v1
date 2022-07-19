@@ -31,7 +31,8 @@ export default defineComponent({
             console.log('pubkey======', pubkey)
 
             GET_KEY_ACCOUNTS(pubkey).then((res: any) => {
-                state.mainData = (res && !res.accounts) ? createArrayAccounts(res): res;
+                state.mainData = (res && !res.account_names) ? createArrayAccounts(res): res;
+                console.log('GET_KEY_ACCOUNTS======', state.mainData)
             });
         };
 
