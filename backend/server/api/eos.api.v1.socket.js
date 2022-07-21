@@ -13,8 +13,8 @@ const request         = require('request');
 const { logWrapper } = require('../utils/main.utils');
 const log            = new logWrapper('socket_io');
 
-const customSlack   = require('../modules/slack.module');
-const logSlack      = customSlack.configure(config.loggerSlack.alerts);
+// const customSlack   = require('../modules/slack.module');
+// const logSlack      = customSlack.configure(config.loggerSlack.alerts);
 
 const updateTimeBlocks = config.blockUpdateTime;
 const updateTPS        = config.updateTPS;
@@ -112,7 +112,8 @@ module.exports = (io, mongoMain, metrics) => {
 
   function getTPS(){
       let timeRequestStart = +new Date(); 
-      customFunctions.getLastBlocks(eos, [1, 2], (err, result) => {
+      // customFunctions.getLastBlocks(eos, [1, 2], (err, result) => {
+      customFunctions.getLastBlocks(eos, [1], (err, result) => {
             if (err){
                 console.error(err);
                 return setTimeout(getTPS, getSleepTimeTPS(timeRequestStart));

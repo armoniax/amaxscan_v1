@@ -137,10 +137,16 @@ export default defineComponent({
             });
         };
 
+        /** half a second block interval */
+        // const countTPS = (data: any[]): number => {
+        //     let start = data[0].transactions.length;
+        //     let end = data[1].transactions.length;
+        //     return start + end;
+        // };
+
+        /** AMAX: one-second block interval */
         const countTPS = (data: any[]): number => {
-            let start = data[0].transactions.length;
-            let end = data[1].transactions.length;
-            return start + end;
+            return data[0].transactions.length;
         };
 
         onMounted(() => {
