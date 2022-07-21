@@ -43,8 +43,8 @@ config.telegram = {
 
 // reserved nodes
 config.endpoints = [
-  'http://sg-exp3.vmi.nchain.me:8889',  //localhost access
-	'https://expnode.amaxscan.io'
+  'http://expnode-service.amax-prod:8889'  //localhost access
+// 	'https://expnode.amaxscan.io'
 ];
 
 // eosjs
