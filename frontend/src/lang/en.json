@@ -98,7 +98,7 @@
         "publick_key_detail": "Accounts by Public Key:",
         "publick_key_lb1": "Public Key:",
         "publick_key_lb2": "Accounts:",
-        "account_detail_by": "Created by:{msg}",
+        "account_detail_by": "Created: {msg}",
         "account_detail_row1": "Actions Info",
         "account_detail_row2": "Token transfer",
         "account_detail_row3": "Actions (Raw Data)",
