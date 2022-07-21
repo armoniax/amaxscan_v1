@@ -43,7 +43,7 @@ config.telegram = {
 
 // reserved nodes
 config.endpoints = [
-  'http://expnode-service.amax-prod:8889'  //localhost access
+  'http://expnode-service.ambt.art'  //localhost access
 // 	'https://expnode.amaxscan.io'
 ];
 
