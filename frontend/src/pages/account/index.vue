@@ -253,6 +253,7 @@ export default defineComponent({
                 getCode(state.mainData.account_name);
 
                 console.log('getAccount-----', res);
+                console.log('state.mainData-----', state.mainData);
             });
         };
 
