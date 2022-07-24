@@ -44,9 +44,9 @@ export default defineComponent({
                 data = data.accounts;
             
             data.forEach(elem => {
-                // if (elem.permission_name === "active"){
+                if (elem.permission_name === "active"){
                     result.account_names.push(elem.account_name);
-                // }
+                }
             });
             return result;
         };
