@@ -111,22 +111,24 @@
         .w-24.lg_w-44 Delegated Bandwidth:
         .flex-1.font-normal
             | CPU weight:
-            span.text-gray-999.mx-2 {{ mainData?.delegated_bandwidth?.cpu_weight }}
-            | from:
-            span.text-gray-999.mx-2 {{ mainData?.delegated_bandwidth?.from }}
+            span.text-gray-999.mx-2 {{ mainData?.self_delegated_bandwidth?.cpu_weight }}
             | NET weight:
-            span.text-gray-999.mx-2 {{ mainData?.delegated_bandwidth?.net_weight }}
+            span.text-gray-999.mx-2 {{ mainData?.self_delegated_bandwidth?.net_weight }}
+            | from:
+            span.text-gray-999.mx-2 {{ mainData?.self_delegated_bandwidth?.from }}
             | to:
-            span.text-gray-999.mx-2 {{ mainData?.delegated_bandwidth?.to }}
+            span.text-gray-999.mx-2 {{ mainData?.self_delegated_bandwidth?.to }}
     //- .flex.items-center
         .w-24.lg_w-44 Voter Info:
         .flex-1.font-normal
-            | Last vote weight:
-            span.text-gray-999.mx-2 {{ mainData?.voter_info?.last_vote_weight }}
             | Owner:
             span.text-gray-999.mx-2 {{ mainData?.voter_info?.owner }}
+            | Staked:
+            span.text-gray-999.mx-2 {{ mainData?.voter_info?.staked }}
+            | Last vote weight:
+            span.text-gray-999.mx-2 {{ mainData?.voter_info?.last_vote_weight }}
     //- .flex.items-center
-        .w-24.lg_w-44 Created by:
+        .w-24.lg_w-44  Creator: 
         .flex-1.font-normal
             a(:href='"/account/" + mainData?.creator') {{ mainData?.creator }}
     //- .flex.items-center
