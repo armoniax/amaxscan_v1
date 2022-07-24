@@ -98,12 +98,12 @@
         "publick_key_detail": "Accounts by Public Key:",
         "publick_key_lb1": "Public Key:",
         "publick_key_lb2": "Accounts:",
-        "account_detail_by": "Created: {msg}",
+        "account_detail_by": "Creator: {msg}",
         "account_detail_row1": "Actions Info",
         "account_detail_row2": "Token transfer",
         "account_detail_row3": "Actions (Raw Data)",
         "account_detail_row4": "Permissions",
         "account_detail_row5": "Controlled Accounts",
-        "account_detail_row6": "Creations"
+        "account_detail_row6": "Creation"
     }
 }
