@@ -182,15 +182,13 @@ export default defineComponent({
             });
 
             socket.on('get_tps_blocks', (res: any) => {
-                console.log('get_tps_blocks',res.length, res);
-                // if (res && res.length === 2) {
-                //     state.TPSLiveTx = countTPS(res);
-                //     state.producer = state.producer === res[1].producer ? state.producer : res[1].producer;
-                //     // TODO 切换用户
-                //     store.dispatch('changeMessage', state.producer);
-                // }
-
-                if (res) {
+                console.log('get_tps_blocks', res.length, res);
+                if (res && res.length === 2) {
+                    state.TPSLiveTx = countTPS(res);
+                    state.producer = state.producer === res[1].producer ? state.producer : res[1].producer;
+                    // TODO 切换用户
+                    store.dispatch('changeMessage', state.producer);
+                } else if (res && res.length === 1) {
                     state.TPSLiveTx = countTPS(res);
                     state.producer = state.producer === res[0].producer ? state.producer : res[0].producer;
                     // TODO 切换用户
