@@ -18,7 +18,7 @@
                 p.mt-2.text-green {{ state.aggragationData?.actions?.toLocaleString() }}
             .bg-white.p-4.rounded-md
                 span {{ $t('message.head5') }}
-                p.mt-2.text-green.cursor-pointer(@click='$router.push(`/producers/${state.producer}`)') {{ state.producer }}
+                p.mt-2.text-green.cursor-pointer(@click='$router.push(`/producers/${state.producer}`)') {{ state.producer }}--
 
         .flex.items-center.justify-between.text-white.px-2.lg_px-0.text-sm
             span
@@ -39,7 +39,7 @@ import Wrapper from '@/components/Wrapper.vue';
 import { GET_TABLE_ROWS, GET_AGGREGATION_STAT, GET_INFO, Ax } from '@/apis';
 import { environment } from '@/environments/environment';
 import { useStore } from 'vuex';
-import { inject } from 'vue';
+import { inject, provide } from 'vue';
 // import { Socket } from 'socket.io-client';
 
 export default defineComponent({
@@ -182,10 +182,17 @@ export default defineComponent({
             });
 
             socket.on('get_tps_blocks', (res: any) => {
-                // console.log('get_tps_blocks', res);
-                if (res && res.length === 2) {
+                console.log('get_tps_blocks',res.length, res);
+                // if (res && res.length === 2) {
+                //     state.TPSLiveTx = countTPS(res);
+                //     state.producer = state.producer === res[1].producer ? state.producer : res[1].producer;
+                //     // TODO 切换用户
+                //     store.dispatch('changeMessage', state.producer);
+                // }
+
+                if (res) {
                     state.TPSLiveTx = countTPS(res);
-                    state.producer = state.producer === res[1].producer ? state.producer : res[1].producer;
+                    state.producer = state.producer === res[0].producer ? state.producer : res[0].producer;
                     // TODO 切换用户
                     store.dispatch('changeMessage', state.producer);
                 }
