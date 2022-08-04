@@ -39,7 +39,7 @@ import Wrapper from '@/components/Wrapper.vue';
 import { GET_TABLE_ROWS, GET_AGGREGATION_STAT, GET_INFO, Ax } from '@/apis';
 import { environment } from '@/environments/environment';
 import { useStore } from 'vuex';
-import { inject } from 'vue';
+import { inject, provide } from 'vue';
 // import { Socket } from 'socket.io-client';
 
 export default defineComponent({
@@ -182,10 +182,15 @@ export default defineComponent({
             });
 
             socket.on('get_tps_blocks', (res: any) => {
-                // console.log('get_tps_blocks', res);
+                console.log('get_tps_blocks', res.length, res);
                 if (res && res.length === 2) {
                     state.TPSLiveTx = countTPS(res);
                     state.producer = state.producer === res[1].producer ? state.producer : res[1].producer;
+                    // TODO 切换用户
+                    store.dispatch('changeMessage', state.producer);
+                } else if (res && res.length === 1) {
+                    state.TPSLiveTx = countTPS(res);
+                    state.producer = state.producer === res[0].producer ? state.producer : res[0].producer;
                     // TODO 切换用户
                     store.dispatch('changeMessage', state.producer);
                 }

@@ -578,6 +578,22 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	   	 		res.status(501).end();
 	   	 	});
 	});
+	/*
+	*	get account if in blacklist
+	*/
+	router.post('/api/v1/get_black_list/:account', (req, res) => {
+		var code = req.params.accountName
+		let data = { 
+			"code": "amax.token",
+			"table": "blacklist",
+			"scope": "amax.token",
+			"lower_bound": code,
+			"upper_bound": code,
+			"limit": 1,
+			"json": true
+		 };
+	   	request.post({url:`${config.customChain}/v1/chain/get_table_rows`, json: data }).pipe(res);
+	});
 	//============ END of Account API
 
 // ============== end of exports

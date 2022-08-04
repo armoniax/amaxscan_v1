@@ -2,7 +2,7 @@
 .py-2.space-y-4.account.px-2.lg_px-0
     .flex.justify-between.items-center
       .lg_text-2xl.text-xl.flex.items-end
-        h2 {{ $t('message.account_detail') }} {{ account || "-" }}&nbsp;&nbsp;
+        h2 {{ $t('message.account_detail') }} <span :style="{'color': state.isBlack === 0 ? 'black' : 'grey'}">{{ account || "-" }}</span>&nbsp;&nbsp;
         a.text-sm.text-green(v-if="state.mainData?.creator", :href='"/account/" + state.mainData?.creator') {{ $t('message.account_detail_by', { msg: state.mainData?.creator}) }}
       .text-sm {{ $t('message.account_detail_time') }}
         span.text-gray-999 {{ state.time || "-" }}
@@ -161,7 +161,7 @@ import { useRoute } from 'vue-router';
 import PageAccountBase from '@/components/Page/Account/Base.vue';
 import RawDataBase from '@/components/RawData/Base.vue';
 import { environment } from '@/environments/environment';
-import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10, GET_ACCOUNT_BY_CREATOR } from '@/apis';
+import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10, GET_ACCOUNT_BY_CREATOR, GET_BLACK_LIST } from '@/apis';
 import { useI18n } from 'vue-i18n';
 
 const frontConfig = environment.frontConfig;
@@ -210,6 +210,7 @@ export default defineComponent({
         const searVal = ref('');
 
         const account = computed(() => route.params.account as string);
+        
         const momentFarmat = moment;
 
         watch(route, (newVlaue, oldValue) => {
@@ -263,6 +264,12 @@ export default defineComponent({
             state.showDataSourceCreation = res.data?.content;
             state.typeActionList[5].name = computed(() => `${row6.value} (${res.data?.totalElements ?? 0})`);
             console.log('getAccountCreator-----', res);
+          })
+        }
+
+        const getBlackList = (account: string) => {
+          GET_BLACK_LIST(account).then((res: any) => {
+            state.isBlack = res.rows.length
           })
         }
 
@@ -455,6 +462,7 @@ export default defineComponent({
             resetData();
             getBlockData(account.value);
             getAccountCreator(account.value);
+            getBlackList(account.value);
             getControlledAccounts(account.value);
             //- getAllTokens(account.value);
         };
