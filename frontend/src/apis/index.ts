@@ -41,6 +41,8 @@ export const GET_EOSIO_GLOBAL_10 = () => Ax.get(`/v1/get_table_rows/eosio/eosio/
 
 export const GET_CHART_RAM = (date: Date) => Ax.post(`/v1/get_chart_ram`, { from: date });
 
+export const GET_BLACK_LIST = (accountName: string) => Ax.post(`/v1/get_black_list/${accountName}`);
+
 export const GET_PRODUCERS_BP_JSON = () => Ax.get('/v1/get_producers_bp_json');
 // export const GET_TABLE_ROWS__GLOBAL = () => Ax.get('/v1/get_table_rows/amax/amax/global/1');
 
