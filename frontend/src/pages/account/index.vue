@@ -267,12 +267,9 @@ export default defineComponent({
         }
 
         const getBlackList = (account: string) => {
-            state.isBlack = true
-          console.log('getblack for account: ', account);
           GET_BLACK_LIST(account).then((res: any) => {
             state.isBlack = res.rows.length
           })
-          console.log('get black2')
         }
 
         // pending状态
