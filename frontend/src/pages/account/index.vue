@@ -161,7 +161,7 @@ import { useRoute } from 'vue-router';
 import PageAccountBase from '@/components/Page/Account/Base.vue';
 import RawDataBase from '@/components/RawData/Base.vue';
 import { environment } from '@/environments/environment';
-import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10, GET_ACCOUNT_BY_CREATOR, GET_BLACK_LIST } from '@/apis';
+import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10, GET_ACCOUNT_BY_CREATOR, GET_BLACKLIST } from '@/apis';
 import { useI18n } from 'vue-i18n';
 
 const frontConfig = environment.frontConfig;
@@ -268,7 +268,7 @@ export default defineComponent({
         }
 
         const getBlackList = (account: string) => {
-          GET_BLACK_LIST(account).then((res: any) => {
+          GET_BLACKLIST(account).then((res: any) => {
             state.isBlack = res.rows.length
           })
         }
