@@ -283,7 +283,7 @@ export default defineComponent({
             GET_CURRENCY_BALANCE({ tokenContract: frontConfig.tokenContract, account, tokenSymbol: frontConfig.coin }).then((res: any) => {
                 console.log('getBalance-----', res);
 
-                state.unstaked = !res[0] ? 0 : Number(res[0].split(' ')[0]);
+                state.unstaked = !res[0] ? 0 : res[0].split(' ')[0];
                 let staked = 0;
                 if (state.mainData.voter_info && state.mainData.voter_info.staked) {
                     staked = state.mainData.voter_info.staked;
