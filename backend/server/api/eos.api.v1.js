@@ -581,7 +581,7 @@ module.exports 	= (router, config, request, log, mongoMain, MARIA) => {
 	/*
 	*	get account if in blacklist
 	*/
-	router.post('/api/v1/get_black_list/:account', (req, res) => {
+	router.post('/api/v1/get_blacklist/:account', (req, res) => {
 		var account = req.params.account
 		let data = { 
 			"code": "amax.token",
