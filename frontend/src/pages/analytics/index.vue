@@ -151,7 +151,7 @@ export default defineComponent({
 
         const getCoinList = () => {
             Ax.get('/stats/coin/list').then((res: any) => {
-                state.coinList = res.data;
+                state.coinList = res.data.filter(item => item.coin !== 'CNYD');
                 state.currentCoinInfo = res.data.find(ele => ele.coin === token.value);
                 getAccounts();
                 getTableList();
