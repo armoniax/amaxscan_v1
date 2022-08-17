@@ -293,7 +293,7 @@ export default defineComponent({
                     //include precision
                     state.balance = state.unstaked;
                 } else {
-                    state.balance = state.unstaked + staked / 100000000;
+                    state.balance = Number(state.unstaked) + staked / 100000000;
                 }
                 // state.eosRate = this.MainService.getEosPrice();
             });
