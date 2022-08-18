@@ -295,6 +295,7 @@ export default defineComponent({
                 } else {
                     state.balance = (Number(state.unstaked) + staked / 100000000).toFixed(8);
                 }
+                state.unstaked = state.unstaked.toFixed(8)
                 // state.eosRate = this.MainService.getEosPrice();
             });
         };
