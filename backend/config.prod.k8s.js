@@ -63,10 +63,10 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = process.env.CUSTOMCHAIN || 'http://expnode-service.ambt.art';
+config.customChain = process.env.CUSTOMCHAIN || 'http://172.31.12.250:8888';
 
 // api url for history
-config.historyChain = process.env.HISTORYCHAIN || 'http://expnode-service.ambt.art'; //still the RPC chain
+config.historyChain = process.env.HISTORYCHAIN || 'http://172.31.12.250:8888'; //still the RPC chain
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
