@@ -291,9 +291,9 @@ export default defineComponent({
                 }
                 if (frontConfig.customBalance) {
                     //include precision
-                    state.balance = state.unstaked;
+                    state.balance = (state.unstaked).toFixed(8);
                 } else {
-                    state.balance = Number(state.unstaked) + staked / 100000000;
+                    state.balance = (Number(state.unstaked) + staked / 100000000).toFixed(8);
                 }
                 // state.eosRate = this.MainService.getEosPrice();
             });
