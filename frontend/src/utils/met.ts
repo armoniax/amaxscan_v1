@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js';
+import moment from 'moment';
 
 export const $BigNumber = (val:string | number = 1) => {
     return new BigNumber(val);
@@ -125,8 +126,13 @@ export const $hash = (txHash:any, length: number = 4, lastLength?: number) => {
 
 
 export const $utctimeToLocaltime = (time:string) =>{
-    let utcTime = time.replace(' ', 'T')+'Z';
-    let newDate:any = new Date(utcTime);
-    return newDate.format('yyyy-MM-dd hh:mm:ss')
+    let utcTime;
+    if(time.indexOf('T')) utcTime = time+'Z'
+    else utcTime = time.replace(' ', 'T')+'Z';
+
+    // let newDate:any = new Date(utcTime);
+    // return newDate.format('yyyy-MM-dd hh:mm:ss')
+    return moment(utcTime).format('yyyy-MM-DD hh:mm:ss')
+    
 
 }
