@@ -163,6 +163,7 @@ import RawDataBase from '@/components/RawData/Base.vue';
 import { environment } from '@/environments/environment';
 import { GET_CONTROLLED_BY_ACCOUNT, GET_ACCOUNT_TOKENS, GET_ACCOUNT, GET_CURRENCY_BALANCE, GET_ACTIONS, GET_ACTIONS_NAME, GET_CODE, GET_TABLE_ROWS, GET_TABLE_ROWS__RAMMARKET_10, GET_ACCOUNT_BY_CREATOR, GET_BLACKLIST } from '@/apis';
 import { useI18n } from 'vue-i18n';
+import { $utctimeToLocaltime } from '@/utils/met';
 
 const frontConfig = environment.frontConfig;
 export default defineComponent({
@@ -416,7 +417,7 @@ export default defineComponent({
             state.currentPage = nextPage;
             start = (state.currentPage - 1) * state.pageSize;
             end = state.currentPage * state.pageSize;
-            state.showDataSource = state.dataSource.slice(start, end);
+            state.showDataSource = state.dataSource.map(item => ({...item, block_time: $utctimeToLocaltime(item.block_time)})).slice(start, end);
 
             //- console.log('state.dataSource：-----', state.dataSource);
             //- console.log('state.showDataSource：-----', state.showDataSource);
