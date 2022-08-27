@@ -18,9 +18,9 @@
             a.tab.tab-bordered(v-for='item in state.typeActionList', :key='item.key', :class='{ "tab-active": state.typeActionActive === item.key }', @click='state.typeActionActive = item.key') {{ item.name }}
 
     .actions-info(v-if='state.typeActionActive === "ActionsInfo"')
-        .flex.border-b.w-72.text-gray-ccc.border-b-gray-ccc.text-gray-ca.h-7.items-center
-            i.fal.fa-search.text-gray-ca.mr-2
-            input.outline-none.flex-1.h-full.text-black(placeholder='Search by producer name', v-model='searVal', @keyup='searchActions')
+        //- .flex.border-b.w-72.text-gray-ccc.border-b-gray-ccc.text-gray-ca.h-7.items-center
+        //-     i.fal.fa-search.text-gray-ca.mr-2
+        //-     input.outline-none.flex-1.h-full.text-black(placeholder='Search by producer name', v-model='searVal', @keyup='searchActions')
 
         .overflow-x-auto.scroll-hidden
             table.table.w-full.my-table
@@ -49,12 +49,9 @@
                                 span.ml-2 {{ element?.action_trace?.act?.data?.quantity }}
 
         .flex.justify-end.items-center.text-gray-666.py-3.text-sm.font-normal(v-if='searVal.length === 0')
-            //- span Items per pag:
-            //- select.outline-none.h-6.w-10.border.rounded.mx-2.border-gray-f4.cursor-pointer
-            //-     option(v-for="i in 10", :key="i") {{ i }}
-            span 1 - {{ state.totalPage }} of {{ state.currentPage }}
-            span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='changePage("up")') &lt;
-            span.outline-none.h-6.w-6.border.rounded.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='changePage("down")') &gt;
+            span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='getActions(state.currentPage - 1, "up")') &lt;
+            span {{ state.currentPage }}
+            span.outline-none.h-6.w-6.border.rounded.mx-2.border-gray-f4.cursor-pointer.text-gray-666.text-center(@click='getActions(state.currentPage + 1, "down")') &gt;
 
     .token-transfer(v-if='state.typeActionActive === "TokenTransfer"')
         .overflow-x-auto.scroll-hidden
@@ -166,6 +163,8 @@ import { useI18n } from 'vue-i18n';
 import { $utctimeToLocaltime } from '@/utils/met';
 
 const frontConfig = environment.frontConfig;
+
+type GetActionsType = "" | "up" | "down";
 export default defineComponent({
     components: { PageAccountBase, RawDataBase, JsonViewer },
     setup() {
@@ -192,7 +191,7 @@ export default defineComponent({
             time: '',
             position: 1,
             dataSourcePermission: [],
-            actionsNotSorted: [],
+            actionsSeqList: [],
             actionsArray: [],
             actions: [],
             dataSource: [],
@@ -201,7 +200,7 @@ export default defineComponent({
             actionsTotal: 0,
             totalPage: 1,
             pageSize: 15,
-            currentPage: 0,
+            currentPage: 1,
             dataSourceCreation: {},
             showDataSourceCreation: [],
             pager: 0,
@@ -250,7 +249,7 @@ export default defineComponent({
                 state.time = moment(state.mainData.created).format('MMMM Do YYYY, h:mm:ss a');
 
                 getBalance(account);
-                getActions(state.mainData.account_name, state.position); // Table Actions info
+                getActions(state.currentPage, ''); // Table Actions info
                 //- getActionsByName(state.mainData.account_name, state.mainData.action_name); //TODO: is action_name definition correct?
                 getCode(state.mainData.account_name);
 
@@ -300,12 +299,25 @@ export default defineComponent({
         };
 
         // Token transfer      Actions (Raw Data)        Actions info
-        const getActions = (account: string, pos: number) => {
-            console.log('getActions for account: ', account);
-            pos = pos === 1 ? -1 : pos;
-            GET_ACTIONS(account, pos, 100).then((res: any) => {
-                console.log('getActions-----', res);
-                state.actionsNotSorted = res.actions;
+        const getActions = (pos: number, type:GetActionsType, limit:number = 15, account: string = state.mainData.account_name) => {
+            //- console.log('pos: ', pos, type, state.actionsSeqList, state.actionsSeqList[0]);
+            if(pos === 0 || (state.actionsSeqList.length > 0 && state.actionsSeqList[0] === 0) && type === "down") return;
+            let _pos, offset;
+            if(type === ''){
+                _pos = -1;
+                offset = -limit;
+            }else if(type === "down"){
+                _pos = state.actionsSeqList[0] - 1;
+                offset = -limit+1;
+            }else if(type === "up"){
+                _pos = state.actionsSeqList[state.actionsSeqList.length - 1] + 1;
+                offset = limit-1;
+            }
+
+            console.error(_pos, offset);
+            GET_ACTIONS(account, _pos, offset).then((res: any) => {
+                state.actionsSeqList = res.actions.map(item => item.account_action_seq);
+                
                 if (res.actions[0] && !res.actions[0].action_trace) {
                     res.actions = createActionsArr(res.actions);
                     state.actionsTotal = res.actionsTotal;
@@ -313,18 +325,15 @@ export default defineComponent({
                     res.actions.reverse();
                 }
                 res.actions = sortArrayFunctions(res.actions);
-                Array.prototype.push.apply(state.actionsArray, res.actions);
 
                 state.actions = state.actionsArray;
                 state.dataSource = state.actionsArray;
-                // state.showDataSource = [...state.actionsArray];
-                state.totalPage = Math.ceil(state.dataSource.length / state.pageSize);
-                changePage('down');
+                state.showDataSource = [...res.actions];
+                state.currentPage = pos;
+                
                 // state.dataSource.filterPredicate = function (data:any, filter: string): boolean {
                 //     return data.action_trace.act.name.toLowerCase().includes(filter) || data.action_trace.act.account.toLowerCase().includes(filter);
                 // };
-
-                // console.log('state.dataSource', state.dataSource.filterPredicate)
             });
         };
 
@@ -443,7 +452,7 @@ export default defineComponent({
             state.time = '';
             state.position = 1;
             state.dataSourcePermission = [];
-            state.actionsNotSorted = [];
+            state.actionsSeqList = [];
             state.actionsArray = [];
             state.actions = [];
             state.dataSource = [];
@@ -452,7 +461,7 @@ export default defineComponent({
             state.actionsTotal = 0;
             state.totalPage = 1;
             state.pageSize = 15;
-            state.currentPage = 0;
+            state.currentPage = 1;
             state.dataSourceCreation = {};
             state.showDataSourceCreation = [];
             state.pager = 0;
@@ -476,6 +485,7 @@ export default defineComponent({
             momentFarmat,
             searchActions,
             changePage,
+            getActions,
             hash,
             handlePrev,
             handleNext,
