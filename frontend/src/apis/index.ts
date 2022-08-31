@@ -29,7 +29,7 @@ export const GET_CODE = (accountName: string) => Ax.get(`/v1/get_code/${accountN
 
 export const GET_ACTIONS_NAME = (accountName: string, actionName: string) => Ax.get(`/v1/get_actions_name/${accountName}/${actionName}?sort=1`);
 
-export const GET_ACTIONS = (accountName: string, pos: number, elementsLimit: number) => Ax.get(`/v1/get_actions/${accountName}/${pos}/-${elementsLimit}`);
+export const GET_ACTIONS = (accountName: string, pos: number, elementsLimit: number) => Ax.get(`/v1/get_actions/${accountName}/${pos}/${elementsLimit}`);
 
 export const GET_CURRENCY_BALANCE = (parmas: GetCurrencyBalanceParams) => Ax.get(`/v1/get_currency_balance/${parmas.tokenContract}/${parmas.account}/${parmas.tokenSymbol}`);
 
