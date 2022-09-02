@@ -32,7 +32,7 @@
 
             tbody
                 tr(v-for='(element, i) in tableList', :key='i')
-                    th {{ i + 1 }}
+                    th {{ (pageIndex * 20) + i + 1 }}
                     th
                         span.text-green.cursor-pointer(@click='$router.push(`/account/${element?.scope}`)') {{ element?.scope }}
                     th(style="text-align: right;") {{ numFormat(toFixed(element.balance)) }}
