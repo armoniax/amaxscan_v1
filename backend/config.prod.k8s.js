@@ -43,7 +43,7 @@ config.telegram = {
 
 // reserved nodes
 config.endpoints = [
-  'http://expnode-service.ambt.art'  //localhost access
+  'http://expnodes.lbi.nchain.me'  //localhost access
 // 	'https://expnode.amaxscan.io'
 ];
 
@@ -62,10 +62,10 @@ config.eosConfig = {
 };
 
 // api url for producers list
-config.customChain = process.env.CUSTOMCHAIN || 'http://expnode-service.ambt.art';
+config.customChain = process.env.CUSTOMCHAIN || 'http://expnodes.lbi.nchain.me';
 
 // api url for history
-config.historyChain = process.env.HISTORYCHAIN || 'http://expnode-service.ambt.art'; //still the RPC chain
+config.historyChain = process.env.HISTORYCHAIN || 'http://expnodes.lbi.nchain.me'; //still the RPC chain
 
 // tokens api
 //config.tokensAPI = 'http://api.light.xeos.me/api/account/eos/';
